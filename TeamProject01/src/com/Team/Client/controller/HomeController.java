@@ -34,21 +34,15 @@ public class HomeController extends HttpServlet {
 		String contextPath = request.getContextPath();
 		String context = url.substring(contextPath.length());
 	
-		String viewPage = "/WEB-INF/";
+		String viewPage = "/WEB-INF/ClitenJoin/";
 		switch (context) {
-			case "/insert.nhn":
-				viewPage += "insert";
+			case "/JoinView.nhn":
+				viewPage += "JoinView";
 				break;
-			case "/insertOK.nhn":
-				viewPage += "insertOK";
+			case "/JoinResultView.nhn":
+				// db , dao , sevice , db.mxl 만들기
+				viewPage += "JoinResultView";
 				break;
-			case "/list.nhn":
-				viewPage += "list";
-				break;
-			case "/increment.nhn":
-				viewPage += "increment";
-				break;
-			
 		}
 		viewPage += ".jsp";
 	

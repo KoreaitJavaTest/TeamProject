@@ -1,5 +1,5 @@
 --------------------------------------------------------
---  ÆÄÀÏÀÌ »ý¼ºµÊ - ¼ö¿äÀÏ-4¿ù-14-2021   
+--  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-4ï¿½ï¿½-14-2021   
 --------------------------------------------------------
 --------------------------------------------------------
 --  DDL for Table ANSWER
@@ -18,43 +18,44 @@
   PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
   TABLESPACE "SYSTEM" ;
 
-   COMMENT ON COLUMN "SES9892"."ANSWER"."A_IDX" IS '´äº¯±Û¹øÈ£';
-   COMMENT ON COLUMN "SES9892"."ANSWER"."A_REF" IS '´äº¯ÀÚ¹øÈ£?';
-   COMMENT ON COLUMN "SES9892"."ANSWER"."A_TITLE" IS 'Á¦¸ñ';
-   COMMENT ON COLUMN "SES9892"."ANSWER"."A_CONTENT" IS '³»¿ë';
-   COMMENT ON COLUMN "SES9892"."ANSWER"."A_IMAGE" IS '°Ô½ÃÇÑÀÌ¹ÌÁö °³¼ö';
-   COMMENT ON COLUMN "SES9892"."ANSWER"."A_WRITEDATE" IS '°Ô½ÃÀÏ';
+   COMMENT ON COLUMN "SES9892"."ANSWER"."A_IDX" IS 'ï¿½äº¯ï¿½Û¹ï¿½È£';
+   COMMENT ON COLUMN "SES9892"."ANSWER"."A_REF" IS 'ï¿½äº¯ï¿½Ú¹ï¿½È£?';
+   COMMENT ON COLUMN "SES9892"."ANSWER"."A_TITLE" IS 'ï¿½ï¿½ï¿½ï¿½';
+   COMMENT ON COLUMN "SES9892"."ANSWER"."A_CONTENT" IS 'ï¿½ï¿½ï¿½ï¿½';
+   COMMENT ON COLUMN "SES9892"."ANSWER"."A_IMAGE" IS 'ï¿½Ô½ï¿½ï¿½ï¿½ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½';
+   COMMENT ON COLUMN "SES9892"."ANSWER"."A_WRITEDATE" IS 'ï¿½Ô½ï¿½ï¿½ï¿½';
 --------------------------------------------------------
 --  DDL for Table CLIENT
 --------------------------------------------------------
 
   CREATE TABLE "SES9892"."CLIENT" 
-   (	"CLIENT_IDX" NUMBER(*,0), 
+   (	
+    "CLIENT_IDX" NUMBER(*,0), 
+    "CLIENT_LEVEL" NUMBER(*,0),
 	"CLIENT_ID" VARCHAR2(20 BYTE), 
 	"CLIENT_PASSWORD" VARCHAR2(20 BYTE), 
-	"CLIENT_IP" VARCHAR2(17 BYTE), 
 	"CLIENT_GENDER" VARCHAR2(20 BYTE), 
-	"CLIENT_ADDR" VARCHAR2(1000 BYTE), 
-	"CLIENT_PH" VARCHAR2(20 BYTE), 
-	"CLIENT_AGE" NUMBER(*,0), 
-	"CLIENT_NICK" VARCHAR2(30 BYTE), 
-	"CLIENT_EMAIL" VARCHAR2(100 BYTE), 
-	"CLIENT_RECPERSON" VARCHAR2(20 BYTE), 
+	"CLIENT_ADDR_HEAD" VARCHAR2(1000 BYTE), 
+	"CLIENT_ADDR_END" VARCHAR2(1000 BYTE), 
+	"CLIENT_PHONE" VARCHAR2(20 BYTE), 
+	"CLIENT_EMAIL" VARCHAR2(100 BYTE),  
+	"CLIENT_EMAIL_CODE" VARCHAR2(100 BYTE),  
 	"CLIENT_POINT" NUMBER(*,0) DEFAULT 0, 
 	"CLIENT_REGISTERDATE" TIMESTAMP (6) DEFAULT sysdate
+	
    ) SEGMENT CREATION IMMEDIATE 
   PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
   STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
   PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
   TABLESPACE "SYSTEM" ;
 
-   COMMENT ON COLUMN "SES9892"."CLIENT"."CLIENT_IDX" IS 'À¯Àú¹øÈ£';
-   COMMENT ON COLUMN "SES9892"."CLIENT"."CLIENT_ID" IS 'À¯Àú¾ÆÀÌµð';
-   COMMENT ON COLUMN "SES9892"."CLIENT"."CLIENT_PASSWORD" IS 'À¯Àúºñ¹Ð¹øÈ£';
-   COMMENT ON COLUMN "SES9892"."CLIENT"."CLIENT_PH" IS 'ÇÚµåÆù';
-   COMMENT ON COLUMN "SES9892"."CLIENT"."CLIENT_AGE" IS '³ªÀÌ';
-   COMMENT ON COLUMN "SES9892"."CLIENT"."CLIENT_RECPERSON" IS 'ÃßÃµÀÎ';
-   COMMENT ON COLUMN "SES9892"."CLIENT"."CLIENT_REGISTERDATE" IS 'È¸¿ø°¡ÀÔ³¯';
+   COMMENT ON COLUMN "SES9892"."CLIENT"."CLIENT_IDX" IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£';
+   COMMENT ON COLUMN "SES9892"."CLIENT"."CLIENT_ID" IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½';
+   COMMENT ON COLUMN "SES9892"."CLIENT"."CLIENT_PASSWORD" IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¹ï¿½È£';
+   COMMENT ON COLUMN "SES9892"."CLIENT"."CLIENT_PH" IS 'ï¿½Úµï¿½ï¿½ï¿½';
+   COMMENT ON COLUMN "SES9892"."CLIENT"."CLIENT_AGE" IS 'ï¿½ï¿½ï¿½ï¿½';
+   COMMENT ON COLUMN "SES9892"."CLIENT"."CLIENT_RECPERSON" IS 'ï¿½ï¿½Ãµï¿½ï¿½';
+   COMMENT ON COLUMN "SES9892"."CLIENT"."CLIENT_REGISTERDATE" IS 'È¸ï¿½ï¿½ï¿½ï¿½ï¿½Ô³ï¿½';
 --------------------------------------------------------
 --  DDL for Table MYPAGE
 --------------------------------------------------------
@@ -69,9 +70,9 @@
   PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
   TABLESPACE "SYSTEM" ;
 
-   COMMENT ON COLUMN "SES9892"."MYPAGE"."MY_IDX" IS '¸ñ·Ï¹øÈ£';
-   COMMENT ON COLUMN "SES9892"."MYPAGE"."MY_USERIDX" IS 'À¯Àú¹øÈ£';
-   COMMENT ON COLUMN "SES9892"."MYPAGE"."MY_ITEMIDX" IS 'ÆÇ¸Å¹øÈ£';
+   COMMENT ON COLUMN "SES9892"."MYPAGE"."MY_IDX" IS 'ï¿½ï¿½Ï¹ï¿½È£';
+   COMMENT ON COLUMN "SES9892"."MYPAGE"."MY_USERIDX" IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£';
+   COMMENT ON COLUMN "SES9892"."MYPAGE"."MY_ITEMIDX" IS 'ï¿½Ç¸Å¹ï¿½È£';
 --------------------------------------------------------
 --  DDL for Table QUESTION
 --------------------------------------------------------
@@ -92,15 +93,15 @@
   PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
   TABLESPACE "SYSTEM" ;
 
-   COMMENT ON COLUMN "SES9892"."QUESTION"."Q_IDX" IS 'Áú¹®±Û¹øÈ£';
-   COMMENT ON COLUMN "SES9892"."QUESTION"."Q_USERIDX" IS 'Áú¹®ÀÛ¼ºÀÚ¹øÈ£';
-   COMMENT ON COLUMN "SES9892"."QUESTION"."Q_USERID" IS 'Áú¹®ÀÛ¼ºÀÚ¾ÆÀÌµð';
-   COMMENT ON COLUMN "SES9892"."QUESTION"."Q_TITLE" IS 'Áú¹®±ÛÁ¦¸ñ';
-   COMMENT ON COLUMN "SES9892"."QUESTION"."Q_CONTENT" IS 'Áú¹®±Û³»¿ë';
-   COMMENT ON COLUMN "SES9892"."QUESTION"."Q_IMG" IS 'Áú¹®±Û¿¡¿Ã¸± ÀÌ¹ÌÁö°³¼ö';
-   COMMENT ON COLUMN "SES9892"."QUESTION"."Q_WRITEDATE" IS 'Áú¹®°Ô½ÃÀÏ';
-   COMMENT ON COLUMN "SES9892"."QUESTION"."Q_HIT" IS 'Á¶È¸¼ö';
-   COMMENT ON COLUMN "SES9892"."QUESTION"."Q_ANSWERIDX" IS 'Áú¹®´äº¯ÀÚ¹øÈ£';
+   COMMENT ON COLUMN "SES9892"."QUESTION"."Q_IDX" IS 'ï¿½ï¿½ï¿½ï¿½ï¿½Û¹ï¿½È£';
+   COMMENT ON COLUMN "SES9892"."QUESTION"."Q_USERIDX" IS 'ï¿½ï¿½ï¿½ï¿½ï¿½Û¼ï¿½ï¿½Ú¹ï¿½È£';
+   COMMENT ON COLUMN "SES9892"."QUESTION"."Q_USERID" IS 'ï¿½ï¿½ï¿½ï¿½ï¿½Û¼ï¿½ï¿½Ú¾ï¿½ï¿½Ìµï¿½';
+   COMMENT ON COLUMN "SES9892"."QUESTION"."Q_TITLE" IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
+   COMMENT ON COLUMN "SES9892"."QUESTION"."Q_CONTENT" IS 'ï¿½ï¿½ï¿½ï¿½ï¿½Û³ï¿½ï¿½ï¿½';
+   COMMENT ON COLUMN "SES9892"."QUESTION"."Q_IMG" IS 'ï¿½ï¿½ï¿½ï¿½ï¿½Û¿ï¿½ï¿½Ã¸ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
+   COMMENT ON COLUMN "SES9892"."QUESTION"."Q_WRITEDATE" IS 'ï¿½ï¿½ï¿½ï¿½ï¿½Ô½ï¿½ï¿½ï¿½';
+   COMMENT ON COLUMN "SES9892"."QUESTION"."Q_HIT" IS 'ï¿½ï¿½È¸ï¿½ï¿½';
+   COMMENT ON COLUMN "SES9892"."QUESTION"."Q_ANSWERIDX" IS 'ï¿½ï¿½ï¿½ï¿½ï¿½äº¯ï¿½Ú¹ï¿½È£';
 --------------------------------------------------------
 --  DDL for Table REVIEW
 --------------------------------------------------------
@@ -122,16 +123,16 @@
   PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
   TABLESPACE "SYSTEM" ;
 
-   COMMENT ON COLUMN "SES9892"."REVIEW"."RE_IDX" IS '¸®ºä±Û¹øÈ£';
-   COMMENT ON COLUMN "SES9892"."REVIEW"."RE_TITLE" IS '¸®ºä±ÛÁ¦¸ñ';
-   COMMENT ON COLUMN "SES9892"."REVIEW"."RE_CONTENT" IS '³»¿ë';
-   COMMENT ON COLUMN "SES9892"."REVIEW"."RE_USERID" IS '±Û¾´ÀÌ';
-   COMMENT ON COLUMN "SES9892"."REVIEW"."RE_GOOD" IS 'ÁÁ¾Æ¿ä';
-   COMMENT ON COLUMN "SES9892"."REVIEW"."RE_BAD" IS '½È¾î¿ä';
-   COMMENT ON COLUMN "SES9892"."REVIEW"."RE_HIT" IS 'Á¶È¸¼ö';
-   COMMENT ON COLUMN "SES9892"."REVIEW"."RE_REPORT" IS '´©Àû½Å°íÈ½¼ö';
-   COMMENT ON COLUMN "SES9892"."REVIEW"."RE_WRITEDATE" IS '°Ô½ÃÀÏ';
-   COMMENT ON COLUMN "SES9892"."REVIEW"."RE_IMG" IS '¿Ã¶ó°£ ÀÌ¹ÌÁö°³¼ö';
+   COMMENT ON COLUMN "SES9892"."REVIEW"."RE_IDX" IS 'ï¿½ï¿½ï¿½ï¿½Û¹ï¿½È£';
+   COMMENT ON COLUMN "SES9892"."REVIEW"."RE_TITLE" IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
+   COMMENT ON COLUMN "SES9892"."REVIEW"."RE_CONTENT" IS 'ï¿½ï¿½ï¿½ï¿½';
+   COMMENT ON COLUMN "SES9892"."REVIEW"."RE_USERID" IS 'ï¿½Û¾ï¿½ï¿½ï¿½';
+   COMMENT ON COLUMN "SES9892"."REVIEW"."RE_GOOD" IS 'ï¿½ï¿½ï¿½Æ¿ï¿½';
+   COMMENT ON COLUMN "SES9892"."REVIEW"."RE_BAD" IS 'ï¿½È¾ï¿½ï¿½';
+   COMMENT ON COLUMN "SES9892"."REVIEW"."RE_HIT" IS 'ï¿½ï¿½È¸ï¿½ï¿½';
+   COMMENT ON COLUMN "SES9892"."REVIEW"."RE_REPORT" IS 'ï¿½ï¿½ï¿½ï¿½ï¿½Å°ï¿½È½ï¿½ï¿½';
+   COMMENT ON COLUMN "SES9892"."REVIEW"."RE_WRITEDATE" IS 'ï¿½Ô½ï¿½ï¿½ï¿½';
+   COMMENT ON COLUMN "SES9892"."REVIEW"."RE_IMG" IS 'ï¿½Ã¶ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
 --------------------------------------------------------
 --  DDL for Table SHOP
 --------------------------------------------------------
@@ -158,20 +159,20 @@
   PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
   TABLESPACE "SYSTEM" ;
 
-   COMMENT ON COLUMN "SES9892"."SHOP"."SH_IDX" IS '°Ô½Ã±Û¹øÈ£';
-   COMMENT ON COLUMN "SES9892"."SHOP"."SH_TITLE" IS '°Ô½Ã±ÛÁ¦¸ñ';
-   COMMENT ON COLUMN "SES9892"."SHOP"."SH_CATEGORY" IS '½Å¹ß';
-   COMMENT ON COLUMN "SES9892"."SHOP"."SH_CATEGORYDETAIL" IS '½Å¹ßÁ¾·ù';
-   COMMENT ON COLUMN "SES9892"."SHOP"."SH_NAME" IS 'ÆÇ¸Å½Å¹ßÀÌ¸§';
-   COMMENT ON COLUMN "SES9892"."SHOP"."SH_EA" IS 'ÆÇ¸Å½Å¹ß°³¼ö';
-   COMMENT ON COLUMN "SES9892"."SHOP"."SH_SIZE" IS 'ÆÇ¸ÅÁß½Å¹ß»çÀÌÁî';
-   COMMENT ON COLUMN "SES9892"."SHOP"."SH_PRICE" IS '°¡°Ý';
-   COMMENT ON COLUMN "SES9892"."SHOP"."SH_LIKE" IS 'ÁÁ¾Æ¿ä';
-   COMMENT ON COLUMN "SES9892"."SHOP"."SH_CONTENT" IS 'ÆÇ¸Å±Û³»¿ë';
-   COMMENT ON COLUMN "SES9892"."SHOP"."SH_IMG" IS 'ÆÇ¸Å±ÛÀÌ¹ÌÁö';
-   COMMENT ON COLUMN "SES9892"."SHOP"."SH_SELLER" IS 'ÆÇ¸ÅÀÚ';
-   COMMENT ON COLUMN "SES9892"."SHOP"."SH_WRITEDATE" IS 'ÆÇ¸Å±Û°Ô½ÃÀÏ';
-   COMMENT ON COLUMN "SES9892"."SHOP"."SH_HIT" IS 'Á¶È¸¼ö';
+   COMMENT ON COLUMN "SES9892"."SHOP"."SH_IDX" IS 'ï¿½Ô½Ã±Û¹ï¿½È£';
+   COMMENT ON COLUMN "SES9892"."SHOP"."SH_TITLE" IS 'ï¿½Ô½Ã±ï¿½ï¿½ï¿½ï¿½ï¿½';
+   COMMENT ON COLUMN "SES9892"."SHOP"."SH_CATEGORY" IS 'ï¿½Å¹ï¿½';
+   COMMENT ON COLUMN "SES9892"."SHOP"."SH_CATEGORYDETAIL" IS 'ï¿½Å¹ï¿½ï¿½ï¿½ï¿½ï¿½';
+   COMMENT ON COLUMN "SES9892"."SHOP"."SH_NAME" IS 'ï¿½Ç¸Å½Å¹ï¿½ï¿½Ì¸ï¿½';
+   COMMENT ON COLUMN "SES9892"."SHOP"."SH_EA" IS 'ï¿½Ç¸Å½Å¹ß°ï¿½ï¿½ï¿½';
+   COMMENT ON COLUMN "SES9892"."SHOP"."SH_SIZE" IS 'ï¿½Ç¸ï¿½ï¿½ß½Å¹ß»ï¿½ï¿½ï¿½ï¿½ï¿½';
+   COMMENT ON COLUMN "SES9892"."SHOP"."SH_PRICE" IS 'ï¿½ï¿½ï¿½ï¿½';
+   COMMENT ON COLUMN "SES9892"."SHOP"."SH_LIKE" IS 'ï¿½ï¿½ï¿½Æ¿ï¿½';
+   COMMENT ON COLUMN "SES9892"."SHOP"."SH_CONTENT" IS 'ï¿½Ç¸Å±Û³ï¿½ï¿½ï¿½';
+   COMMENT ON COLUMN "SES9892"."SHOP"."SH_IMG" IS 'ï¿½Ç¸Å±ï¿½ï¿½Ì¹ï¿½ï¿½ï¿½';
+   COMMENT ON COLUMN "SES9892"."SHOP"."SH_SELLER" IS 'ï¿½Ç¸ï¿½ï¿½ï¿½';
+   COMMENT ON COLUMN "SES9892"."SHOP"."SH_WRITEDATE" IS 'ï¿½Ç¸Å±Û°Ô½ï¿½ï¿½ï¿½';
+   COMMENT ON COLUMN "SES9892"."SHOP"."SH_HIT" IS 'ï¿½ï¿½È¸ï¿½ï¿½';
 REM INSERTING into SES9892.ANSWER
 SET DEFINE OFF;
 REM INSERTING into SES9892.CLIENT

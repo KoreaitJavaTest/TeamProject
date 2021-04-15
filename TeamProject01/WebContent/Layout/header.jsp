@@ -22,7 +22,7 @@
 		<div class="col-xs-4 text-center test01 user">
 			<div class="col-xs-3"></div>
 			<div class="col-xs-3"><span class="usercursor">로그인</span></div>
-			<div class="col-xs-3"><span class="usercursor">회원가입</span></div>
+			<div class="col-xs-3"><span class="usercursor" onclick = "location.href = 'JoinView.nhn'">회원가입</span></div>
 			<div class="col-xs-3"><span class="usercursor"> 마이페이지</span></div>
 		</div>	
 	</div>

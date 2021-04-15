@@ -22,8 +22,7 @@
 	</environments>
 	
 	<mappers>
-		<mapper resource="com/Team/mybatis/freeboard.xml" />
-		<mapper resource="com/Team/mybatis/freeboardcomment.xml" />
+		<mapper resource="com/Team/mybatis/Client.xml"/>
 <!-- 		바뀔내용 -->
 	</mappers>
 
