@@ -34,7 +34,7 @@
 		</div>	
 	</div>
 	<div class="row" id="main2" style="min-height: 200px;">
-		<div class="col-xs-12" align="center"><span id="title" onclick="location.href='?'">Koreait Team A(img넣거나 그냥글자)</span></div>
+		<div class="col-xs-12" align="center"><span id="title" onclick="location.href='index.jsp'">Koreait Team A(img넣거나 그냥글자)</span></div>
 	</div>
 	<div class="row" id="menuLine" style="min-height:80px; ">
 		<div class="col-xs-1"></div>
