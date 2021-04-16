@@ -76,11 +76,6 @@ public class HomeController extends HttpServlet {
 			case "/ReViewInsert.nhn":
 				viewPage += "ReView/ReViewInsert";
 				break;
-
-				asdaskl;dsa;ldk;laskd;alsd
-
-				ㅁㄴㄷㅁㄴㅇㄻㄴㅇㄻㄴㅇㄹ
-
 		}
 		
 		
