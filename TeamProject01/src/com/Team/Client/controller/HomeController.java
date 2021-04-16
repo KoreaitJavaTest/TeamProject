@@ -70,6 +70,8 @@ public class HomeController extends HttpServlet {
 				viewPage += "Login/LogoutView";
 				break;
 		// 리뷰게시판 페이지
+			case "System.out.println":
+				System.out.println("커밋테스트");
 			case "/ReViewBoard.nhn":
 				viewPage += "ReView/ReViewBoard";
 				break;
