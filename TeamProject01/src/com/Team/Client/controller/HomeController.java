@@ -69,6 +69,8 @@ public class HomeController extends HttpServlet {
 				ClientService.getInstance().logout(request,response);
 				viewPage += "Login/LogoutView";
 				break;
+			case "/asdw.nhn":
+				break;
 		}
 		viewPage += ".jsp";
 	
