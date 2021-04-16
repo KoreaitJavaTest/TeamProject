@@ -6,7 +6,7 @@
 	<properties resource="com/Team/mybatis/db.properties" />
 	
 	<typeAliases>
-<!-- 		<typeAlias type="com.Team.vo.freeboardVO" alias="vo" />	이건 그때그때 바꿔서 최신화해주시길 -->
+ 		<typeAlias type="com.Team.Client.vo.ClientVo" alias="vo" />	
 	</typeAliases>
 	
 	<environments default="development">

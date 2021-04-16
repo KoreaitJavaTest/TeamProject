@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.Team.Client.dao.ClientDao;
+import com.Team.Client.service.ClientService;
+
 @WebServlet("*.nhn")
 public class HomeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -34,14 +37,37 @@ public class HomeController extends HttpServlet {
 		String contextPath = request.getContextPath();
 		String context = url.substring(contextPath.length());
 	
-		String viewPage = "/WEB-INF/ClitenJoin/";
+		String viewPage = "/WEB-INF/";
 		switch (context) {
+		
+		// 회원가입 페이지
 			case "/JoinView.nhn":
-				viewPage += "JoinView";
+				viewPage += "ClitenJoin/JoinView";
 				break;
+		// 회원가입 결과 페이지
 			case "/JoinResultView.nhn":
 				// db , dao , sevice , db.mxl 만들기
-				viewPage += "JoinResultView";
+				ClientService.getInstance().join(request,response);
+				viewPage += "ClitenJoin/JoinResultView";
+				break;
+		// 회원가입 이메일 페이지
+			case "/JoinEmailResultView.nhn":
+				ClientService.getInstance().emailCheckAction(request,response);
+				viewPage += "ClitenJoin/JoinEmailResultView";
+				break;
+		// 로그인 페이지
+			case "/LoginView.nhn":
+				viewPage += "Login/LoginView";
+				break;
+		// 로그인 결과 페이지
+			case "/LoginResultView.nhn":
+				ClientService.getInstance().login(request,response);
+				viewPage += "Login/LoginResultView";
+				break;
+		// 로그아웃 페이지
+			case "/LogoutView.nhn":
+				ClientService.getInstance().logout(request,response);
+				viewPage += "Login/LogoutView";
 				break;
 		}
 		viewPage += ".jsp";

@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri ="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
-<!-- 부가적인 테마 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<!-- 부가적인 테마 -->
 
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
@@ -21,8 +22,14 @@
 		<div class="col-xs-8 test01" ></div>	
 		<div class="col-xs-4 text-center test01 user">
 			<div class="col-xs-3"></div>
-			<div class="col-xs-3"><span class="usercursor">로그인</span></div>
-			<div class="col-xs-3"><span class="usercursor" onclick = "location.href = 'JoinView.nhn'">회원가입</span></div>
+			<c:if test = "${sessionScope.session_id eq null }">
+				<div class="col-xs-3"><span class="usercursor" onclick = "location.href = 'LoginView.nhn'">로그인</span></div>
+				<div class="col-xs-3"><span class="usercursor" onclick = "location.href = 'JoinView.nhn'">회원가입</span></div>
+			</c:if>
+			<c:if test = "${sessionScope.session_id != null }">
+				<div class="col-xs-3"><span class="usercursor">${sessionScope.session_id}님<br/>point: ${sessionScope.session_point}점</span></div>
+				<div class="col-xs-3"><span class="usercursor" onclick = "location.href = 'LogoutView.nhn'">로그아웃</span></div>
+			</c:if>
 			<div class="col-xs-3"><span class="usercursor"> 마이페이지</span></div>
 		</div>	
 	</div>
