@@ -69,7 +69,16 @@ public class HomeController extends HttpServlet {
 				ClientService.getInstance().logout(request,response);
 				viewPage += "Login/LogoutView";
 				break;
+		// 리뷰게시판 페이지
+			case "/ReViewBoard.nhn":
+				viewPage += "ReView/ReViewBoard";
+				break;
+			case "/ReViewInsert.nhn":
+				viewPage += "ReView/ReViewInsert";
+				break;
 		}
+		
+		
 		viewPage += ".jsp";
 	
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
