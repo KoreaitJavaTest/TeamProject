@@ -30,7 +30,9 @@
 				<div class="col-xs-3"><span class="usercursor">${sessionScope.session_id}님<br/>point: ${sessionScope.session_point}점</span></div>
 				<div class="col-xs-3"><span class="usercursor" onclick = "location.href = 'LogoutView.nhn'">로그아웃</span></div>
 			</c:if>
-			<div class="col-xs-3"><span class="usercursor"> 마이페이지</span></div>
+			<c:if test = "${sessionScope.session_id != null }">
+				<div class="col-xs-3"><span class="usercursor" onclick = "location.href = 'MyEditViewPasswordCheck.nhn'"> 마이페이지</span></div>
+			</c:if>
 		</div>	
 	</div>
 	<div class="row" id="main2" style="min-height: 200px;">

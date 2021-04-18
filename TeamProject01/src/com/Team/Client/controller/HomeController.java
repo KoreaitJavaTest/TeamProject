@@ -69,6 +69,20 @@ public class HomeController extends HttpServlet {
 				ClientService.getInstance().logout(request,response);
 				viewPage += "Login/LogoutView";
 				break;
+		// 회원정보 수정페이지가기 전 비밀번호 체크
+			case "/MyEditViewPasswordCheck.nhn":
+				viewPage += "ClientEdit/ClientMyEditPasswordView";
+				break;
+		// 내정보 수정 페이지
+			case "/ClientEditView.nhn":
+				ClientService.getInstance().edit(request,response);
+				viewPage += "ClientEdit/ClientEditView";
+				break;
+		// 수정 완료
+			case "/EditResultView.nhn":
+				ClientService.getInstance().editOK(request,response);
+				viewPage += "ClientEdit/EditResultView";
+				break;
 		// 리뷰게시판 페이지
 			case "/ReViewBoard.nhn":
 				viewPage += "ReView/ReViewBoard";
