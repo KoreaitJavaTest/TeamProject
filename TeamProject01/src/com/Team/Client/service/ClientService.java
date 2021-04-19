@@ -68,7 +68,7 @@ public class ClientService {
 		
 		String host = "http://localhost:9090/TeamProject01/";
 		String to = dao.getClientEmail(mapper,vo.getClient_id());
-		String from = "gygus7345@gmail.com";
+		String from = "본인의 이메일주소";
 		String subject = "이메일인증입니다.";
 		String content = "다음 링크에 접속하여 이메일 인증을 진행하세요" + "<a href ='"+host+"JoinEmailResultView.nhn?code=" + new SHA256().getSHA256(to) + "'>이메일 인증하기</a>";
 		
