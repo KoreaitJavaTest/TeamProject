@@ -6,3 +6,7 @@ TeamProject01/.settings/org.eclipse.wst.common.component
 TeamProject01/.settings/org.eclipse.wst.common.project.facet.core.xml
 TeamProject01/.settings/org.eclipse.wst.jsdt.ui.superType.container
 TeamProject01/.settings/org.eclipse.wst.jsdt.ui.superType.name
+TeamProject01/src/com/Team/Client/controller/HomeController_BACKUP_782.java
+TeamProject01/src/com/Team/Client/controller/HomeController_BASE_782.java
+TeamProject01/src/com/Team/Client/controller/HomeController_LOCAL_782.java
+TeamProject01/src/com/Team/Client/controller/HomeController_REMOTE_782.java

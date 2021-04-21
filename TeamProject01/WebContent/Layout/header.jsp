@@ -1,18 +1,62 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix = "c" uri ="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
-<!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<style>
+#header{
+	border: 1px solid red;
+	display: flex;
+	align-items: center;
+	background: black;
+}
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<!-- 부가적인 테마 -->
+#main2{
+	border: 1px solid blue;
+	display: flex;
+	align-items: center;
+/* background: black; */
+}
 
-<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+#menuLine{
+	border: 1px solid pink;
+	display: flex;
+	align-items: center;
+}
+.test01{
+	border: 1px solid red;
+}
+.user{
+	float: right;
+}
+span{
+	border: 1px solid red;
+}
+.usercursor{ 
+	cursor: pointer;
+	font-size: 15pt;
+	color: white;
+	}
+#title{
+	font-size: 40pt;
+	font-weight: bold;
+	cursor: pointer;
+}
+.menuitem{
+	width: 100px;
+	cursor: pointer;
+	font-size: 13pt;
+}
+
+</style>
 <link rel="stylesheet" href="Layout/style.css">
+<link rel="shortcut icon" href="../images/favicon.ico">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8">
 <title>header</title>
 </head>
@@ -40,7 +84,7 @@
 		<div class="col-xs-1"></div>
 		<div class="col-xs-10" style="border: 1px solid gray;">
 			<div class="col-xs-2"><span class="menuitem" onclick="location.href='?'">전체상품</span></div>
-			<div class="col-xs-2"><span class="menuitem" onclick="location.href='?'">리뷰게시판</span></div>
+			<div class="col-xs-2"><span class="menuitem" onclick="location.href='ReViewBoard.nhn'">리뷰게시판</span></div>
 			<div class="col-xs-2"><span class="menuitem" onclick="location.href='?'">묻고 답하기</span></div>
 			<div class="col-xs-2"><span class="menuitem" onclick="location.href='?'">공지사항</span></div>
 			<div class="col-xs-2"><span class="menuitem" onclick="location.href='?'">뭘넣을까</span></div>
