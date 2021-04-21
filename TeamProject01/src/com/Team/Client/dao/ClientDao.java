@@ -25,6 +25,12 @@ public class ClientDao {
 	public ClientVo login(SqlSession mapper, ClientVo vo) {
 		return (ClientVo) mapper.selectOne("login",vo);
 	}
+	public ClientVo ClientInfo(SqlSession mapper ,ClientVo vo) {
+		return (ClientVo) mapper.selectOne("ClientInfo",vo);
+	}
+	public void ClientUpdate(SqlSession mapper, ClientVo vo) {
+		mapper.update("ClientUpdate",vo);
+	}
 	
 
 	

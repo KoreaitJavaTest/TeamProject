@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.mapper.Mapper;
 import org.apache.ibatis.session.SqlSession;
 
 import com.Team.Client.dao.ClientDao;
@@ -66,8 +67,8 @@ public class ClientService {
 		mapper.commit();
 		
 		String host = "http://localhost:9090/TeamProject01/";
-		String from = "본인의 이메일 아이디@naver.com or @gmail.com 을 입력해주세요";
 		String to = dao.getClientEmail(mapper,vo.getClient_id());
+		String from = "본인의 이메일주소";
 		String subject = "이메일인증입니다.";
 		String content = "다음 링크에 접속하여 이메일 인증을 진행하세요" + "<a href ='"+host+"JoinEmailResultView.nhn?code=" + new SHA256().getSHA256(to) + "'>이메일 인증하기</a>";
 		
@@ -167,6 +168,113 @@ public class ClientService {
 		session.removeAttribute("session_point");
 		session.invalidate();	
 	}
+	public void edit(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		HttpSession session = request.getSession();
+		SqlSession mapper = MySession.getSession();
+		String id = (String) session.getAttribute("session_id");
+		String password = request.getParameter("password");
+		ClientVo vo = null;
+		if(password.equals((String)session.getAttribute("session_password"))) {
+			vo = new ClientVo(id, password);
+			vo = dao.ClientInfo(mapper, vo);
+		}else {
+			vo = new ClientVo(id, password);
+			vo = dao.ClientInfo(mapper, vo);
+			if(null == vo) {
+				PrintWriter script;
+				script = response.getWriter();
+				script.println("<script>");
+				script.println("alert('비밀번호가 일치하지 않습니다.');");
+				script.println("history.back();");
+				script.println("</script>");
+				script.close();
+				return;
+			}
+		}
+		request.setAttribute("vo", vo);
+		mapper.close();
+	}
 	
-	
+	public void editOK(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		ClientVo vo = null;
+		
+		HttpSession session = request.getSession();
+		SqlSession mapper = MySession.getSession();
+		
+		String id = (String) session.getAttribute("session_id");
+		String before_password = (String)session.getAttribute("session_password");
+		String before_addr_head = (String)session.getAttribute("session_addr_head");
+		String before_addr_end = (String)session.getAttribute("session_addr_end");
+		
+		String password = request.getParameter("password");
+		String addr_head = request.getParameter("addr_head");
+		String addr_end = request.getParameter("addr_end");
+		if(password.equals("") || password.equals(before_password)) {
+			if(addr_head.equals(before_addr_head)) {
+				if(addr_end.equals(before_addr_end)) {
+					PrintWriter script;
+					try {
+						script = response.getWriter();
+						script.println("<script>");
+						script.println("alert('변경된 내용이없어 메인페이지로 돌아갑니다.');");
+						script.println("location.href = 'index.jsp';");
+						script.println("</script>");
+						script.close();
+						return;
+					} catch (IOException e) {e.printStackTrace();}
+				}else {
+					System.out.println("비밀번호는 변경하지않지만 주소만 변경");
+					vo = new ClientVo();
+					vo.setClient_password(before_password);
+					vo.setClient_addr_head(addr_head);
+					vo.setClient_addr_end(addr_end);
+					vo.setClient_id(id);
+					
+					dao.ClientUpdate(mapper,vo);
+					
+					session.setAttribute("session_addr_head", addr_head);
+					session.setAttribute("session_addr_end", addr_end);
+					mapper.commit();
+					mapper.close();
+				}
+			}else {
+				System.out.println("비밀번호는 변경하지않지만 주소만 변경");
+				vo = new ClientVo();
+				vo.setClient_password(before_password);
+				vo.setClient_addr_head(addr_head);
+				vo.setClient_addr_end(addr_end);
+				vo.setClient_id(id);
+				
+				dao.ClientUpdate(mapper,vo);
+				
+				session.setAttribute("session_addr_head", addr_head);
+				session.setAttribute("session_addr_end", addr_end);
+				mapper.commit();
+				mapper.close();
+			}
+		}else {
+			System.out.println("비밀번호 주소 둘다변경");
+			vo = new ClientVo();
+			vo.setClient_password(password);
+			vo.setClient_addr_head(addr_head);
+			vo.setClient_addr_end(addr_end);
+			vo.setClient_id(id);
+			dao.ClientUpdate(mapper,vo);
+			
+			session.setAttribute("session_password", password);
+			session.setAttribute("session_addr_head", addr_head);
+			session.setAttribute("session_addr_end", addr_end);
+			mapper.commit();
+			mapper.close();
+		}
+
+		
+		
+	}
 }

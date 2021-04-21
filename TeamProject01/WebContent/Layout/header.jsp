@@ -21,6 +21,7 @@
 /* background: black; */
 }
 
+
 #menuLine{
 	border: 1px solid pink;
 	display: flex;
@@ -54,6 +55,9 @@ span{
 </style>
 <link rel="stylesheet" href="Layout/style.css">
 <link rel="shortcut icon" href="../images/favicon.ico">
+
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -74,7 +78,9 @@ span{
 				<div class="col-xs-3"><span class="usercursor">${sessionScope.session_id}님<br/>point: ${sessionScope.session_point}점</span></div>
 				<div class="col-xs-3"><span class="usercursor" onclick = "location.href = 'LogoutView.nhn'">로그아웃</span></div>
 			</c:if>
-			<div class="col-xs-3"><span class="usercursor"> 마이페이지</span></div>
+			<c:if test = "${sessionScope.session_id != null }">
+				<div class="col-xs-3"><span class="usercursor" onclick = "location.href = 'MyEditViewPasswordCheck.nhn'"> 마이페이지</span></div>
+			</c:if>
 		</div>	
 	</div>
 	<div class="row" id="main2" style="min-height: 200px;">
