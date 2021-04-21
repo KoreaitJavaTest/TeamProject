@@ -110,7 +110,6 @@ public class HomeController extends HttpServlet {
 				//게시글 디테일 정보에서 신고하기 버튼을 누르고 => 누적신고횟수를 1증가시킨다. ( 추후 한ID당 중복 신고횟수를 없애야함)
 				ReViewService.getInstance().ReViewReport(request,response);
 				ReViewService.getInstance().ReViewSelect(request,response);
-
 				viewPage += "ReView/ReViewBoard";
 				break;
 			case "/ReViewUpdate.nhn":
