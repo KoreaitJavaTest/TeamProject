@@ -16,11 +16,6 @@ public class ReViewVO {
 	private int RE_img;
 	private String RE_categoryDetail;
 	private String RE_imgNames;
-
-	
-	
-
-	
 	
 	@Override
 	public String toString() {
