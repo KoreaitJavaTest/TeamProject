@@ -32,6 +32,20 @@
 		UPDATE CLIENT_DB SET CLIENT_PASSWORD = #{client_password}, CLIENT_ADDR_HEAD = #{client_addr_head}, CLIENT_ADDR_END = #{client_addr_end}
 		WHERE CLIENT_ID = #{client_id}
 	</update>
+	
+	<select id="reviewListCount" parameterType="String" resultType="int">
+		SELECT count(*) FROM REVIEW WHERE RE_USERID = #{id}
+	</select>
+	
+	<select id="selectList" parameterType="Re_vo" resultType="Re_vo">
+		<![CDATA[
+		select * from (
+			select rownum rnum, TT.* from (
+				select * from REVIEW WHERE RE_USERID = #{id} order by RE_IDX asc
+			) TT where rownum <= #{endNo}
+		) where rnum >= #{startNo}
+		]]>
+	</select>
 </mapper>
 
 
