@@ -43,7 +43,7 @@
 		<div class="col-xs-10" style="border: 1px solid gray;">
 			<div class="col-xs-2"><span class="menuitem" onclick="location.href='?'">전체상품</span></div>
 			<div class="col-xs-2"><span class="menuitem" onclick="location.href='?'">리뷰게시판</span></div>
-			<div class="col-xs-2"><span class="menuitem" onclick="location.href='?'">묻고 답하기</span></div>
+			<div class="col-xs-2"><span class="menuitem" onclick="location.href='QAboard.nhn'">묻고 답하기</span></div>
 			<div class="col-xs-2"><span class="menuitem" onclick="location.href='?'">공지사항</span></div>
 			<div class="col-xs-2"><span class="menuitem" onclick="location.href='?'">뭘넣을까</span></div>
 			<div class="col-xs-2"><span class="menuitem" onclick="location.href='?'">여기도뭘넣지</span></div>

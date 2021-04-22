@@ -7,6 +7,7 @@
 	
 	<typeAliases>
  		<typeAlias type="com.Team.Client.vo.ClientVo" alias="vo" />	
+ 		<typeAlias type="com.Team.QAboard.QAboardVo" alias="QAvo"/>
 	</typeAliases>
 	
 	<environments default="development">
@@ -23,6 +24,7 @@
 	
 	<mappers>
 		<mapper resource="com/Team/mybatis/Client.xml"/>
+		<mapper resource="com/Team/mybatis/questionboard.xml"/>
 <!-- 		바뀔내용 -->
 	</mappers>
 
