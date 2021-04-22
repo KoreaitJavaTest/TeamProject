@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -24,7 +22,6 @@
 	border: 1px solid blue;
 	display: flex;
 	align-items: center;
-/* background: black; */
 }
 
 
@@ -147,7 +144,7 @@ span{
 .product-grid .price span{color:#999;font-size:12px;font-weight:400;text-decoration:line-through;margin-left:3px;display:inline-block}
 .product-grid .add-to-cart{color:#333;font-size:13px;font-weight:600}
 
-@media only screen and (max-width:990px){.product-grid{margin-bottom:30px}
+@media only screen and (max-width:2000px){.product-grid{margin-bottom:30px}
 }
 	
 </style>
