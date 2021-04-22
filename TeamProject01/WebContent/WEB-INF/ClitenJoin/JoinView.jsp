@@ -3,6 +3,41 @@
 <%@ taglib prefix = "c" uri ="http://java.sun.com/jsp/jstl/core" %>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<style>
+.dots {
+  width: 3.5em;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dots div {
+  
+  width: 0.8em;
+  height: 0.8em;
+  border-radius: 50%;
+  background-color: #fc2f70;
+  animation: fade 0.8s ease-in-out alternate infinite;
+}
+
+.dots div:nth-of-type(1) {
+  animation-delay: -0.4s;
+}
+
+.dots div:nth-of-type(2) {
+  animation-delay: -0.2s;
+}
+
+@keyframes fade {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+</style>
 <script type="text/javascript">
 	$(function() {
 	   // 아이디 중복 체크
@@ -202,7 +237,25 @@ function searchAddr(){
 			</tr>
 			<tr>
 				<td align = "center" colspan ="2">
-					<input type = "submit" id = "join_go" disabled="" value = "회원가입!">
+					<input type = "submit" id = "join_go" disabled="" data-target = "#modal" data-toggle = "modal" value = "회원가입!">
+						<div class = "row">
+						<div class = "modal" id = "modal" tabindex = "1">
+							<div class = "modal-dialog">
+								<div class = "modal-content">
+									<div class = "modal-header" align = "center">
+									  회원가입중입니다.
+									</div>
+									<div class ="modal-body" align = "center">
+										<div class="dots" align = "center">
+										  <div align = "center"></div>
+										  <div align = "center"></div>
+										  <div align = "center"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</td>
 			</tr>
 		</table>

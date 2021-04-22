@@ -1,6 +1,7 @@
 package com.Team.Client.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.Team.Client.dao.ClientDao;
 import com.Team.Client.service.ClientService;
 import com.Team.Shop.service.ShopService;
+import com.Team.Review.service.ReViewService;
 
 @WebServlet("*.nhn")
 public class HomeController extends HttpServlet {
@@ -72,15 +74,38 @@ public class HomeController extends HttpServlet {
 				ClientService.getInstance().logout(request,response);
 				viewPage += "Login/LogoutView";
 				break;
-				
+		// 마이페이지 메인 뷰페이지 
+			case "/MyPageView.nhn":
+				viewPage += "MyPage/MyPageMainView";
+				break;
+		// 회원정보 수정페이지가기 전 비밀번호 체크
+			case "/MyEditViewPasswordCheck.nhn":
+				viewPage += "MyPage/ClientMyEditPasswordView";
+				break;
+		// 내정보 수정 페이지
+			case "/ClientEditView.nhn":
+				ClientService.getInstance().edit(request,response);
+				viewPage += "MyPage/ClientEditView";
+				break;
+		// 수정 완료
+			case "/EditResultView.nhn":
+				ClientService.getInstance().editOK(request,response);
+				viewPage += "MyPage/EditResultView";
+				break;
+		// 나의 게시물 관리
+			case "/MyListViewPage.nhn":
+				ClientService.getInstance().reviewSelect(request,response);
+				viewPage += "MyPage/MyListViewPage";
+				break;
 		// 리뷰게시판 페이지
 			case "/ReViewBoard.nhn":
+				ReViewService.getInstance().ReViewSelect(request,response);
 				viewPage += "ReView/ReViewBoard";
 				break;
+		// 리뷰작성 페이지
 			case "/ReViewInsert.nhn":
 				viewPage += "ReView/ReViewInsert";
 				break;
-				
 		// ==================== 상품 페이지 ======================
 			case "/AllProducts.nhn":
 				shopService.selectAllProduct(request,response);
@@ -107,7 +132,39 @@ public class HomeController extends HttpServlet {
 				viewPage += "Shop/brand/newbalance";
 				break;
 		// ==========================================================
+		// 작성리뷰 DB추가 페이지
+			case "/ReViewInsertOK.nhn":
+				//저장된 세션 정보 + 리뷰 작성 게시글 정보를 받아 리뷰DB에 저장
+				ReViewService.getInstance().ReViewInsert(request,response);
+				viewPage += "ReView/ReViewBoardListOk";
+				//여기서 그냥 보드로 가는게 맞을까? 아니면 ReViewBoard.nhn으로 가는게 맞을까?
+				break;
+			case "/ReHitUp.nhn":
+				//선택한 게시글의 조회수를 1증가 + idx로 게시글 정보를 vo 객체에 저장 -> 선택한 게시글 자세히보기 페이지로 이동
+				ReViewService.getInstance().ReHitUp(request,response);
+				viewPage += "ReView/ReViewPostDetail";
+				break;
+			case "/ReViewReport.nhn":
+				//게시글 디테일 정보에서 신고하기 버튼을 누르고 => 누적신고횟수를 1증가시킨다. ( 추후 한ID당 중복 신고횟수를 없애야함)
+				ReViewService.getInstance().ReViewReport(request,response);
+				ReViewService.getInstance().ReViewSelect(request,response);
+				viewPage += "ReView/ReViewBoard";
+				break;
+			case "/ReViewUpdate.nhn":
+				//수정하기 버튼 클릭후 수정할 게시글번호(idx) 수정할 글이 있는 currentPage가 request영역에 저장되어 옴.
+				ReViewService.getInstance().selectByIdx(request,response);
+				//idx로 해당 게시글 정보를 request 영역에 저장후 update View 단으로 이동
+				viewPage += "ReView/ReViewUpdate";
+				break;
+			case "/ReViewUpdateOK.nhn":
+				//수정하기 버튼 클릭후 수정할 게시글번호(idx) 수정할 글이 있는 currentPage가 request영역에 저장되어 옴.
+				ReViewService.getInstance().ReViewUpdate(request,response);
+				//idx로 해당 게시글 정보를 request 영역에 저장후 update View 단으로 이동
+				viewPage += "ReView/ReViewPostDetail";
+				break;
 		}
+				
+			
 		
 		
 		viewPage += ".jsp";
