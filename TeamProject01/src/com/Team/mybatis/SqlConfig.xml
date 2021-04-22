@@ -6,7 +6,8 @@
 	<properties resource="com/Team/mybatis/db.properties" />
 	
 	<typeAliases>
- 		<typeAlias type="com.Team.Client.vo.ClientVo" alias="vo" />	
+ 		<typeAlias type="com.Team.Client.vo.ClientVo" alias="vo"/>	
+ 		<typeAlias type="com.Team.Shop.vo.ShopVO" alias="shopVO"/>	
 	</typeAliases>
 	
 	<environments default="development">
@@ -24,6 +25,8 @@
 	<mappers>
 		<mapper resource="com/Team/mybatis/Client.xml"/>
 <!-- 		바뀔내용 -->
+		<mapper resource="com/Team/mybatis/Shop.xml"/>
+<!-- 		<mapper resource="com/Team/mybatis/Shop.xml"/> -->
 	</mappers>
 
 

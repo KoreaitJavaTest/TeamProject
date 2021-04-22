@@ -4,36 +4,36 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
-$(function() {
+	$(function() {
 	   // 아이디 중복 체크
 	      $('#user_input_id').keyup(function() {
-	      var client_id = $("#user_input_id").val();
-	      var idcheck = "사용 가능한 아이디입니다.";
-	      var realid = "";
-	      if(client_id.length > 8 && client_id.length < 16){
-	         $.ajax({
-	        	  type:'GET',
-	        	  async:'true',
-	        	  url: './IdoverlapcheckLogic.jsp?client_id=' + client_id,
-	        	  data: client_id,
-	        	  dataType: 'text',
-	            success: function(data) {
-	               $("#id_overlap_result").empty();
-	               $("#id_overlap_result").append(data);
-	               realid = data;
-	               yourealwantthisid(realid,idcheck);
-	            }, 
-	            error: function(xhr, status) {
-	            	alert(xhr + " : " + status)
-	            }
-	         }); 
-	         return false;
-	      }else{
-	    	  $("#id_overlap_result").empty();
-	    	  $("#id_overlap_result").append("8자 이상이여야 합니다.");
-	      }
+		      var client_id = $("#user_input_id").val();
+		      var idcheck = "사용 가능한 아이디입니다.";
+		      var realid = "";
+		      if(client_id.length > 8 && client_id.length < 16){
+		         $.ajax({
+		        	  type:'GET',
+		        	  async:'true',
+		        	  url: './IdoverlapcheckLogic.jsp?client_id=' + client_id,
+		        	  data: client_id,
+		        	  dataType: 'text',
+		            success: function(data) {
+		               $("#id_overlap_result").empty();
+		               $("#id_overlap_result").append(data);
+		               realid = data;
+		               yourealwantthisid(realid,idcheck);
+		            }, 
+		            error: function(xhr, status) {
+		            	alert(xhr + " : " + status)
+		            }
+		         }); 
+		         return false;
+		      }else{
+		    	  $("#id_overlap_result").empty();
+		    	  $("#id_overlap_result").append("8자 이상이여야 합니다.");
+		      }
 	      }); 
-	   });
+	});
 	function yourealwantthisid(realid ,idcheck){
 		   var joinbtn = document.getElementById('join_go');
 		   var pscheckreal = document.getElementById('password_result').innerText;  

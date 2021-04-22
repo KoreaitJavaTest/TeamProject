@@ -44,3 +44,20 @@ span{
 	cursor: pointer;
 	font-size: 13pt;
 }
+/*==========================================
+ul{
+	display: inline-block;
+	list-style:none;
+}
+
+ul li{
+	list-style-type: none;
+	float: left; 
+	outline: 1px dotted red;
+	margin-right: 30px;
+}
+.contain{
+	text-align: center;
+}
+	
+============================================*/

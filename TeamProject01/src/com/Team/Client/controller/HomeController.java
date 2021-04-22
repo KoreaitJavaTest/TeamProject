@@ -11,11 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.Team.Client.dao.ClientDao;
 import com.Team.Client.service.ClientService;
+import com.Team.Shop.service.ShopService;
 
 @WebServlet("*.nhn")
 public class HomeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
+	private ShopService shopService = ShopService.getInstance();
+	
 //	컨트롤러에서 사용할 service 클래스 객체를 선언한다.
 	
     public HomeController() {
@@ -69,6 +72,7 @@ public class HomeController extends HttpServlet {
 				ClientService.getInstance().logout(request,response);
 				viewPage += "Login/LogoutView";
 				break;
+				
 		// 리뷰게시판 페이지
 			case "/ReViewBoard.nhn":
 				viewPage += "ReView/ReViewBoard";
@@ -76,6 +80,33 @@ public class HomeController extends HttpServlet {
 			case "/ReViewInsert.nhn":
 				viewPage += "ReView/ReViewInsert";
 				break;
+				
+		// ==================== 상품 페이지 ======================
+			case "/AllProducts.nhn":
+				shopService.selectAllProduct(request,response);
+				viewPage += "Shop/AllProducts";
+				break;
+			case "/insertProduct.nhn":
+				viewPage += "Shop/insertProduct";
+				break;
+			case "/insertProductOK.nhn":
+				shopService.insertProduct(request,response);
+				shopService.selectAllProduct(request, response);
+				viewPage += "index";
+				break;
+			case "/nike.nhn":
+				shopService.selectNike(request, response);
+				viewPage += "Shop/brand/nike";
+				break;
+			case "/adidas.nhn":
+				shopService.selectAdidas(request, response);
+				viewPage += "Shop/brand/adidas";
+				break;
+			case "/newbalance.nhn":
+				shopService.selectNewbalance(request, response);
+				viewPage += "Shop/brand/newbalance";
+				break;
+		// ==========================================================
 		}
 		
 		
