@@ -16,12 +16,12 @@ public class QAboardDAO {
 	}
 	
 	public int selectCount(SqlSession mapper) {
-		return (int) mapper.selectOne("selectCount");
+		return (int) mapper.selectOne("selectCountQA");
 	}
 	
 	public ArrayList<QAboardVo> selectList(SqlSession mapper, HashMap<String, Integer> hmap) {
 		System.out.println("QAboardDAO 클래스의 selectList() 메소드");
-		return (ArrayList<QAboardVo>) mapper.selectList("selectList", hmap);
+		return (ArrayList<QAboardVo>) mapper.selectList("selectListQA", hmap);
 	}
 
 	

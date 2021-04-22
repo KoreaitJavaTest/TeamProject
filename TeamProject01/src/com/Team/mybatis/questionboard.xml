@@ -8,11 +8,11 @@
 		values(qaboard2_q_idx_seq.nextval, #{q_title}, #{q_content}, #{q_userid},qaboard2_q_idx_seq.currval, 0, 0)
 	</insert>
 
-	<select id="selectCount" resultType="int">
+	<select id="selectCountQA" resultType="int">
 		select count(*) from qaboard2
 	</select>
 	
-	<select id="selectList" parameterType="java.util.HashMap" resultType="QAvo">
+	<select id="selectListQA" parameterType="java.util.HashMap" resultType="QAvo">
 		<![CDATA[
 		select * from (
 			select rownum rnum, GG.* from (

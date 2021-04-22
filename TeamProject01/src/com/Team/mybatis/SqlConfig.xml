@@ -28,9 +28,7 @@
 		<mapper resource="com/Team/mybatis/Client.xml"/>
 		<mapper resource="com/Team/mybatis/questionboard.xml"/>
 		<mapper resource="com/Team/mybatis/Review.xml"/>
-<!-- 		바뀔내용 -->
 		<mapper resource="com/Team/mybatis/Shop.xml"/>
-<!-- 		<mapper resource="com/Team/mybatis/Shop.xml"/> -->
 	</mappers>
 
 
