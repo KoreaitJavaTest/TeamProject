@@ -6,3 +6,30 @@ TeamProject01/.settings/org.eclipse.wst.common.component
 TeamProject01/.settings/org.eclipse.wst.common.project.facet.core.xml
 TeamProject01/.settings/org.eclipse.wst.jsdt.ui.superType.container
 TeamProject01/.settings/org.eclipse.wst.jsdt.ui.superType.name
+<<<<<<< HEAD
+TeamProject01/WebContent/images/hot.gif
+TeamProject01/WebContent/images/ic_file.gif
+TeamProject01/WebContent/images/ic_new.gif
+TeamProject01/WebContent/images/icon_key.gif
+TeamProject01/WebContent/images/icon_news.gif
+TeamProject01/WebContent/images/icon_secret.gif
+TeamProject01/WebContent/images/new.png
+TeamProject01/WebContent/images/new1.png
+TeamProject01/WebContent/images/nikeshoes1.GIF
+TeamProject01/WebContent/images/nikeshoes2.GIF
+TeamProject01/WebContent/images/nikeshoes3.GIF
+TeamProject01/WebContent/images/nikeshoes4.GIF
+TeamProject01/WebContent/images/nikeshoes5.GIF
+TeamProject01/WebContent/images/notice.png
+TeamProject01/WebContent/images/reply.png
+=======
+<<<<<<< HEAD
+TeamProject01/src/com/Team/Client/controller/HomeController_BACKUP_782.java
+TeamProject01/src/com/Team/Client/controller/HomeController_BASE_782.java
+TeamProject01/src/com/Team/Client/controller/HomeController_LOCAL_782.java
+TeamProject01/src/com/Team/Client/controller/HomeController_REMOTE_782.java
+=======
+TeamProject01/src/com/Team/Client/service/ClientService.java.rej
+>>>>>>> 6a6b3e4572cd35d488d9b5656a979125893a2817
+TeamProject01/WebContent/WEB-INF/ReView/ReViewUpdate2.jsp
+>>>>>>> c0d268a5da10392884aade85fc336595ba1d3377

@@ -2,6 +2,7 @@ package com.Team.Client.service;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.Properties;
 
 import javax.mail.*;
@@ -18,6 +19,8 @@ import com.Team.Client.dao.ClientDao;
 import com.Team.Client.util.Gmail;
 import com.Team.Client.util.SHA256;
 import com.Team.Client.vo.ClientVo;
+import com.Team.Review.dao.ReViewDao;
+import com.Team.Review.vo.ReViewList;
 import com.Team.mybatis.MySession;
 
 public class ClientService {
@@ -277,4 +280,37 @@ public class ClientService {
 		
 		
 	}
+	
+	public void reviewSelect(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession();
+		SqlSession mapper = MySession.getSession();
+		
+		int currentPage = 1;
+		try {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		} catch (Exception e) { }
+		
+		int pagesize = 10;
+		
+		String id = (String)session.getAttribute("session_id");
+		ClientDao dao = ClientDao.getInstance();
+		
+		int totalcount = dao.reviewListCount(mapper,id);
+//		System.out.println(listcount);
+		
+		ReViewList reViewList = new ReViewList(pagesize, totalcount, currentPage,id);
+
+//		1페이지 분량의 글 목록을 얻어와서 mvcboardList의 ArrayList에 넣어준다.
+		reViewList.setList(dao.selectList(mapper, reViewList));
+		
+		request.setAttribute("reViewList", reViewList);
+		mapper.close();
+		
+	}
 }
+
+
+
+
+
