@@ -79,7 +79,7 @@ span{
 				<div class="col-xs-3"><span class="usercursor" onclick = "location.href = 'LogoutView.nhn'">로그아웃</span></div>
 			</c:if>
 			<c:if test = "${sessionScope.session_id != null }">
-				<div class="col-xs-3"><span class="usercursor" onclick = "location.href = 'MyEditViewPasswordCheck.nhn'"> 마이페이지</span></div>
+				<div class="col-xs-3"><span class="usercursor" onclick = "location.href = 'MyPageView.nhn'"> 마이페이지</span></div>
 			</c:if>
 		</div>	
 	</div>

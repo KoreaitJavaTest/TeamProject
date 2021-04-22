@@ -13,11 +13,19 @@ public class ReViewList {
 	private int endNo = 0;
 	private int startPage = 0;
 	private int endPage = 0;
+	private String id = "";
 	
 	public ReViewList() { }
 	public ReViewList(int pageSize, int totalCount, int currentPage) {
 		this.pageSize = pageSize;
 		this.totalCount = totalCount;
+		this.currentPage = currentPage;
+		calculator();
+	}
+	public ReViewList(int pagesize, int totalcount, int currentPage, String id) {
+		this.id = id;
+		this.pageSize = pagesize;
+		this.totalCount = totalcount;
 		this.currentPage = currentPage;
 		calculator();
 	}

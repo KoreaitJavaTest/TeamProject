@@ -1,8 +1,13 @@
 package com.Team.Client.dao;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.apache.ibatis.session.SqlSession;
 
 import com.Team.Client.vo.ClientVo;
+import com.Team.Review.vo.ReViewList;
+import com.Team.Review.vo.ReViewVO;
 
 public class ClientDao {
 	private static ClientDao instance = new ClientDao();
@@ -30,6 +35,12 @@ public class ClientDao {
 	}
 	public void ClientUpdate(SqlSession mapper, ClientVo vo) {
 		mapper.update("ClientUpdate",vo);
+	}
+	public int reviewListCount(SqlSession mapper, String id) {
+		return (int) mapper.selectOne("reviewListCount",id);
+	}
+	public ArrayList<ReViewVO> selectList(SqlSession mapper, ReViewList reViewList) {
+		return (ArrayList<ReViewVO>) mapper.selectList("selectList",reViewList);
 	}
 	
 

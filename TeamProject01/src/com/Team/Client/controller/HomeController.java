@@ -71,19 +71,28 @@ public class HomeController extends HttpServlet {
 				ClientService.getInstance().logout(request,response);
 				viewPage += "Login/LogoutView";
 				break;
+		// 마이페이지 메인 뷰페이지 
+			case "/MyPageView.nhn":
+				viewPage += "MyPage/MyPageMainView";
+				break;
 		// 회원정보 수정페이지가기 전 비밀번호 체크
 			case "/MyEditViewPasswordCheck.nhn":
-				viewPage += "ClientEdit/ClientMyEditPasswordView";
+				viewPage += "MyPage/ClientMyEditPasswordView";
 				break;
 		// 내정보 수정 페이지
 			case "/ClientEditView.nhn":
 				ClientService.getInstance().edit(request,response);
-				viewPage += "ClientEdit/ClientEditView";
+				viewPage += "MyPage/ClientEditView";
 				break;
 		// 수정 완료
 			case "/EditResultView.nhn":
 				ClientService.getInstance().editOK(request,response);
-				viewPage += "ClientEdit/EditResultView";
+				viewPage += "MyPage/EditResultView";
+				break;
+		// 나의 게시물 관리
+			case "/MyListViewPage.nhn":
+				ClientService.getInstance().reviewSelect(request,response);
+				viewPage += "MyPage/MyListViewPage";
 				break;
 		// 리뷰게시판 페이지
 			case "/ReViewBoard.nhn":
