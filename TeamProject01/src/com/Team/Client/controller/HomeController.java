@@ -117,7 +117,7 @@ public class HomeController extends HttpServlet {
 			case "/insertProductOK.nhn":
 				shopService.insertProduct(request,response);
 				shopService.selectAllProduct(request, response);
-				viewPage += "index";
+				viewPage += "Shop/AllProducts";
 				break;
 			case "/nike.nhn":
 				shopService.selectNike(request, response);

@@ -5,9 +5,5 @@
 
 <h1 align="center">이안에 게시글or 쇼핑이 만들어진다.</h1>
 
-<%
-	response.sendRedirect("/TeamProject/AllProducts.nhn");
-%>
-
 <jsp:include page="/Layout/footer.jsp"></jsp:include>
 	

@@ -285,6 +285,7 @@ public class ClientService {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		SqlSession mapper = MySession.getSession();
+		
 		int currentPage = 1;
 		try {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
@@ -299,7 +300,7 @@ public class ClientService {
 //		System.out.println(listcount);
 		
 		ReViewList reViewList = new ReViewList(pagesize, totalcount, currentPage,id);
-		
+
 //		1페이지 분량의 글 목록을 얻어와서 mvcboardList의 ArrayList에 넣어준다.
 		reViewList.setList(dao.selectList(mapper, reViewList));
 		

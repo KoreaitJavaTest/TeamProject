@@ -40,7 +40,7 @@ public class ClientDao {
 		return (int) mapper.selectOne("reviewListCount",id);
 	}
 	public ArrayList<ReViewVO> selectList(SqlSession mapper, ReViewList reViewList) {
-		return (ArrayList<ReViewVO>) mapper.selectList("selectList",reViewList);
+		return (ArrayList<ReViewVO>) mapper.selectList("selectreviewList",reViewList);
 	}
 	
 

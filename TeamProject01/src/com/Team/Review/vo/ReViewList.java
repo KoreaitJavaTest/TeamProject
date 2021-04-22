@@ -22,6 +22,7 @@ public class ReViewList {
 		this.currentPage = currentPage;
 		calculator();
 	}
+	
 	public ReViewList(int pagesize, int totalcount, int currentPage, String id) {
 		this.id = id;
 		this.pageSize = pagesize;
@@ -29,6 +30,7 @@ public class ReViewList {
 		this.currentPage = currentPage;
 		calculator();
 	}
+	
 	private void calculator() {
 		totalPage = (totalCount - 1) / pageSize + 1;
 		currentPage = currentPage > totalPage ? totalPage : currentPage;

@@ -184,28 +184,15 @@ span{
 	<div class="row" id="menuLine" style="min-height:80px; ">
 		<div class="col-xs-1"></div>
 		<div class="col-xs-10" style="border: 1px solid gray;">
-			<div class="col-xs-2"><span class="menuitem" onclick="location.href='?'">전체상품</span></div>
+			<div class="col-xs-2"><span class="menuitem" onclick="location.href='AllProducts.nhn?currentPage=1'">전체상품</span></div>
 			<div class="col-xs-2"><span class="menuitem" onclick="location.href='ReViewBoard.nhn'">리뷰게시판</span></div>
 			<div class="col-xs-2"><span class="menuitem" onclick="location.href='?'">묻고 답하기</span></div>
 			<div class="col-xs-2"><span class="menuitem" onclick="location.href='?'">공지사항</span></div>
 			<div class="col-xs-2"><span class="menuitem" onclick="location.href='?'">뭘넣을까</span></div>
 			<div class="col-xs-2"><span class="menuitem" onclick="location.href='?'">여기도뭘넣지</span></div>
-<!-- 			onclikc은 나중에 JS로 통합해서 코드수를 줄일 예정 -->
-		</div>
-		<div class="row" id="menuLine" style="min-height:80px; ">
-			<div class="col-xs-1"></div>
-			<div class="col-xs-10" style="border: 1px solid gray;">
-				<div class="col-xs-2"><span class="menuitem" onclick="location.href='AllProducts.nhn?currentPage=1'">전체상품</span></div>
-				<div class="col-xs-2"><span class="menuitem" onclick="location.href='?'">리뷰게시판</span></div>
-				<div class="col-xs-2"><span class="menuitem" onclick="location.href='?'">묻고 답하기</span></div>
-				<div class="col-xs-2"><span class="menuitem" onclick="location.href='?'">공지사항</span></div>
-				<div class="col-xs-2"><span class="menuitem" onclick="location.href='?'">뭘넣을까</span></div>
-				
-				<!-- 판매자 view에서 보이도록 수정해야함. -->
 				<c:if test="${sessionScope.session_id != null }">
 					<div class="col-xs-2"><span class="menuitem" onclick="location.href='insertProduct.nhn'">판매 상품 등록</span></div>
 				</c:if>
-				<!-- onclikc은 나중에 JS로 통합해서 코드수를 줄일 예정 -->
 			</div>
 			<div class="col-xs-1"></div>
 		</div>

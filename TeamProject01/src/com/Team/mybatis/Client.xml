@@ -37,7 +37,7 @@
 		SELECT count(*) FROM REVIEW WHERE RE_USERID = #{id}
 	</select>
 	
-	<select id="selectList" parameterType="Re_vo" resultType="Re_vo">
+	<select id="selectreviewList" parameterType="Re_vo" resultType="Re_vo">
 		<![CDATA[
 		select * from (
 			select rownum rnum, TT.* from (

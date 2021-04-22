@@ -5,7 +5,7 @@
 <script type="text/javascript">
 	window.onload = function(){
 		alert("${sessionScope.session_id }님 환영합니다");
-		location.href = "AllProducts.nhn";
+		location.href = "index.jsp";
 	}
 </script>
 
