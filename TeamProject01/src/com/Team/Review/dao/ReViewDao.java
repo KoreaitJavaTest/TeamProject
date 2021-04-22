@@ -37,6 +37,10 @@ public class ReViewDao {
 		mapper.update("ReViewUpdate",vo);
 		
 	}
+	public void ReViewUpdateNoImg(SqlSession mapper, ReViewVO vo) {
+		mapper.update("ReViewUpdateNoImg",vo);
+		
+	}
 	
 	
 }

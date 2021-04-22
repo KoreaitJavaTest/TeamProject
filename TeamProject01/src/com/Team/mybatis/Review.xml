@@ -32,6 +32,12 @@
 		where RE_idx = #{RE_idx}
 	</update>
 		
+	<update id="ReViewUpdateNoImg" parameterType="Re_vo">
+		update REVIEW set re_content = #{RE_content},re_title=#{RE_title},
+		RE_categoryDetail=#{RE_categoryDetail}
+		where RE_idx = #{RE_idx}
+	</update>
+		
 </mapper>
 
 

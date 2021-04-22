@@ -23,6 +23,16 @@ function imgMinus() {
 	btnCount--;
 	}
 }
+function test(){	//Test
+	   var test = document.getElementsByName("1")[0].value;
+	   if(test == ""){
+	      alert("사진을 등록해주세요");
+	      return false;
+	   }
+	   if(test != ""){
+	      return true;
+	   }
+	}
 </script>
 <jsp:include page="/Layout/header.jsp"></jsp:include>
 <div class="container" align="center" style="margin-top: 30px;">
