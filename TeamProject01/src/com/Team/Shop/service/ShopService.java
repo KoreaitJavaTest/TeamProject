@@ -39,8 +39,8 @@ public class ShopService {
 		
 		MultipartRequest mr = new MultipartRequest(
 				request,
-				application.getRealPath("./upload/"),
-//				"C:/upload/",
+//				application.getRealPath("./upload/"),
+				"D:/upload/",
 				5 * 1024 * 1024,
 				"UTF-8",
 				new DefaultFileRenamePolicy()
@@ -63,7 +63,7 @@ public class ShopService {
 					continue;
 				}
 				
-				String imgNames = "http://localhost:9090/korea/upload/" + fileName;	// img 파일 이름
+				String imgNames = "http://localhost:8009/korea/upload/" + fileName;	// img 파일 이름
 				
 				if(imgCount == 1) {
 					vo.setSh_img1(imgNames);

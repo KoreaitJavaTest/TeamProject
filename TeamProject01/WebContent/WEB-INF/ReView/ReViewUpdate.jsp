@@ -18,15 +18,7 @@ $(function() {					//업뎃단이 뜨자마자 btnCount 에 맞게 파일 태그
 		}
 	}
 	$('#divfile').append('<span>기존파일:'+fileTagName[0]+'</span>')
-// 	for (var i = 1; i <= btnCount; i++) {
-// 		console.log(imgFiles+(i));
-			
-// 	}
-	
-// 	for (var i = 0; i < btnCount; i++) {
-// 		$('input[type=file]').eq(i).html('${fileTagName}')
-// 	}
-		
+// 	console.log('${fileName1}')
 })
 
 function imgPlus() {
@@ -45,6 +37,7 @@ function imgMinus() {
 	}else{
 // 	$('input[type=file]:last-child').remove();
 	$('#file>div').last().remove();
+	$('input[name=fileName'+btnCount+']').remove();
 	btnCount--;
 	$('.clthumbnail').eq(btnCount).css('display','none');	// 주의 eq(index)
 	$('.userimg').eq(btnCount).attr('src'," ");
@@ -115,6 +108,7 @@ thumbnail a>img, .thumbnail>img {
 				</td>
 				<script>
 					$('#1').change(function() {
+						$('input[name=fileName1]').remove()
 						var getList = this.files;
 						var reader = new FileReader();
 						reader.readAsDataURL(getList[0]);
@@ -124,6 +118,8 @@ thumbnail a>img, .thumbnail>img {
 						}
 					})
 					$(document).on('change',"#2",function(){
+						$('input[name=fileName2]').remove()
+// 						console.log($('input[name=fileName2]').val())
 						var getList = this.files;
 						var reader = new FileReader();
 						reader.readAsDataURL(getList[0]);
@@ -133,6 +129,7 @@ thumbnail a>img, .thumbnail>img {
 						}
 					})
 					$(document).on('change',"#3",function(){
+						$('input[name=fileName3]').remove()						
 						var getList = this.files;
 						var reader = new FileReader();
 						reader.readAsDataURL(getList[0]);
@@ -177,12 +174,12 @@ thumbnail a>img, .thumbnail>img {
 				                <a class="thumbnail clthumbnail" style="display: none;" href="" data-toggle="modal" data-target="#myModal2">
 				                <img alt=""  class="userimg" id="img2"  src='
 				                <c:if test="${fileName2==null}"></c:if>
-				                <c:if test="${fileName2==null}">${fileName2}</c:if>
+				                <c:if test="${fileName2!=null}">${fileName2}</c:if>
 				                '></a>
 				                <a class="thumbnail clthumbnail" style="display: none;" href="" data-toggle="modal" data-target="#myModal3">
 				                <img alt=""  class="userimg" id="img3"  src="
 				                <c:if test="${fileName3==null}"></c:if>
-				                <c:if test="${fileName3==null}">${fileName3}</c:if>
+				                <c:if test="${fileName3!=null}">${fileName3}</c:if>
 				                "></a>
 								<!-- Modal -->
 				              </div>
@@ -202,8 +199,16 @@ thumbnail a>img, .thumbnail>img {
 		</table>
 		<input type="hidden" value="${vo.RE_idx}" name="idx">
 		<input type="hidden" value="${currentPage}" name="currentPage">
+		<c:if test="${fileName1!=null}">
+			<input type="hidden" value="${fileName1}" name="fileName1">
+		</c:if>
+		<c:if test="${fileName2!=null}">
+			<input type="hidden" value="${fileName2}" name="fileName2">
+		</c:if>
+		<c:if test="${fileName3!=null}">
+			<input type="hidden" value="${fileName3}" name="fileName3">
+		</c:if>
 	</form>
-
 </div>
-
 <jsp:include page="/Layout/footer.jsp"></jsp:include>
+

@@ -5,6 +5,8 @@ import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.Team.Review.vo.ReViewList;
+import com.Team.Review.vo.ReViewSearchVO;
 import com.Team.Review.vo.ReViewVO;
 
 public class ReViewDao {
@@ -41,6 +43,27 @@ public class ReViewDao {
 		mapper.update("ReViewUpdateNoImg",vo);
 		
 	}
+	public void ReViewDelete(SqlSession mapper, int idx) {
+		mapper.delete("ReViewDelete",idx);
+		
+	}
+	public ArrayList<ReViewVO> ReViewSearch(SqlSession mapper, ReViewSearchVO searchvo) {
+		return (ArrayList<ReViewVO>) mapper.selectList("ReViewSearch",searchvo);
+		
+	}
+	public int ReViewTotalCount(SqlSession mapper, ReViewSearchVO searchvo) {
+		
+		return (int) mapper.selectOne("ReViewTotalCount",searchvo);
+	}
+	public void CommentUp(SqlSession mapper, int refIdx) {
+		mapper.update("CommentUp",refIdx);
+		
+	}
+	public void minusCommentCount(SqlSession mapper, int idx) {
+		mapper.update("minusCommentCount",idx);
+		
+	}
+
 	
 	
 }

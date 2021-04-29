@@ -16,13 +16,17 @@ public class ReViewVO {
 	private int RE_img;
 	private String RE_categoryDetail;
 	private String RE_imgNames;
+	private int RE_commentCount;
 	
+
+
+
 	@Override
 	public String toString() {
 		return "ReViewVO [RE_idx=" + RE_idx + ", RE_title=" + RE_title + ", RE_content=" + RE_content + ", RE_userId="
 				+ RE_userId + ", RE_good=" + RE_good + ", RE_bad=" + RE_bad + ", RE_hit=" + RE_hit + ", RE_report="
 				+ RE_report + ", RE_writeDate=" + RE_writeDate + ", RE_img=" + RE_img + ", RE_categoryDetail="
-				+ RE_categoryDetail + ", RE_imgNames=" + RE_imgNames + "]";
+				+ RE_categoryDetail + ", RE_imgNames=" + RE_imgNames + ", RE_commentCount=" + RE_commentCount + "]";
 	}
 
 
@@ -105,6 +109,16 @@ public class ReViewVO {
 
 	public void setRE_imgNames(String rE_imgNames) {
 		RE_imgNames = rE_imgNames;
+	}
+
+
+	public int getRE_commentCount() {
+		return RE_commentCount;
+	}
+
+
+	public void setRE_commentCount(int rE_commentCount) {
+		RE_commentCount = rE_commentCount;
 	}
 	
 	

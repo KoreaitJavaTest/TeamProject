@@ -37,7 +37,44 @@
 		RE_categoryDetail=#{RE_categoryDetail}
 		where RE_idx = #{RE_idx}
 	</update>
-		
+	<delete id="ReViewDelete" parameterType="Integer">
+		delete from REVIEW where RE_idx = #{idx}
+	</delete>
+	
+	<select id="ReViewTotalCount" parameterType="com.Team.Review.vo.ReViewSearchVO" resultType="Integer">
+		select count(*) from REVIEW where
+		<if test="searchName=='제목'">
+			RE_title LIKE '%'||#{searchText}||'%'
+		</if>		
+		<if test="searchName=='작성자'">
+			RE_USERID LIKE '%'||#{searchText}||'%'
+		</if>		
+		<if test="searchName=='제목작성자'">
+			RE_title LIKE '%'||#{searchText}||'%' or RE_USERID LIKE '%'||#{searchText}||'%'
+		</if>
+	</select>
+	
+	<select id="ReViewSearch" parameterType="com.Team.Review.vo.ReViewSearchVO" resultType="Re_vo">
+		<![CDATA[select * from (select rownum rnum, GG.* from (select*from REVIEW where]]>
+		<if test="searchName=='제목'">
+			<![CDATA[RE_title like '%'||#{searchText}||'%']]>
+		</if>		
+		<if test="searchName=='작성자'">
+			<![CDATA[RE_USERID like '%'||#{searchText}||'%']]>
+		</if>		
+		<if test="searchName=='제목작성자'">
+			<![CDATA[RE_title like '%'||#{searchText}||'%' or RE_USERID like '%'||#{searchText}||'%']]>
+		</if>
+			<![CDATA[order by RE_idx desc) GG where rownum <=#{endNo})where rnum>=#{startNo}]]>	
+	</select>
+	
+	<update id="CommentUp" parameterType="Integer">
+		update REVIEW set RE_COMMENTCOUNT = RE_COMMENTCOUNT + 1 where RE_idx = #{refIdx}
+	</update>
+	<update id="minusCommentCount" parameterType="Integer">
+		update REVIEW set RE_COMMENTCOUNT = RE_COMMENTCOUNT - 1 where RE_idx = #{idx}
+	</update>
+
 </mapper>
 
 

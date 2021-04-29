@@ -6,8 +6,22 @@
 <meta charset="UTF-8">
 <script type="text/javascript">
 	window.onload = function(){
-		alert("성공적으로 글을 작성했습니다.");
-		location.href = "ReViewBoard.nhn";
+		// 글삽입 : 1 
+		// 글수정 : 2
+		// 글삭제 : 3
+		// 댓글삽입 : 4
+		var flag = ${flag}
+		var currentPage = ${currentPage}
+		if(flag==1){
+			alert("성공적으로 글을 작성했습니다.");
+		}else if(flag==3){
+			alert("성공적으로 글을 삭제했습니다.");
+		}else if(flag==4){
+			alert('댓글을 추가 하였습니다.');
+			location.href = "ReViewSelect.nhn?currentPage="+currentPage+"&idx=${idx}";
+			return;
+		}
+		location.href = "ReViewBoard.nhn?currentPage="+currentPage;
 	}
 </script>
 </head>

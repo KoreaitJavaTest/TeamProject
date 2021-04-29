@@ -9,6 +9,7 @@
  		<typeAlias type="com.Team.Client.vo.ClientVo" alias="vo"/>	
  		<typeAlias type="com.Team.Shop.vo.ShopVO" alias="shopVO"/>	
  		<typeAlias type="com.Team.Review.vo.ReViewVO" alias="Re_vo" />	
+ 		<typeAlias type="com.Team.Review.vo.ReViewCommentVO" alias="Re_Co_vo" />	
 	</typeAliases>
 	
 	<environments default="development">
@@ -26,6 +27,7 @@
 	<mappers>
 		<mapper resource="com/Team/mybatis/Client.xml"/>
 		<mapper resource="com/Team/mybatis/Review.xml"/>
+		<mapper resource="com/Team/mybatis/ReviewComment.xml"/>
 <!-- 		바뀔내용 -->
 		<mapper resource="com/Team/mybatis/Shop.xml"/>
 <!-- 		<mapper resource="com/Team/mybatis/Shop.xml"/> -->

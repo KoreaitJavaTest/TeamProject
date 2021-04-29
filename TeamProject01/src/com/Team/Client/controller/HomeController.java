@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.Team.Client.dao.ClientDao;
 import com.Team.Client.service.ClientService;
 import com.Team.Shop.service.ShopService;
+import com.Team.Review.service.ReViewCommentService;
 import com.Team.Review.service.ReViewService;
 
 @WebServlet("*.nhn")
@@ -97,15 +98,6 @@ public class HomeController extends HttpServlet {
 				ClientService.getInstance().reviewSelect(request,response);
 				viewPage += "MyPage/MyListViewPage";
 				break;
-		// 리뷰게시판 페이지
-			case "/ReViewBoard.nhn":
-				ReViewService.getInstance().ReViewSelect(request,response);
-				viewPage += "ReView/ReViewBoard";
-				break;
-		// 리뷰작성 페이지
-			case "/ReViewInsert.nhn":
-				viewPage += "ReView/ReViewInsert";
-				break;
 		// ==================== 상품 페이지 ======================
 			case "/AllProducts.nhn":
 				shopService.selectAllProduct(request,response);
@@ -132,7 +124,15 @@ public class HomeController extends HttpServlet {
 				viewPage += "Shop/brand/newbalance";
 				break;
 		// ==========================================================
-		// 작성리뷰 DB추가 페이지
+				// 리뷰게시판 페이지
+			case "/ReViewBoard.nhn":
+				ReViewService.getInstance().ReViewSelect(request,response);
+				viewPage += "ReView/ReViewBoard";
+				break;
+				// 리뷰작성 페이지
+			case "/ReViewInsert.nhn":
+				viewPage += "ReView/ReViewInsert";
+				break;
 			case "/ReViewInsertOK.nhn":
 				//저장된 세션 정보 + 리뷰 작성 게시글 정보를 받아 리뷰DB에 저장
 				ReViewService.getInstance().ReViewInsert(request,response);
@@ -141,7 +141,11 @@ public class HomeController extends HttpServlet {
 				break;
 			case "/ReHitUp.nhn":
 				//선택한 게시글의 조회수를 1증가 + idx로 게시글 정보를 vo 객체에 저장 -> 선택한 게시글 자세히보기 페이지로 이동
-				ReViewService.getInstance().ReHitUp(request,response);
+				ReViewService.getInstance().ReHitUp(request, response);
+				viewPage += "ReView/ReViewPostDetail";
+				break;
+			case "/ReViewSelect.nhn":
+				ReViewService.getInstance().ReViewDetailSelect(request,response);
 				viewPage += "ReView/ReViewPostDetail";
 				break;
 			case "/ReViewReport.nhn":
@@ -162,6 +166,40 @@ public class HomeController extends HttpServlet {
 				//idx로 해당 게시글 정보를 request 영역에 저장후 update View 단으로 이동
 				viewPage += "ReView/ReViewPostDetail";
 				break;
+			case "/ReViewDeleteOK.nhn":
+				//게시글 삭제하기 버튼 클릭후 예,아니오 클릭시에따라 가지는 jsp 파일로 가게함
+//				ReViewService.getInstance().ReViewDelete(request,response);
+				viewPage += "ReView/ReViewDeleteOK";
+				break;
+			case "/ReViewDelete.nhn":
+				// idx,currentPage를 넘겨받고 idx 게시글을 삭제함
+				ReViewService.getInstance().ReViewDelete(request, response);
+				viewPage += "ReView/ReViewBoardListOk";
+				break;
+			case "/ReViewSearch.nhn":
+				//searchName , searchText를 넘겨받고 해당 게시글을 검색하여 다시 ReViewBoard로 돌려준다.
+				ReViewService.getInstance().ReViewSearch(request,response);
+				viewPage += "ReView/ReViewBoard";	
+				break;
+			case "/ReViewComment.nhn":
+				//ReViewDetail 받은 답글정보(내용,답글을쓴아이디,답글이 넣은 리뷰글번호,현재페이지) 를 넘겨받고 답글을 추가하는 메소드를 호출.
+				ReViewCommentService.getInstance().commentInsert(request,response);
+				//리뷰글(idx), currentPage => request에 저장되있는상태
+				viewPage += "ReView/ReViewBoardListOk";
+				break;
+			case "/updateComment.nhn":
+				
+				ReViewCommentService.getInstance().updateComment(request,response);
+				//리뷰글(idx), currentPage => request에 저장되있는상태
+				viewPage += "ReView/ReViewPostDetail";
+				break;
+			case "/commentDelete.nhn":
+				
+				ReViewCommentService.getInstance().deleteComment(request,response);
+				//리뷰글(idx), currentPage => request에 저장되있는상태
+				viewPage += "ReView/ReViewPostDetail";
+				break;
+				
 		}
 				
 			
