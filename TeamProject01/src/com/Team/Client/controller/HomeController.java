@@ -89,7 +89,7 @@ public class HomeController extends HttpServlet {
 				ClientService.getInstance().edit(request,response);
 				viewPage += "MyPage/ClientEditView";
 				break;
-		// 수정 완료
+		// 내정보 수정 완료
 			case "/EditResultView.nhn":
 				ClientService.getInstance().editOK(request,response);
 				viewPage += "MyPage/EditResultView";
@@ -98,6 +98,11 @@ public class HomeController extends HttpServlet {
 			case "/MyListViewPage.nhn":
 				ClientService.getInstance().reviewSelect(request,response);
 				viewPage += "MyPage/MyListViewPage";
+				break;
+		// 나의 Q&A 게시물 관리
+			case "/MyQnAviewPage.nhn":
+				ClientService.getInstance().myQnASelect(request,response);
+				viewPage += "MyPage/MyQnAviewPage";
 				break;
 		// 리뷰게시판 페이지
 			case "/ReViewBoard.nhn":

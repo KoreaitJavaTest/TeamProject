@@ -10,7 +10,7 @@
 				<ul>
 					<li onclick = "location.href='MyEditViewPasswordCheck.nhn'">내정보 수정</li>
 					<li onclick = "location.href='MyListViewPage.nhn'">리뷰게시글 관리</li>
-					<li onclick = "location.href='아직안정했음'">질문게시글 관리</li>
+					<li onclick = "location.href='MyQnAviewPage.nhn'">질문게시글 관리</li>
 				</ul>
 			</nav>
 		</div>

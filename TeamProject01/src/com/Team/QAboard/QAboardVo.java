@@ -22,6 +22,7 @@ public class QAboardVo {
 		this.q_content = q_content;
 	}
 	
+	
 	public int getQ_idx() {
 		return q_idx;
 	}

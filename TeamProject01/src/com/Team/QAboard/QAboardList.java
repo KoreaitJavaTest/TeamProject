@@ -14,6 +14,7 @@ public class QAboardList {
 	private int endNo = 0;			
 	private int startPage = 0;			
 	private int endPage = 0;
+	private String id = "";
 	
 	public QAboardList() { }
 	
@@ -24,6 +25,16 @@ public class QAboardList {
 		this.currentPage = currentPage;
 		calculator();
 	}
+	
+	public QAboardList(int pageSize, int totalCount, int currentPage ,String id) {
+		super();
+		this.id = id;
+		this.pageSize = pageSize;
+		this.totalCount = totalCount;
+		this.currentPage = currentPage;
+		calculator();
+	}
+	
 	
 	private void calculator() {
 		totalPage = (totalCount - 1) / pageSize + 1;
