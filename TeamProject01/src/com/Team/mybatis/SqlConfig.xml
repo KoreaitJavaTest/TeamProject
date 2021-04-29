@@ -8,6 +8,7 @@
 	<typeAliases>
  		<typeAlias type="com.Team.Client.vo.ClientVo" alias="vo"/>	
  		<typeAlias type="com.Team.Shop.vo.ShopVO" alias="shopVO"/>	
+ 		<typeAlias type="com.Team.Shop.vo.ShopList" alias="shopList" />	
  		<typeAlias type="com.Team.Review.vo.ReViewVO" alias="Re_vo" />	
 	</typeAliases>
 	
@@ -26,9 +27,7 @@
 	<mappers>
 		<mapper resource="com/Team/mybatis/Client.xml"/>
 		<mapper resource="com/Team/mybatis/Review.xml"/>
-<!-- 		바뀔내용 -->
 		<mapper resource="com/Team/mybatis/Shop.xml"/>
-<!-- 		<mapper resource="com/Team/mybatis/Shop.xml"/> -->
 	</mappers>
 
 

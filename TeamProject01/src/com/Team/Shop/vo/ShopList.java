@@ -14,12 +14,21 @@ public class ShopList {
 	private int endNo = 0;
 	private int startPage = 0;
 	private int endPage = 0;
+	private String categoryDetail;
 	
 	public ShopList() { }
+	
 	public ShopList(int pageSize, int totalCount, int currentPage) {
 		this.pageSize = pageSize;
 		this.totalCount = totalCount;
 		this.currentPage = currentPage;
+		calculator();
+	}
+	public ShopList(int pageSize, int totalCount, int currentPage, String categoryDetail) {
+		this.pageSize = pageSize;
+		this.totalCount = totalCount;
+		this.currentPage = currentPage;
+		this.categoryDetail = categoryDetail;
 		calculator();
 	}
 	
@@ -34,6 +43,12 @@ public class ShopList {
 		endPage = endPage > totalPage ? totalPage : endPage;
 	}
 	
+	public String getcategoryDetail() {
+		return categoryDetail;
+	}
+	public void setcategoryDetail(String categoryDetail) {
+		this.categoryDetail = categoryDetail;
+	}
 	public ArrayList<ShopVO> getList() {
 		return list;
 	}
@@ -88,12 +103,11 @@ public class ShopList {
 	public void setEndPage(int endPage) {
 		this.endPage = endPage;
 	}
+	
 	@Override
 	public String toString() {
 		return "ShopList [list=" + list + ", pageSize=" + pageSize + ", totalCount=" + totalCount + ", totalPage="
 				+ totalPage + ", currentPage=" + currentPage + ", startNo=" + startNo + ", endNo=" + endNo
-				+ ", startPage=" + startPage + ", endPage=" + endPage + "]";
+				+ ", startPage=" + startPage + ", endPage=" + endPage + ", categoryDetail=" + categoryDetail + "]";
 	}
-	
-	
 }

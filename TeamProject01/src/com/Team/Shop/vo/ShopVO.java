@@ -7,30 +7,30 @@ public class ShopVO {
 	public ShopVO() {
 	}
 	
-	private int sh_idx;				// 상품 번호
-	private String sh_category;		// 상품 종류 	ex) 신발, 옷, 가방, ...
+	private int sh_idx;					// 상품 번호
+	private String sh_category;			// 상품 종류 	ex) 신발, 옷, 가방, ...
 	private String sh_categoryDetail;	// 상품 브랜드 	ex) 나이키, 아디다스, 뉴발란스, ...
-	private String sh_name;			// 상품명
-	private String sh_content;		// 상품 내용
-	private int sh_ea;				// 재고
-	private int sh_size;			// 사이즈
-	private int sh_price;			// 가격
+	private String sh_name;				// 상품명
+	private String sh_content;			// 상품 내용
+	private int sh_ea;					// 재고
+	private int sh_size;				// 사이즈
+	private int sh_price;				// 가격
 	private double sh_salePrice;		// 할인된 가격
 	private double sh_salePercent;		// 할인 퍼센트
-	private int sh_like;			// 찜하기
-	private int sh_hit;				// 조회수
-	private int sh_report;			// 신고받은 횟수
+	private int sh_like;				// 찜하기
+	private int sh_hit;					// 조회수
+	private int sh_report;				// 신고받은 횟수
 	
-	private String sh_img1;			// 상품 이미지1
-	private String sh_img2;			// 상품 이미지2
-	private String sh_img3;			// 상품 이미지3
-	private Date sh_writeDate;		// 상품 게시일
+	private String sh_img1;				// 상품 이미지1
+	private String sh_img2;				// 상품 이미지2
+	private String sh_img3;				// 상품 이미지3
+	private Date sh_writeDate;			// 상품 게시일
 	
-	private String sh_seller;		// 판매자 명
-	private String sh_title;		// 판매글 제목
+	private String sh_seller;			// 판매자 명
+	private String sh_title;			// 판매글 제목
 	
-	private String sh_priceFM;		// 가격 포멧
-	private String sh_salePriceFM;	// 할인 가격 포멧
+	private String sh_priceFM;			// 가격 포멧
+	private String sh_salePriceFM;		// 할인 가격 포멧
 	
 	
 	public String getSh_salePriceFM() {

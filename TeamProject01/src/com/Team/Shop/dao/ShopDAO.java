@@ -5,6 +5,8 @@ import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.Team.Shop.vo.CategoryDetail;
+import com.Team.Shop.vo.ShopList;
 import com.Team.Shop.vo.ShopVO;
 import com.Team.mybatis.MySession;
 
@@ -15,10 +17,9 @@ public class ShopDAO {
 	
 	
 //	상품 등록 메서드
-	public void insertProduct(ShopVO vo) {
-		SqlSession mapper = MySession.getSession();
-		System.out.println(vo.getSh_idx());
-		
+	public void insertProduct(SqlSession mapper, ShopVO vo) {
+		System.out.println("dao => insertProduct() 메서드 들어옴");
+		System.out.println(vo);
 		if(vo.getSh_img1() != null && vo.getSh_img2() != null) {
 			mapper.insert("insertProduct", vo);
 		} else if(vo.getSh_img1() != null && vo.getSh_img2() == null) {
@@ -26,35 +27,43 @@ public class ShopDAO {
 		} else if(vo.getSh_img1() == null && vo.getSh_img2() != null) {
 			mapper.insert("insertProduct2", vo);
 		}
-		mapper.commit();
-		mapper.close();
 	}
 	
+//	전체상품 카운트
 	public int selectCount(SqlSession mapper) {
 		return (int) mapper.selectOne("selectCount");
 	}
 	
+//	브랜드별 카운트
+	public int selectCountDetail(SqlSession mapper, HashMap<String, String> hmap) {
+		return (int) mapper.selectOne("selectCountDetail", hmap);
+	}
+	
 //	전체 상품
-	public ArrayList<ShopVO> selectList(SqlSession mapper, HashMap<String, Integer> hmap) {
-		return (ArrayList<ShopVO>) mapper.selectList("selectList", hmap);
+	public ArrayList<ShopVO> selectList(SqlSession mapper, CategoryDetail cd) {
+		System.out.println("dao => selectList() 메서드 들어옴");
+		return (ArrayList<ShopVO>) mapper.selectList("selectList", cd);
 	}
 	
-//	나이키
-	public ArrayList<ShopVO> selectnike(SqlSession mapper, HashMap<String, Object> hmap) {
-		System.out.println("ShopDAO => 나이키");
+//	브랜드별 상품
+	public ArrayList<ShopVO> selectCategoryDetail(SqlSession mapper, CategoryDetail categoryDetail) {
+//		System.out.println("ShopDAO => selectCategoryDetail");
+		return (ArrayList<ShopVO>) mapper.selectList("selectCategoryDetail", categoryDetail);
+	}
+	
+//	상품 상세 보기
+	public ShopVO selectProduct(SqlSession mapper, int sh_idx) {
 		
-		return (ArrayList<ShopVO>) mapper.selectList("selectnike", hmap);
+		return (ShopVO) mapper.selectOne("selectProduct", sh_idx);
 	}
 	
-//	뉴발란스
-	public ArrayList<ShopVO> selectNewbalance(SqlSession mapper, HashMap<String, Object> hmap) {
-		return (ArrayList<ShopVO>) mapper.selectList("selectNewbalance", hmap);
+//	조회수 증가
+	public void increment(SqlSession mapper, int sh_idx) {
+		mapper.update("increment", sh_idx);
 	}
 	
-//	아디다스
-	public ArrayList<ShopVO> selectAdidas(SqlSession mapper, HashMap<String, Object> hmap) {
-		return (ArrayList<ShopVO>) mapper.selectList("selectAdidas", hmap);
+	public void deleteProduct(SqlSession mapper, int sh_idx) {
+		mapper.delete("deleteProduct", sh_idx);
 	}
-	
 	
 }

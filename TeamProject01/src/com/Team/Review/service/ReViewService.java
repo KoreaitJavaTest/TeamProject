@@ -44,8 +44,7 @@ public class ReViewService {
 //		파일업로드 시작 ===============================
 		try {
 			MultipartRequest mr = new MultipartRequest(request,
-//					application.getRealPath("../upload"),
-					"D:/upload",
+					application.getRealPath("./upload/"),
 					5*1024*1024,
 					"UTF-8",
 					new DefaultFileRenamePolicy()

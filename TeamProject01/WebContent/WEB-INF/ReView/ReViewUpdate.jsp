@@ -177,12 +177,12 @@ thumbnail a>img, .thumbnail>img {
 				                <a class="thumbnail clthumbnail" style="display: none;" href="" data-toggle="modal" data-target="#myModal2">
 				                <img alt=""  class="userimg" id="img2"  src='
 				                <c:if test="${fileName2==null}"></c:if>
-				                <c:if test="${fileName2==null}">${fileName2}</c:if>
+				                <c:if test="${fileName2!=null}">${fileName2}</c:if>
 				                '></a>
 				                <a class="thumbnail clthumbnail" style="display: none;" href="" data-toggle="modal" data-target="#myModal3">
 				                <img alt=""  class="userimg" id="img3"  src="
 				                <c:if test="${fileName3==null}"></c:if>
-				                <c:if test="${fileName3==null}">${fileName3}</c:if>
+				                <c:if test="${fileName3!=null}">${fileName3}</c:if>
 				                "></a>
 								<!-- Modal -->
 				              </div>
