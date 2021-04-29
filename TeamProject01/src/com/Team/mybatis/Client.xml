@@ -46,6 +46,20 @@
 		) where rnum >= #{startNo}
 		]]>
 	</select>
+	
+	<select id="qnaTotalCount" parameterType="String" resultType="int">
+		select count(*) from QABOARD2 where Q_USERID like '%'||#{id}||'%'
+	</select>
+	
+	<select id="selectQAList" parameterType="QAvo" resultType="QAvo">
+		<![CDATA[
+		select * from (
+			select rownum rnum, TT.* from (
+				select * from QABOARD2 WHERE Q_USERID like '%'||#{id}||'%' order by Q_IDX asc
+			) TT where rownum <= #{endNo}
+		) where rnum >= #{startNo}
+		]]>
+	</select>
 </mapper>
 
 

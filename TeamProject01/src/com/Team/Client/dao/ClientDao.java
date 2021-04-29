@@ -6,6 +6,8 @@ import java.util.HashMap;
 import org.apache.ibatis.session.SqlSession;
 
 import com.Team.Client.vo.ClientVo;
+import com.Team.QAboard.QAboardList;
+import com.Team.QAboard.QAboardVo;
 import com.Team.Review.vo.ReViewList;
 import com.Team.Review.vo.ReViewVO;
 
@@ -41,6 +43,12 @@ public class ClientDao {
 	}
 	public ArrayList<ReViewVO> selectList(SqlSession mapper, ReViewList reViewList) {
 		return (ArrayList<ReViewVO>) mapper.selectList("selectreviewList",reViewList);
+	}
+	public int qnaTotalCount(SqlSession mapper, String id) {
+		return (int) mapper.selectOne("qnaTotalCount",id);
+	}
+	public ArrayList<QAboardVo> QAselectList(SqlSession mapper, QAboardList qaBoardList) {
+		return (ArrayList<QAboardVo>) mapper.selectList("selectQAList",qaBoardList);
 	}
 	
 

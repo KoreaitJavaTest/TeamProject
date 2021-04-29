@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -200,7 +201,6 @@ footer {
 	border: 1px solid blue;
 	display: flex;
 	align-items: center;
-/* background: black; */
 }
 
 
@@ -313,7 +313,8 @@ span{
 .product-grid .price span{color:#999;font-size:12px;font-weight:400;text-decoration:line-through;margin-left:3px;display:inline-block}
 .product-grid .add-to-cart{color:#333;font-size:13px;font-weight:600}
 
-@media only screen and (max-width:1920px){.product-grid{margin-bottom:30px}
+
+@media only screen and (max-width:2000px){.product-grid{margin-bottom:30px}
 }
 	
 </style>
@@ -352,7 +353,7 @@ span{
 		<div class="col-xs-10" style="border: 1px solid gray;">
 			<div class="col-xs-2"><span class="menuitem" onclick="location.href='AllProducts.nhn'">전체상품</span></div>
 			<div class="col-xs-2"><span class="menuitem" onclick="location.href='ReViewBoard.nhn'">리뷰게시판</span></div>
-			<div class="col-xs-2"><span class="menuitem" onclick="location.href='?'">묻고 답하기</span></div>
+			<div class="col-xs-2"><span class="menuitem" onclick="location.href='QAboard.nhn'">묻고 답하기</span></div>
 			<div class="col-xs-2"><span class="menuitem" onclick="location.href='?'">공지사항</span></div>
 			<div class="col-xs-2"><span class="menuitem" onclick="location.href='?'">뭘넣을까</span></div>
 			<div class="col-xs-2"><span class="menuitem" onclick="location.href='?'">여기도뭘넣지</span></div>

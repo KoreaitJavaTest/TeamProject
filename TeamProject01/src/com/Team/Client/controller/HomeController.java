@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.Team.Client.dao.ClientDao;
 import com.Team.Client.service.ClientService;
+import com.Team.QAboard.QAboardService;
 import com.Team.Shop.service.ShopService;
 import com.Team.Review.service.ReViewService;
 
@@ -22,6 +23,7 @@ public class HomeController extends HttpServlet {
 	private ShopService shopService = ShopService.getInstance();
 	
 //	컨트롤러에서 사용할 service 클래스 객체를 선언한다.
+	private QAboardService service = QAboardService.getInstance();
 	
     public HomeController() {
         super();
@@ -87,7 +89,7 @@ public class HomeController extends HttpServlet {
 				ClientService.getInstance().edit(request,response);
 				viewPage += "MyPage/ClientEditView";
 				break;
-		// 수정 완료
+		// 내정보 수정 완료
 			case "/EditResultView.nhn":
 				ClientService.getInstance().editOK(request,response);
 				viewPage += "MyPage/EditResultView";
@@ -96,6 +98,11 @@ public class HomeController extends HttpServlet {
 			case "/MyListViewPage.nhn":
 				ClientService.getInstance().reviewSelect(request,response);
 				viewPage += "MyPage/MyListViewPage";
+				break;
+		// 나의 Q&A 게시물 관리
+			case "/MyQnAviewPage.nhn":
+				ClientService.getInstance().myQnASelect(request,response);
+				viewPage += "MyPage/MyQnAviewPage";
 				break;
 		// 리뷰게시판 페이지
 			case "/ReViewBoard.nhn":
@@ -106,6 +113,26 @@ public class HomeController extends HttpServlet {
 			case "/ReViewInsert.nhn":
 				viewPage += "ReView/ReViewInsert";
 				break;
+
+		// ================== Q&A 게시판 =====================		
+			case "/QAboard.nhn":
+				service.selectList(request, response);
+				viewPage += "QAboard/QAlist";
+				break;
+			case "/QAinsert.nhn":
+				viewPage += "QAboard/QAinsert";
+				break;
+			case "/insertOK.nhn":
+				System.out.println(request);
+				service.insert(request, response);
+				viewPage += "QAboard/index";
+				System.out.println(viewPage);
+				break;
+			case "/list.nhn":
+				service.selectList(request, response);
+				viewPage += "QAboard/QAlist";
+				break;
+
 				
 		// ==================== 상품 페이지 ======================
 				
