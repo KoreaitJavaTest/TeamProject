@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.Team.Client.dao.ClientDao;
 import com.Team.Client.service.ClientService;
+import com.Team.QAboard.QAboardService;
 import com.Team.Shop.service.ShopService;
 import com.Team.Review.service.ReViewCommentService;
 import com.Team.Review.service.ReViewService;
@@ -23,6 +24,7 @@ public class HomeController extends HttpServlet {
 	private ShopService shopService = ShopService.getInstance();
 	
 //	컨트롤러에서 사용할 service 클래스 객체를 선언한다.
+	private QAboardService service = QAboardService.getInstance();
 	
     public HomeController() {
         super();
@@ -45,7 +47,6 @@ public class HomeController extends HttpServlet {
 	
 		String viewPage = "/WEB-INF/";
 		switch (context) {
-		
 		// 회원가입 페이지
 			case "/JoinView.nhn":
 				viewPage += "ClitenJoin/JoinView";
@@ -79,7 +80,7 @@ public class HomeController extends HttpServlet {
 			case "/MyPageView.nhn":
 				viewPage += "MyPage/MyPageMainView";
 				break;
-		// 회원정보 수정페이지가기 전 비밀번호 체크
+		// 회원정보 수정페이지 가기 전 비밀번호 체크
 			case "/MyEditViewPasswordCheck.nhn":
 				viewPage += "MyPage/ClientMyEditPasswordView";
 				break;
@@ -88,7 +89,7 @@ public class HomeController extends HttpServlet {
 				ClientService.getInstance().edit(request,response);
 				viewPage += "MyPage/ClientEditView";
 				break;
-		// 수정 완료
+		// 내정보 수정 완료
 			case "/EditResultView.nhn":
 				ClientService.getInstance().editOK(request,response);
 				viewPage += "MyPage/EditResultView";
@@ -98,31 +99,93 @@ public class HomeController extends HttpServlet {
 				ClientService.getInstance().reviewSelect(request,response);
 				viewPage += "MyPage/MyListViewPage";
 				break;
+		// 나의 Q&A 게시물 관리
+			case "/MyQnAviewPage.nhn":
+				ClientService.getInstance().myQnASelect(request,response);
+				viewPage += "MyPage/MyQnAviewPage";
+				break;
+
+		// ================== Q&A 게시판 =====================		
+			case "/QAboard.nhn":
+				service.selectList(request, response);
+				viewPage += "QAboard/QAlist";
+				break;
+			case "/QAinsert.nhn":
+				viewPage += "QAboard/QAinsert";
+				break;
+			case "/insertOK.nhn":
+				System.out.println(request);
+				service.insert(request, response);
+				viewPage += "QAboard/index";
+				System.out.println(viewPage);
+				break;
+			case "/list.nhn":
+				service.selectList(request, response);
+				viewPage += "QAboard/QAlist";
+				break;
 		// ==================== 상품 페이지 ======================
+				
+			// 전체 상품 페이지
 			case "/AllProducts.nhn":
 				shopService.selectAllProduct(request,response);
 				viewPage += "Shop/AllProducts";
 				break;
+				
+			// 상품 등록 페이지
 			case "/insertProduct.nhn":
 				viewPage += "Shop/insertProduct";
 				break;
 			case "/insertProductOK.nhn":
 				shopService.insertProduct(request,response);
-				shopService.selectAllProduct(request, response);
-				viewPage += "Shop/AllProducts";
+//				System.out.println("상품 등록 끝");
+				viewPage += "Shop/goMain";
 				break;
-			case "/nike.nhn":
-				shopService.selectNike(request, response);
-				viewPage += "Shop/brand/nike";
+			
+			// 브랜드별로 나눔
+			case "/categoryDetail.nhn":
+				shopService.selectCategoryDetail(request, response);
+				viewPage += "Shop/categoryDetail";
 				break;
-			case "/adidas.nhn":
-				shopService.selectAdidas(request, response);
-				viewPage += "Shop/brand/adidas";
+			
+			// 상품 상세보기 페이지
+			case "/selectProduct.nhn":
+				shopService.selectProduct(request, response);
+				viewPage += "Shop/selectProduct";
 				break;
-			case "/newbalance.nhn":
-				shopService.selectNewbalance(request, response);
-				viewPage += "Shop/brand/newbalance";
+				
+			// 조회수 증가
+			case "/increment.nhn":
+				shopService.increment(request, response);
+				viewPage += "Shop/increment";
 				break;
+				
+			// 장바구니 테스트
+			case "/cart.nhn":
+				viewPage += "Shop/cart";
+				break;
+			
+			// 상품 삭제 페이지
+			case "/deleteProduct.nhn":
+				shopService.selectProduct(request, response);
+				viewPage += "Shop/deleteProduct";
+				break;
+			// 상품 삭제 완료
+			case "/deleteOK.nhn":
+				shopService.deleteProduct(request, response);
+				viewPage += "index";
+				break;
+				
+				// 상품 수정 페이지
+			case "/updateProduct.nhn":
+				shopService.selectProduct(request, response);
+				viewPage += "Shop/updateProduct";
+				break;
+				// 상품 수정 완료
+			case "/updateOK.nhn":
+				shopService.deleteProduct(request, response);
+				viewPage += "index";
+				break;
+
 		// ==========================================================
 				// 리뷰게시판 페이지
 			case "/ReViewBoard.nhn":
@@ -132,7 +195,8 @@ public class HomeController extends HttpServlet {
 				// 리뷰작성 페이지
 			case "/ReViewInsert.nhn":
 				viewPage += "ReView/ReViewInsert";
-				break;
+				break;	
+				// 작성리뷰 DB추가 페이지
 			case "/ReViewInsertOK.nhn":
 				//저장된 세션 정보 + 리뷰 작성 게시글 정보를 받아 리뷰DB에 저장
 				ReViewService.getInstance().ReViewInsert(request,response);
@@ -201,9 +265,6 @@ public class HomeController extends HttpServlet {
 				break;
 				
 		}
-				
-			
-		
 		
 		viewPage += ".jsp";
 	

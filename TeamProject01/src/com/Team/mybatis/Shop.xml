@@ -5,81 +5,95 @@
 	<insert id="insertProduct" parameterType="shopVO">
 		insert into shop	
 		(
-			sh_idx, sh_title, sh_name, sh_category, sh_categoryDetail, sh_content, sh_ea, sh_price, sh_img1, sh_img2, sh_saleprice, sh_salepercent
+			sh_idx, sh_title, sh_name, sh_category, sh_categoryDetail, sh_content, sh_ea, sh_price, sh_img1, sh_img2, sh_saleprice, sh_salepercent, sh_seller
 		)
 		values 
 		(
-			SHOP_idx_seq.nextval, #{sh_title}, #{sh_name},	#{sh_category},	#{sh_categoryDetail}, #{sh_content}, #{sh_ea}, #{sh_price}, #{sh_img1}, #{sh_img2}, #{sh_salePrice}, #{sh_salePercent}
+			shop_idx_seq.nextval, #{sh_title}, #{sh_name},	#{sh_category},	#{sh_categoryDetail}, #{sh_content}, #{sh_ea}, #{sh_price}, #{sh_img1}, #{sh_img2}, #{sh_salePrice}, #{sh_salePercent}, #{sh_seller}												
 		)
 	</insert>
 	<insert id="insertProduct1" parameterType="shopVO">
 		insert into shop	
 		(
-			sh_idx, sh_title, sh_name, sh_category, sh_categoryDetail, sh_content, sh_ea, sh_price, sh_img1, sh_saleprice, sh_salepercent
+			sh_idx, sh_title, sh_name, sh_category, sh_categoryDetail, sh_content, sh_ea, sh_price, sh_img1, sh_saleprice, sh_salepercent, sh_seller
 		)
 		values 
 		(
-			SHOP_idx_seq.nextval, #{sh_title}, #{sh_name},	#{sh_category},	#{sh_categoryDetail}, #{sh_content}, #{sh_ea}, #{sh_price}, #{sh_img1}, #{sh_salePrice}, #{sh_salePercent}
+			shop_idx_seq.nextval, #{sh_title}, #{sh_name},	#{sh_category},	#{sh_categoryDetail}, #{sh_content}, #{sh_ea}, #{sh_price}, #{sh_img1}, #{sh_salePrice}, #{sh_salePercent}, #{sh_seller}
 		)
 	</insert>
 	<insert id="insertProduct2" parameterType="shopVO">
 		insert into shop	
 		(
-			sh_idx, sh_title, sh_name, sh_category, sh_categoryDetail, sh_content, sh_ea, sh_price, sh_img2, sh_saleprice, sh_salepercent
+			sh_idx, sh_title, sh_name, sh_category, sh_categoryDetail, sh_content, sh_ea, sh_price, sh_img2, sh_saleprice, sh_salepercent, sh_seller
 		)
 		values 
 		(
-			SHOP_idx_seq.nextval, #{sh_title}, #{sh_name},	#{sh_category},	#{sh_categoryDetail}, #{sh_content}, #{sh_ea}, #{sh_price}, #{sh_img2}, #{sh_salePrice}, #{sh_salePercent}
+			shop_idx_seq.nextval, #{sh_title}, #{sh_name},	#{sh_category},	#{sh_categoryDetail}, #{sh_content}, #{sh_ea}, #{sh_price}, #{sh_img2}, #{sh_salePrice}, #{sh_salePercent}, #{sh_seller}
 		)
 	</insert>
 	
+	
+<!-- 	전체상품 개수 가져오기 -->
 	<select id="selectCount" resultType="int">
 		select count(*) from shop
 	</select>
 	
-	<select id="selectList" parameterType="java.util.HashMap" resultType="shopVO">
+<!-- 	브랜드별 상품 총 개수 가져오기 -->
+	<select id="selectCountDetail" parameterType="java.util.HashMap" resultType="Integer">
+		select count(*) from shop where SH_CATEGORYDETAIL like '%'||#{categoryDetail}||'%'
+	</select>
+	
+<!-- 	전체상품 가져오기 -->
+	<select id="selectList" parameterType="com.Team.Shop.vo.CategoryDetail" resultType="shopVO">
 		<![CDATA[
 		select * from (
 			select rownum rnum, TT.* from (
-				select * from shop order by sh_idx desc
+				select * from shop 
+				]]>
+					<where>
+						<if test="category != null and category.equals('신발')">
+							SH_CATEGORY = '신발'
+						</if>
+						<if test="category != null and category.equals('상의')">
+							SH_CATEGORY = '상의'
+						</if>
+					</where>
+				<![CDATA[
+				order by sh_idx desc
 			) TT where rownum <= #{endNo}
 		) where rnum >= #{startNo}
 		]]>
 	</select> 
 	
-	<select id="selectnike" parameterType="java.util.HashMap" resultType="shopVO">
+<!-- 	브랜드별 상품 가져오기 -->
+	<select id="selectCategoryDetail" parameterType="com.Team.Shop.vo.CategoryDetail" resultType="shopVO">
 		<![CDATA[
  			select * from (
  				select rownum rnum, TT.* from (
- 					select * from shop where sh_categoryDetail = 'nike' order by sh_idx desc
+  					select * from shop where 
+  					
+  					SH_CATEGORYDETAIL like '%'||#{categoryDetail}||'%' AND SH_CATEGORY like '%'||#{category}||'%' 
+  					
+  					order by sh_idx desc
  				) TT where rownum <= #{endNo}
  			) where rnum >= #{startNo}
- 			
  		]]> 
 	</select>
 	
-	<select id="selectNewbalance" parameterType="java.util.HashMap" resultType="shopVO">
-		<![CDATA[
- 			select * from (
- 				select rownum rnum, TT.* from (
- 					select * from shop where sh_categoryDetail = 'newbalance' order by sh_idx desc
- 				) TT where rownum <= #{endNo}
- 			) where rnum >= #{startNo}
- 			
- 		]]> 
+<!-- 	상품 상세보기  -->
+	<select id="selectProduct" parameterType="int" resultType="shopVO">
+ 			select * from shop where sh_idx = #{sh_idx}
 	</select>
 	
-	<select id="selectAdidas" parameterType="java.util.HashMap" resultType="shopVO">
-		<![CDATA[
- 			select * from (
- 				select rownum rnum, TT.* from (
- 					select * from shop where sh_categoryDetail = 'adidas' order by sh_idx desc
- 				) TT where rownum <= #{endNo}
- 			) where rnum >= #{startNo}
- 			
- 		]]> 
-	</select>
+<!-- 	조회수 증가 -->
+	<update id="increment" parameterType="int">
+		update shop set sh_hit = sh_hit + 1 WHERE SH_IDX = #{sh_idx}
+	</update>
 	
+	<delete id="deleteProduct" parameterType="int">
+		delete shop where sh_idx = #{sh_idx}
+	</delete>
 </mapper>
 
 

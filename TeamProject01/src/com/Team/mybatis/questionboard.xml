@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team.vo.QuestionVo">
+
+	<!-- 메인글을 저장한다. -->
+	<insert id="insert" parameterType="QAvo">
+		insert into QABOARD2 (q_idx, q_title, q_content, q_userid, q_ref, q_lev, q_seq) 
+		values(qaboard2_q_idx_seq.nextval, #{q_title}, #{q_content}, #{q_userid},qaboard2_q_idx_seq.currval, 0, 0)
+	</insert>
+
+	<select id="selectCountQA" resultType="int">
+		select count(*) from QABOARD2
+	</select>
+	
+	<select id="selectListQA" parameterType="java.util.HashMap" resultType="QAvo">
+		<![CDATA[
+		select * from (
+			select rownum rnum, GG.* from (
+				select * from QABOARD2 order by q_ref desc, q_seq asc
+			) GG where rownum <= #{endNo}
+		) where rnum >= #{startNo}
+		]]>
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+

@@ -23,6 +23,199 @@ table tbody>tr>td>a:focus{
 	text-decoration: none;
 	color:red;
 	
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<link rel="shortcut icon" href="../images/favicon.ico">
+
+
+
+
+<style>
+/* ============================ 재훈 추가 (왼쪽 메뉴바) ===================================== */
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}table{border-collapse:collapse;border-spacing:0}
+
+body {
+  margin-top: 2rem;
+ font: 100% "Open sans", "Trebuchet MS", sans-serif;
+} 
+
+a {
+  text-decoration: none;
+}
+
+/**
+ * Hidden fallback
+ */
+[hidden] {
+  display: none;
+  visibility: hidden;
+}
+
+/**
+ * Styling navigation
+ */
+header {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 22.5rem;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
+}
+
+/**
+ * Styling top level items
+ */
+.nav a,
+.nav label {
+  display: block;
+  padding: .85rem;
+  color: #fff;
+  background-color: #151515;
+  box-shadow: inset 0 -1px #1d1d1d;
+  -webkit-transition: all .25s ease-in;
+          transition: all .25s ease-in;
+}
+.nav a:focus, .nav a:hover,
+.nav label:focus,
+.nav label:hover {
+  color: rgba(255, 255, 255, 0.5);
+  background: #030303;
+}
+
+.nav label {
+  cursor: pointer;
+}
+
+/**
+ * Styling first level lists items
+ */
+.group-list a,
+.group-list label {
+  padding-left: 2rem;
+  background: #252525;
+  box-shadow: inset 0 -1px #373737;
+}
+.group-list a:focus, .group-list a:hover,
+.group-list label:focus,
+.group-list label:hover {
+  background: #131313;
+}
+
+/**
+ * Styling second level list items
+ */
+.sub-group-list a,
+.sub-group-list label {
+  padding-left: 4rem;
+  background: #353535;
+  box-shadow: inset 0 -1px #474747;
+}
+.sub-group-list a:focus, .sub-group-list a:hover,
+.sub-group-list label:focus,
+.sub-group-list label:hover {
+  background: #232323;
+}
+
+/**
+ * Styling third level list items
+ */
+.sub-sub-group-list a,
+.sub-sub-group-list label {
+  padding-left: 6rem;
+  background: #454545;
+  box-shadow: inset 0 -1px #575757;
+}
+.sub-sub-group-list a:focus, .sub-sub-group-list a:hover,
+.sub-sub-group-list label:focus,
+.sub-sub-group-list label:hover {
+  background: #333333;
+}
+
+/**
+ * Hide nested lists
+ */
+.group-list,
+.sub-group-list,
+.sub-sub-group-list {
+  height: 100%;
+  max-height: 0;
+  overflow: hidden;
+  -webkit-transition: max-height .5s ease-in-out;
+          transition: max-height .5s ease-in-out;
+}
+
+.nav__list input[type=checkbox]:checked + label + ul {
+  /* reset the height when checkbox is checked */
+  max-height: 1000px;
+}
+
+/**
+ * Rotating chevron icon
+ */
+label > span {
+  float: right;
+  -webkit-transition: -webkit-transform .65s ease;
+          transition: transform .65s ease;
+}
+
+.nav__list input[type=checkbox]:checked + label > span {
+  -webkit-transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+
+/**
+ * Styling footer
+ */
+footer {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  background-color: #050505;
+}
+
+.soc-media {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.soc-media li:nth-child(n+2) {
+  margin-left: 1rem;
+}
+
+.soc-media a {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.65);
+  -webkit-transition: color .25s ease-in;
+          transition: color .25s ease-in;
+}
+.soc-media a:focus, .soc-media a:hover {
+  color: rgba(255, 255, 255, 0.2);
+}
+/* ==========================재훈 추가 끝=============================== */
+
+
+#header{
+	border: 1px solid red;
+	display: flex;
+	align-items: center;
+	background: black;
+}
+
+<!-- 부가적인 테마 -->
+#main2{
+	border: 1px solid blue;
+	display: flex;
+	align-items: center;
 }
 
 /*네비영역*/
@@ -147,10 +340,6 @@ table tbody>tr>td>a:focus{
 </head>
 <body>
 	<div style = "background-color: black;">
-<!-- 		<div align="center"> -->
-<!-- 			<img src="./images/naver.png" onclick = "location.href='https://www.naver.com'"> -->
-<!-- 			<img src="./images/navershop.png" onclick = "location.href='https://www.naver.com'"> -->
-<!-- 		</div> -->
 	</div>
 	<nav class="navbar navbar-default">
 		<div class="container-fluid" id="headerNav">
@@ -188,26 +377,24 @@ table tbody>tr>td>a:focus{
 							<a class="nav-link" href="d.html">마이페이지</a>
 						</c:if>
 					</li>
-					<li>
-						<span class="nav navbar-nav navbar-right" style="margin-left: 10px;">
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle loginMenu"  data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-									접속하기<span class="caret"></span>
-								</a>
-								<ul class="dropdown-menu">
-									<c:if test = "${sessionScope.session_id eq null }">
-										<li><a href="LoginView.nhn">로그인</a></li>
-										<li><a href="JoinView.nhn">회원가입</a></li>
-									</c:if>
-									<c:if test = "${sessionScope.session_id != null }">
-										<li><div align="center">${sessionScope.session_id}님<br/>point: ${sessionScope.session_point}점</div></li>
-										<li><a href="LogoutView.nhn">로그아웃</a></li>
-									</c:if>
-								</ul>
-							</li>
-						</span>
+			<li>
+				<span class="nav navbar-nav navbar-right" style="margin-left: 10px;">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle loginMenu"  data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+							접속하기<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<c:if test = "${sessionScope.session_id eq null }">
+								<li><a href="LoginView.nhn">로그인</a></li>
+								<li><a href="JoinView.nhn">회원가입</a></li>
+							</c:if>
+							<c:if test = "${sessionScope.session_id != null }">
+								<li><div align="center">${sessionScope.session_id}님<br/>point: ${sessionScope.session_point}점</div></li>
+								<li><a href="LogoutView.nhn">로그아웃</a></li>
+							</c:if>
+						</ul>
 					</li>
-					</ul>
-			</div>
-		</div>
+				</span>
+			</li>
+			</ul>
 	</nav>

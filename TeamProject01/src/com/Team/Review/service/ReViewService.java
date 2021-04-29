@@ -53,6 +53,7 @@ public class ReViewService {
 			MultipartRequest mr = new MultipartRequest(request,
 //					application.getRealPath("./upload/"),
 					"D:/upload",
+
 					5*1024*1024,
 					"UTF-8",
 					new DefaultFileRenamePolicy()

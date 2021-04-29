@@ -19,6 +19,7 @@ import com.Team.Client.dao.ClientDao;
 import com.Team.Client.util.Gmail;
 import com.Team.Client.util.SHA256;
 import com.Team.Client.vo.ClientVo;
+import com.Team.QAboard.QAboardList;
 import com.Team.Review.dao.ReViewDao;
 import com.Team.Review.vo.ReViewList;
 import com.Team.mybatis.MySession;
@@ -69,9 +70,9 @@ public class ClientService {
 		
 		mapper.commit();
 		
-		String host = "http://localhost:9090/TeamProject01/";
+		String host = "http://localhost:9928/TeamProject01/";
 		String to = dao.getClientEmail(mapper,vo.getClient_id());
-		String from = "본인의 이메일주소";
+		String from = "kanghj0306@naver.com";
 		String subject = "이메일인증입니다.";
 		String content = "다음 링크에 접속하여 이메일 인증을 진행하세요" + "<a href ='"+host+"JoinEmailResultView.nhn?code=" + new SHA256().getSHA256(to) + "'>이메일 인증하기</a>";
 		
@@ -307,6 +308,32 @@ public class ClientService {
 		request.setAttribute("reViewList", reViewList);
 		mapper.close();
 		
+	}
+	public void myQnASelect(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession();
+		SqlSession mapper = MySession.getSession();
+		
+		int currentPage = 1;
+		try {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		} catch (Exception e) { }
+		
+		int pagesize = 10;
+		
+		String id = (String)session.getAttribute("session_id");
+		ClientDao dao = ClientDao.getInstance();
+		
+		int totalcount = dao.qnaTotalCount(mapper,id);
+		System.out.println(totalcount);
+		
+		QAboardList qaBoardList = new QAboardList(pagesize, totalcount, currentPage,id);
+		
+//		1페이지 분량의 글 목록을 얻어와서 mvcboardList의 ArrayList에 넣어준다.
+		qaBoardList.setList(dao.QAselectList(mapper, qaBoardList));
+
+		request.setAttribute("qaList", qaBoardList);
+		mapper.close();
 	}
 }
 

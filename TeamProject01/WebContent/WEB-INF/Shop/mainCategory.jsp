@@ -1,20 +1,59 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
+	pageEncoding="UTF-8"%>
+
 <jsp:include page="/Layout/header.jsp"></jsp:include>
 
-
-	<div class="container_fluid " id="main">	
-			<h3 style="text-align: center;">브랜드 목록</h3>
-		<div class="row category" id="menuLine" style="min-height: 120px;" >
-			<div class="col-xs-10" style="border: 1px solid gray;">
-				<div class="col-xs-2"><strong><span class="menuitem" onclick = "location.href='nike.nhn?brand=nike'">나이키</span></strong></div>
-				<div class="col-xs-2"><strong><span class="menuitem" onclick = "location.href='adidas.nhn?brand=adidas'">아디다스</span></strong></div>
-				<div class="col-xs-2"><strong><span class="menuitem" onclick = "location.href='newbalance.nhn?brand=newbalance'">뉴발란스</span></strong></div>
-				<div class="col-xs-2"><strong><span class="menuitem" onclick = "location.href='?'">브랜드1</span></strong></div>
-				<div class="col-xs-2"><strong><span class="menuitem" onclick = "location.href='?'">브랜드2</span></strong></div>
-				<div class="col-xs-2"><strong><span class="menuitem" onclick = "location.href='?'">브랜드3</span></strong></div>
-			</div>
-		</div>
-	</div>
-	
+<div style="position:fixed; width: 200px; margin-right: 50%;">
+	<header role="banner">
+		<nav class="nav" role="navigation">
+			<ul class="nav__list">
+				<li><input id="group-1" type="checkbox" hidden /> 
+				<label for="group-1"><span class="fa fa-angle-right"></span> 카테고리 </label>
+					<ul class="group-list" >
+					<!-- <li><a href="#">1st level item</a></li> -->
+					
+						<li><input id="sub-group-1" type="checkbox" hidden/> <!-- 2rd 카테고리 -->
+							<label for="sub-group-1"><span class="fa fa-angle-right"></span>신발</label>
+							<ul class="sub-group-list">
+								<li><a href="AllProducts.nhn?category=신발">전체 신발</a></li>
+								<li><a href="categoryDetail.nhn?categoryDetail=nike&category=신발">나이키</a></li>
+								<li><a href="categoryDetail.nhn?categoryDetail=adidas&category=신발">아디다스</a></li>
+								<li><a href="categoryDetail.nhn?categoryDetail=newbalance&category=신발">뉴발란스</a></li>
+							</ul>	
+						</li>
+						<li><input id="sub-group-2" type="checkbox" hidden/> <!-- 2rd 카테고리 -->		
+							<label for="sub-group-2"><span class="fa fa-angle-right"></span>상의</label>
+							<ul class="sub-group-list">
+								<li><a href="AllProducts.nhn?category=상의">전체 상의</a></li>
+								<li><a href="categoryDetail.nhn?categoryDetail=nike&category=상의">나이키</a></li>
+								<li><a href="categoryDetail.nhn?categoryDetail=adidas&category=상의">아디다스</a></li>
+								<li><a href="categoryDetail.nhn?categoryDetail=newbalance&category=상의">뉴발란스</a></li>
+							</ul>
+						</li>
+						<li><input id="sub-group-3" type="checkbox" hidden/> <!-- 2rd 카테고리 -->		
+							<label for="sub-group-3"><span class="fa fa-angle-right"></span>하의</label>
+							<ul class="sub-group-list">
+								<li><a href="AllProducts.nhn?category=하의">전체 하의</a></li>
+								<li><a href="categoryDetail.nhn?categoryDetail=nike&category=하의">나이키</a></li>
+								<li><a href="categoryDetail.nhn?categoryDetail=adidas&category=하의">아디다스</a></li>
+								<li><a href="categoryDetail.nhn?categoryDetail=newbalance&category=하의">뉴발란스</a></li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</nav>
+	</header>
+</div>
+								<!--
+								<li>
+								3rd 카테고리 
+		 						<input id="sub-sub-group-1" type="checkbox" hidden />
+			 						<label for="sub-sub-group-1"><span class="fa fa-angle-right"></span></label>
+			 						<ul class="sub-sub-group-list"> 			 							
+			 							<li><a href="#"></a></li>
+			 							<li><a href="#"></a></li>
+			 							<li><a href="#"></a></li>
+			 						</ul>
+								</li>
+								-->

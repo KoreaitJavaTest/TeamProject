@@ -1,36 +1,40 @@
-package com.Team.Shop.vo;
+package com.Team.QAboard;
 
 import java.util.ArrayList;
 
-//	1페이지에 표시할 글 목록과 페이징 작업에 사용할 8개의 변수를 기억한다.
-public class ShopList {
-
-	private ArrayList<ShopVO> list = new ArrayList<ShopVO>();
-	private int pageSize = 10;
-	private int totalCount = 0;
-	private int totalPage = 0;
-	private int currentPage = 1;
-	private int startNo = 0;
-	private int endNo = 0;
-	private int startPage = 0;
+public class QAboardList {
+	
+	private ArrayList<QAboardVo> list = new ArrayList<QAboardVo>();
+		
+	private int pageSize = 10;			
+	private int totalCount = 0;			
+	private int totalPage = 0;			
+	private int currentPage = 1;		
+	private int startNo = 0;		
+	private int endNo = 0;			
+	private int startPage = 0;			
 	private int endPage = 0;
-	private String categoryDetail;
+	private String id = "";
 	
-	public ShopList() { }
+	public QAboardList() { }
 	
-	public ShopList(int pageSize, int totalCount, int currentPage) {
+	public QAboardList(int pageSize, int totalCount, int currentPage) {
+		super();
 		this.pageSize = pageSize;
 		this.totalCount = totalCount;
 		this.currentPage = currentPage;
 		calculator();
 	}
-	public ShopList(int pageSize, int totalCount, int currentPage, String categoryDetail) {
+	
+	public QAboardList(int pageSize, int totalCount, int currentPage ,String id) {
+		super();
+		this.id = id;
 		this.pageSize = pageSize;
 		this.totalCount = totalCount;
 		this.currentPage = currentPage;
-		this.categoryDetail = categoryDetail;
 		calculator();
 	}
+	
 	
 	private void calculator() {
 		totalPage = (totalCount - 1) / pageSize + 1;
@@ -42,72 +46,85 @@ public class ShopList {
 		endPage = startPage + 9;
 		endPage = endPage > totalPage ? totalPage : endPage;
 	}
-	
-	public String getcategoryDetail() {
-		return categoryDetail;
-	}
-	public void setcategoryDetail(String categoryDetail) {
-		this.categoryDetail = categoryDetail;
-	}
-	public ArrayList<ShopVO> getList() {
+
+	public ArrayList<QAboardVo> getList() {
 		return list;
 	}
-	public void setList(ArrayList<ShopVO> list) {
+
+	public void setList(ArrayList<QAboardVo> list) {
 		this.list = list;
 	}
+
 	public int getPageSize() {
 		return pageSize;
 	}
+
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
 	}
+
 	public int getTotalCount() {
 		return totalCount;
 	}
+
 	public void setTotalCount(int totalCount) {
 		this.totalCount = totalCount;
 	}
+
 	public int getTotalPage() {
 		return totalPage;
 	}
+
 	public void setTotalPage(int totalPage) {
 		this.totalPage = totalPage;
 	}
+
 	public int getCurrentPage() {
 		return currentPage;
 	}
+
 	public void setCurrentPage(int currentPage) {
 		this.currentPage = currentPage;
 	}
+
 	public int getStartNo() {
 		return startNo;
 	}
+
 	public void setStartNo(int startNo) {
 		this.startNo = startNo;
 	}
+
 	public int getEndNo() {
 		return endNo;
 	}
+
 	public void setEndNo(int endNo) {
 		this.endNo = endNo;
 	}
+
 	public int getStartPage() {
 		return startPage;
 	}
+
 	public void setStartPage(int startPage) {
 		this.startPage = startPage;
 	}
+
 	public int getEndPage() {
 		return endPage;
 	}
+
 	public void setEndPage(int endPage) {
 		this.endPage = endPage;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "ShopList [list=" + list + ", pageSize=" + pageSize + ", totalCount=" + totalCount + ", totalPage="
+		return "QAboardList [list=" + list + ", pageSize=" + pageSize + ", totalCount=" + totalCount + ", totalPage="
 				+ totalPage + ", currentPage=" + currentPage + ", startNo=" + startNo + ", endNo=" + endNo
-				+ ", startPage=" + startPage + ", endPage=" + endPage + ", categoryDetail=" + categoryDetail + "]";
+				+ ", startPage=" + startPage + ", endPage=" + endPage + "]";
 	}
+	
+	
 }

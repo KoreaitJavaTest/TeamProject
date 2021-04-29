@@ -2,6 +2,7 @@ package com.Team.Shop.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.DecimalFormat;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -15,6 +16,7 @@ import javax.websocket.Session;
 import org.apache.ibatis.session.SqlSession;
 
 import com.Team.Shop.dao.ShopDAO;
+import com.Team.Shop.vo.CategoryDetail;
 import com.Team.Shop.vo.ShopList;
 import com.Team.Shop.vo.ShopVO;
 import com.Team.mybatis.MySession;
@@ -26,16 +28,21 @@ public class ShopService {
 	private static ShopService instance = new ShopService();
 	private ShopService() {}
 	public static ShopService getInstance() {return instance;}
+	DecimalFormat priceFm = new DecimalFormat("#,##0");
+	
+	
 	
 	public void insertProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		
-		System.out.println("insertProduct() 메서드");
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		SqlSession mapper = MySession.getSession();
-		ServletContext application = request.getServletContext();
 		HttpSession session = request.getSession();
-		String userId = (String) session.getAttribute("session_id");
-		ShopVO vo = new ShopVO();
+		ServletContext application = request.getServletContext();
+		
 		ShopDAO dao = ShopDAO.getInstance();
+		ShopVO vo = new ShopVO();
+		
+		String userId = (String) session.getAttribute("session_id");
 		
 		MultipartRequest mr = new MultipartRequest(
 				request,
@@ -84,9 +91,6 @@ public class ShopService {
 			int price = Integer.parseInt(mr.getParameter("price"));
 			double salePercent = Double.parseDouble(mr.getParameter("salePercent"));
 			double salePrice = price - (price*(salePercent/100));
-			System.out.println("price : " + price);
-			System.out.println("salePercent : " + salePercent);
-			System.out.println("salePrice : " + salePrice);
 			
 			vo.setSh_title(title);
 			vo.setSh_name(name);
@@ -95,30 +99,11 @@ public class ShopService {
 			vo.setSh_content(content);
 //			vo.setSh_size(size);
 			vo.setSh_price(price);
-			vo.setSh_seller(userId);
 			vo.setSh_salePercent(salePercent);
 			vo.setSh_salePrice(salePrice);
+			vo.setSh_seller(userId);
 			
-			dao.insertProduct(vo);
-			
-//			request.setAttribute("idx", idx);
-//			request.setAttribute("title", title);
-//			request.setAttribute("name", name);
-//			request.setAttribute("category", category);
-//			request.setAttribute("categoryDetail", categoryDetail);
-//			request.setAttribute("content", content);
-//			request.setAttribute("size", size);
-//			request.setAttribute("price", price);
-//			
-//			if(vo.getSh_img1() != null) {
-//				request.setAttribute("img1", vo.getSh_img1());
-//			}
-//			if(vo.getSh_img2() != null) {
-//				request.setAttribute("img2", vo.getSh_img2());
-//			}
-//			if(vo.getSh_img3() != null) {
-//				request.setAttribute("img3", vo.getSh_img3());
-//			}
+			dao.insertProduct(mapper, vo);
 			
 			mapper.commit();
 			mapper.close();
@@ -126,28 +111,28 @@ public class ShopService {
 	}
 	
 	public void selectAllProduct(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("service => selectAllProduct() 메서드 들어옴");
 		DecimalFormat priceFm = new DecimalFormat("#,##0");
-		
-		SqlSession mapper = MySession.getSession();
 		ShopDAO dao = ShopDAO.getInstance();
+		CategoryDetail cd = new CategoryDetail();
+		SqlSession mapper = MySession.getSession();
 		
 		int currentPage = 1;
 		try {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
-			
 		} catch (NumberFormatException e) {
-			System.out.println("NumberFormatException");
 		}
 		
-		int pageSize = 6;
+		int pageSize = 24;
 		int totalCount = dao.selectCount(mapper);
-//		System.out.println(totalCount);
 		
 		ShopList shopList = new ShopList(pageSize, totalCount, currentPage);
-		HashMap<String, Integer> hmap = new HashMap<String, Integer>();
-		hmap.put("startNo", shopList.getStartNo());
-		hmap.put("endNo", shopList.getEndNo());
-		shopList.setList(dao.selectList(mapper, hmap));
+		
+		String category = request.getParameter("category");	// 이전 페이지에서 카테고리를 가져온다. ex) 신발, 상의, 하의
+		System.out.println("category : " + category);
+		cd.Category(category, shopList.getStartNo(), shopList.getEndNo());
+		
+		shopList.setList(dao.selectList(mapper, cd));
 		
 //		가격에 , 찍기
 		for (ShopVO vo : shopList.getList()) {
@@ -161,117 +146,108 @@ public class ShopService {
 	}
 	
 	
-	public void selectNike(HttpServletRequest request, HttpServletResponse response) {
-		DecimalFormat priceFm = new DecimalFormat("#,##0");
+	public void selectCategoryDetail(HttpServletRequest request, HttpServletResponse response) {
+		
 		SqlSession mapper = MySession.getSession();
 		ShopDAO dao = ShopDAO.getInstance();
-		
 		int currentPage = 1;
-		try {
-			currentPage = Integer.parseInt(request.getParameter("currentPage"));
-			
-		} catch (NumberFormatException e) {
-			System.out.println("NumberFormatException");
-		}
+		try { currentPage = Integer.parseInt(request.getParameter("currentPage")); } catch (NumberFormatException e) {}
 		
 		int pageSize = 24;
-		int totalCount = dao.selectCount(mapper);
-//		System.out.println(totalCount);
 		
-		ShopList shopList = new ShopList(pageSize, totalCount, currentPage);
-		HashMap<String, Object> hmap = new HashMap<String, Object>();
-		hmap.put("startNo", shopList.getStartNo());
-		hmap.put("endNo", shopList.getEndNo());
-//		hmap.put("brand", request.getParameter("brand"));		// brand별로 분류 하려고 했으나 실패
-		shopList.setList(dao.selectnike(mapper, hmap));
+		String categoryDetail = request.getParameter("categoryDetail");
+		String category = request.getParameter("category");
+		
+		HashMap<String, String> hmap = new HashMap<String, String>();
+		hmap.put("categoryDetail", categoryDetail);
+		
+		int totalCount = dao.selectCountDetail(mapper, hmap);
+		
+		ShopList shopList = new ShopList(pageSize, totalCount, currentPage, categoryDetail);
+		CategoryDetail cd = new CategoryDetail(categoryDetail, category, shopList.getStartNo(), shopList.getEndNo());
+		shopList.setList(dao.selectCategoryDetail(mapper, cd));
 		
 //		가격에 , 찍기
 		for (ShopVO vo : shopList.getList()) {
 			vo.setSh_priceFM(priceFm.format(vo.getSh_price()));			// 정상 가격
 			vo.setSh_salePriceFM(priceFm.format(vo.getSh_salePrice()));	// 할인된 가격
 		}
-		
 		request.setAttribute("shopList", shopList);
 		 
 		mapper.close();
+
 	}
 	
 	
-	public void selectAdidas(HttpServletRequest request, HttpServletResponse response) {
-		DecimalFormat priceFm = new DecimalFormat("#,##0");
+//	상품의 idx로 상품 정보를 얻어오는 메소드
+	public void selectProduct(HttpServletRequest request, HttpServletResponse response) {
+		
 		SqlSession mapper = MySession.getSession();
 		ShopDAO dao = ShopDAO.getInstance();
 		
 		int currentPage = 1;
-		try {
-			currentPage = Integer.parseInt(request.getParameter("currentPage"));
-			
-		} catch (NumberFormatException e) {
-			System.out.println("NumberFormatException");
-		}
+		try { currentPage = Integer.parseInt(request.getParameter("currentPage")); } catch (NumberFormatException e) { }
 		
-		int pageSize = 24;
-		int totalCount = dao.selectCount(mapper);
-//		System.out.println(totalCount);
+		ShopVO vo = dao.selectProduct(mapper, Integer.parseInt(request.getParameter("sh_idx")));
 		
-		ShopList shopList = new ShopList(pageSize, totalCount, currentPage);
-		HashMap<String, Object> hmap = new HashMap<String, Object>();
-		hmap.put("startNo", shopList.getStartNo());
-		hmap.put("endNo", shopList.getEndNo());
-//		hmap.put("brand", request.getParameter("brand"));
+		vo.setSh_priceFM(priceFm.format(vo.getSh_price()));
+		vo.setSh_salePriceFM(priceFm.format(vo.getSh_salePrice()));
 		
-		shopList.setList(dao.selectAdidas(mapper, hmap));
-//		가격에 , 찍기
-		for (ShopVO vo : shopList.getList()) {
-			vo.setSh_priceFM(priceFm.format(vo.getSh_price()));
-			
-			vo.setSh_salePriceFM(priceFm.format(vo.getSh_salePrice()));
-		}
-		
-		
-		request.setAttribute("shopList", shopList);
-		
+		request.setAttribute("vo", vo);
+		System.out.println("vo : " + vo);
 		mapper.close();
 	}
 	
 	
-	public void selectNewbalance(HttpServletRequest request, HttpServletResponse response) {
-		DecimalFormat priceFm = new DecimalFormat("#,##0");
+//	조회수 증가 메소드
+	public void increment(HttpServletRequest request, HttpServletResponse response) {
 		SqlSession mapper = MySession.getSession();
 		ShopDAO dao = ShopDAO.getInstance();
+//		조회수를 증가시킬 글 번호를 받는다.
+		int sh_idx = Integer.parseInt(request.getParameter("sh_idx"));
 		
-		int currentPage = 1;
-		try {
-			currentPage = Integer.parseInt(request.getParameter("currentPage"));
-			
-		} catch (NumberFormatException e) {
-			System.out.println("NumberFormatException");
-		}
+//		조회수를 증가시키는 메소드를 호출한다.
+		dao.increment(mapper, sh_idx);
 		
-		int pageSize = 24;
-		int totalCount = dao.selectCount(mapper);
-//		System.out.println(totalCount);
-		
-		ShopList shopList = new ShopList(pageSize, totalCount, currentPage);
-		HashMap<String, Object> hmap = new HashMap<String, Object>();
-		hmap.put("startNo", shopList.getStartNo());
-		hmap.put("endNo", shopList.getEndNo());
-//		hmap.put("brand", request.getParameter("brand"));
-		
-		shopList.setList(dao.selectNewbalance(mapper, hmap));
-//		가격에 , 찍기
-		for (ShopVO vo : shopList.getList()) {
-			vo.setSh_priceFM(priceFm.format(vo.getSh_price()));
-			
-			vo.setSh_salePriceFM(priceFm.format(vo.getSh_salePrice()));
-		}
-		
-		
-		request.setAttribute("shopList", shopList);
-		
+		mapper.commit();
 		mapper.close();
 	}
 	
+//	상품 삭제 메소드
+	public void deleteProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		SqlSession mapper = MySession.getSession();
+		ShopDAO dao = ShopDAO.getInstance();
+		System.out.println("deleteProduct 들어옴");
+		
+//		System.out.println(request.getParameter("sh_password"));
+//		System.out.println(request.getParameter("sh_idx"));
+		
+		HttpSession session = request.getSession();
+		String userPw = session.getAttribute("session_password") +"";		//	로그인시 사용되는 비밀번호
+		String inputPw = request.getParameter("sh_password");				//	삭제페이지에서 입력한 비밀번호
+		int sh_idx = Integer.parseInt(request.getParameter("sh_idx"));		// 	삭제할 비밀번호
+		
+		PrintWriter script = response.getWriter();
+		if(userPw.trim().equals(inputPw.trim())) {
+			dao.deleteProduct(mapper, sh_idx);
+			script.println("<script>");
+			script.println("alert('삭제되었습니다.');");
+			script.println("location.href = 'index.jsp';");
+			script.println("</script>");
+			script.close();
+			mapper.commit();
+			mapper.close();
+		} else {
+			script.println("<script>");
+			script.println("alert('비밀번호가 맞지 않습니다.');");
+			script.println("history.back();");
+			script.println("</script>");
+			script.close();
+		}
+	}
 }
 
 
