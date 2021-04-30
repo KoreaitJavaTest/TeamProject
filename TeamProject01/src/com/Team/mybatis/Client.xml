@@ -51,11 +51,11 @@
 		select count(*) from QABOARD2 where Q_USERID like '%'||#{id}||'%'
 	</select>
 	
-	<select id="selectQAList" parameterType="QAvo" resultType="QAvo">
+	<select id="selectQAList" parameterType="Qvo" resultType="Qvo">
 		<![CDATA[
 		select * from (
 			select rownum rnum, TT.* from (
-				select * from QABOARD2 WHERE Q_USERID like '%'||#{id}||'%' order by Q_IDX asc
+				select * from QABOARD2 WHERE Q_USERID like '%'||#{q_userid}||'%' order by Q_IDX asc
 			) TT where rownum <= #{endNo}
 		) where rnum >= #{startNo}
 		]]>

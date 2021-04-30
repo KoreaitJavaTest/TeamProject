@@ -15,13 +15,12 @@ public class QAboardVo {
 
 	public QAboardVo() {}
 	
-	public QAboardVo(String q_title, String q_userid, String q_content) {
+	public QAboardVo(String q_userid, String q_title, String q_content) {
 		super();
-		this.q_title = q_title;
 		this.q_userid = q_userid;
+		this.q_title = q_title;
 		this.q_content = q_content;
 	}
-	
 	
 	public int getQ_idx() {
 		return q_idx;

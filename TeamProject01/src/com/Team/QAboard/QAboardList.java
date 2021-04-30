@@ -26,16 +26,17 @@ public class QAboardList {
 		calculator();
 	}
 	
-	public QAboardList(int pageSize, int totalCount, int currentPage ,String id) {
+		
+	
+	public QAboardList(int pageSize, int totalCount, int currentPage, String id) {
 		super();
-		this.id = id;
 		this.pageSize = pageSize;
 		this.totalCount = totalCount;
 		this.currentPage = currentPage;
+		this.id = id;
 		calculator();
 	}
-	
-	
+
 	private void calculator() {
 		totalPage = (totalCount - 1) / pageSize + 1;
 		currentPage = currentPage > totalPage ? totalPage : currentPage;

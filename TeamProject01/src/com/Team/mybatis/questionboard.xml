@@ -3,25 +3,64 @@
 <mapper namespace="com.team.vo.QuestionVo">
 
 	<!-- 메인글을 저장한다. -->
-	<insert id="insert" parameterType="QAvo">
-		insert into QABOARD2 (q_idx, q_title, q_content, q_userid, q_ref, q_lev, q_seq) 
-		values(qaboard2_q_idx_seq.nextval, #{q_title}, #{q_content}, #{q_userid},qaboard2_q_idx_seq.currval, 0, 0)
+	<insert id="insert" parameterType="Qvo">
+		insert into QABOARD2 (Q_IDX, Q_TITLE, Q_CONTENT, Q_USERID, Q_REF, Q_LEV, Q_SEQ) 
+		values(QABOARD2_Q_IDX_SEQ.NEXTVAL, #{q_title}, #{q_content}, #{q_userid},QABOARD2_Q_IDX_SEQ.CURRVAL, 0, 0)
 	</insert>
 
-	<select id="selectCountQA" resultType="int">
-		select count(*) from QABOARD2
+	<select id="QAselectCount" resultType="int">
+		SELECT COUNT(*) FROM QABOARD2
 	</select>
 	
-	<select id="selectListQA" parameterType="java.util.HashMap" resultType="QAvo">
+	<select id="QAselectList" parameterType="java.util.HashMap" resultType="Qvo">
 		<![CDATA[
-		select * from (
-			select rownum rnum, GG.* from (
-				select * from QABOARD2 order by q_ref desc, q_seq asc
-			) GG where rownum <= #{endNo}
-		) where rnum >= #{startNo}
+		SELECT * FROM(
+			SELECT ROWNUM RNUM, GG.* FROM (
+				SELECT * FROM QABOARD2 ORDER BY Q_REF DESC, Q_SEQ ASC
+			) GG WHERE ROWNUM <= #{endNo}
+		)WHERE RNUM >= #{startNo}
 		]]>
 	</select>
 	
+	<!-- 글 1건을 얻어온다. -->
+	<select id="QAselectByIdx" parameterType="int" resultType="Qvo">
+		SELECT * FROM QABOARD2 WHERE Q_IDX = #{q_idx}
+	</select>
+	
+	<!-- 글 1건을 삭제한다. -->
+	<delete id="delete" parameterType="int">
+		DELETE FROM QABOARD2 WHERE Q_IDX = #{q_idx}
+	</delete>
+	
+	<!-- 글 1건 수정 -->
+	<update id="update" parameterType="Qvo">
+		UPDATE QABOARD2 SET Q_TITLE = #{q_title}, Q_CONTENT =  #{q_content} WHERE Q_IDX = #{q_idx}
+	</update>
+	
+	<!-- 답글이 삽입될 위치를 확보하기 위해 조건에 만족하는 seq를 1씩 증가시킨다. -->
+	<update id="incrementSeq" parameterType="java.util.HashMap">
+		UPDATE QABOARD2 SET Q_SEQ = Q_SEQ + 1 WHERE Q_REF = #{q_ref} AND Q_SEQ >= #{q_seq} 
+	</update>
+	
+	<!-- 답글을 저장한다. -->
+	<insert id="ansReply" parameterType="Avo">
+		INSERT INTO ANSWER_DB (A_IDX, A_TITLE, A_CONTENT, A_USERID, A_REF) 
+		values (answer_db_a_idx_seq.NEXTVAL, #{a_title}, #{a_content}, #{a_userid}, #{q_idx})
+	</insert>
+	
+	<select id="selectAlist" resultType="Avo">
+		select * from answer_db
+	</select>
+	
+	<!-- 답글 1건을 얻어온다. -->
+	<select id="AnswerByIdx" parameterType="int" resultType="Avo">
+		select * from answer_db where a_ref = #{q_idx}
+	</select>
+	
+	<!-- 답글 1건 수정 -->
+	<update id="Aupdate" parameterType="Avo">
+		update answer_db set a_title = #{a_title}, a_content = #{a_content} where a_idx = #{a_idx}
+	</update>
 </mapper>
 
 
