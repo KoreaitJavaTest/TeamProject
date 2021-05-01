@@ -143,10 +143,45 @@ public class QAboardService {
 		AnswerVO vo = new AnswerVO(a_userid, a_title, a_content, q_idx);
 		System.out.println(vo);
 		dao.ansReply(mapper, vo);
+		AnswerVO voref = dao.selectAnswarbyref(mapper,q_idx);
+		dao.editqaflag(mapper,voref);
 		
 		
 		mapper.commit();
 		mapper.close();
+	}
+	public void aupdate(HttpServletRequest request, HttpServletResponse response) {
+		SqlSession mapper = MySession.getSession();
+		int q_idx = Integer.parseInt(request.getParameter("q_idx"));
+		System.out.println(q_idx);
+		String a_userid = request.getParameter("a_userid");
+		System.out.println(a_userid);
+		String a_title = request.getParameter("a_title");
+		System.out.println(a_title);
+		String a_content = request.getParameter("a_content");
+		System.out.println(a_content);
+		
+		AnswerVO vo = new AnswerVO(a_userid, a_title, a_content, q_idx);
+		System.out.println(vo);
+		dao.Aupdate(mapper, vo);
+		
+		mapper.commit();
+		mapper.close();
+	}
+	public void ansdelete(HttpServletRequest request, HttpServletResponse response) {
+		SqlSession mapper = MySession.getSession();
+		int a_idx = Integer.parseInt(request.getParameter("a_idx"));
+		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		request.setAttribute("currentPage", currentPage);
+		
+		AnswerVO vo = dao.selectAnswar(mapper,a_idx);
+		vo.setA_flag(0);
+		
+		dao.ansdelete(mapper,vo);
+		
+		mapper.commit();
+		mapper.close();
+		
 	}
 	
 

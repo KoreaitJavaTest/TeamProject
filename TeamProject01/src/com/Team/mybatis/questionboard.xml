@@ -45,22 +45,42 @@
 	<!-- 답글을 저장한다. -->
 	<insert id="ansReply" parameterType="Avo">
 		INSERT INTO ANSWER_DB (A_IDX, A_TITLE, A_CONTENT, A_USERID, A_REF) 
-		values (answer_db_a_idx_seq.NEXTVAL, #{a_title}, #{a_content}, #{a_userid}, #{q_idx})
+		values (answer_db_a_idx_seq.NEXTVAL, #{a_title}, #{a_content}, #{a_userid}, #{a_ref})
 	</insert>
 	
 	<select id="selectAlist" resultType="Avo">
-		select * from answer_db
+		select * from ANSWER_DB
 	</select>
 	
 	<!-- 답글 1건을 얻어온다. -->
 	<select id="AnswerByIdx" parameterType="int" resultType="Avo">
-		select * from answer_db where a_ref = #{q_idx}
+		select * from ANSWER_DB where a_ref = #{q_idx}
 	</select>
 	
 	<!-- 답글 1건 수정 -->
 	<update id="Aupdate" parameterType="Avo">
-		update answer_db set a_title = #{a_title}, a_content = #{a_content} where a_idx = #{a_idx}
+		update ANSWER_DB set a_title = #{a_title}, a_content = #{a_content} where a_ref = #{a_ref}
 	</update>
+	
+	<update id="Aqflagon">
+		update qaboard2 set q_flag = #{a_idx} where q_idx = #{a_ref}
+	</update>
+	
+	<update id="Aqflagoff" parameterType="Avo">
+		update qaboard2 set q_flag = #{a_flag} where q_idx = #{a_ref}
+	</update>
+	
+	<delete id="ansdelete" parameterType="Avo">
+		DELETE FROM ANSWER_DB WHERE A_IDX = #{a_idx}
+	</delete>
+	
+	<select id="selectAnswer" parameterType="int" resultType="Avo">
+		select * from ANSWER_DB where a_idx = #{a_idx}
+	</select>
+	
+	<select id="selectAnswarbyref" parameterType="int" resultType="Avo">
+		select * from ANSWER_DB where a_ref = #{q_idx}
+	</select>
 </mapper>
 
 

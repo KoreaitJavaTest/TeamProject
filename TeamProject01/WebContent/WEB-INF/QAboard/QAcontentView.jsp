@@ -55,30 +55,53 @@
 				<td colspan="4" align="center">
 					<input type="hidden" name="q_idx" value="${vo.q_idx}"/>
 					<input type="hidden" name="currentPage" value="${currentPage}"/>
-					
-					<input type="submit" value="수정하기"/>
-
-					<c:choose>
-						<c:when test="${sessionScope.session_id != null }">
+					<c:if test="${sessionScope.session_id eq q_userid }">
+						<input type="submit" value="수정하기"/>
+					</c:if>
+					<c:if test="${sessionScope.session_id eq q_userid }">
 							<input type="button" value="삭제하기" onclick="location.href='delete.nhn?idx=${vo.q_idx}&currentPage=${currentPage}'"/>
-						</c:when>
-						<c:otherwise>
-						<input type="button" value="삭제하기" onclick="alert('로그인 후 작성하실 수 있습니다')"/>
-						</c:otherwise>
-					</c:choose>
+					</c:if>
 					<c:choose>
 						<c:when test="${sessionScope.session_id != null }">
-							<input type="button" value="답변하기" onclick="location.href='reply.nhn?idx=${vo.q_idx}&currentPage=${currentPage}'"/>
+							<c:if test = "${vo.q_flag == '0'}">
+								<input type="button" value="답변하기" onclick="location.href='reply.nhn?idx=${vo.q_idx}&currentPage=${currentPage}'"/>
+							</c:if>
 						</c:when>
 						<c:otherwise>
-						<input type="button" value="답변하기" onclick="alert('관리자만 작성 할 수 있습니다.')"/>
+							<c:if test = "${vo.q_flag == '0'}">
+								<input type="button" value="답변하기" onclick="alert('관리자만 작성 할 수 있습니다.')"/>
+							</c:if>
 						</c:otherwise>
 					</c:choose>
 					<input type="button" value="돌아가기" onclick="location.href='list.nhn?currentPage=${currentPage}'"/>  
-					
 				</td>
 			</tr>
 		</table>
+		<c:if test = "${vo.q_flag != 0 }">
+			<table class="table table-bordered table-hover">
+				<tr>
+					<th colspan="5">답변 내용</th>				
+				</tr>	
+				<tr>
+					<td width="100" align="center">이름</td>
+					<td width="500">
+						<input type="text" name="a_userid" readonly="readonly" value="${avo.a_userid}"/>
+					</td>
+				</tr>
+				<tr>
+					<td align="center">제목</td>
+					<td colspan="3">
+						<input type="text" name="a_title" readonly="readonly" value="${avo.a_title}" style="width: 98%"/>
+					</td>
+				</tr>
+				<tr>
+					<td align="center">내용</td>
+					<td colspan="3">
+						<textarea rows="10" cols="120" name="a_content" readonly="readonly" style="resize: none;">${avo.a_content}</textarea>
+					</td>
+				</tr>
+			</table>
+		</c:if>
 	</form>
 </div>
 </body>

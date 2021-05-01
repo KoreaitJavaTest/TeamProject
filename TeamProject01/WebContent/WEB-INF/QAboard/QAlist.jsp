@@ -42,7 +42,7 @@
 			<td>
 				<c:set var="q_title" value="${fn:replace(fn:trim(vo.q_title), '<', '&lt;')}"/>
 				<c:set var="q_title" value="${fn:replace(q_title, '>', '&gt;')}"/>
-				<a href="contentView.nhn?idx=${vo.q_idx}&currentPage=${qaboardList.currentPage}">  <!-- get 방식 -->
+				<a href="contentView.nhn?idx=${vo.q_idx}&currentPage=${qaboardList.currentPage}" style = "color : black;">  <!-- get 방식 -->
 					${q_title}
 				</a>
 			</td> 
@@ -52,8 +52,8 @@
 				<c:set var="q_userid" value="${fn:replace(q_userid, '>', '&gt;')}"/>
 				${q_userid}
 			</td>
-			
 			<td align="center">
+			
 				<c:if test="${date.year == vo.q_writedate.year && date.month == vo.q_writedate.month && date.date == vo.q_writedate.date}">
 					<fmt:formatDate value="${vo.q_writedate}" pattern="a h:mm"/>
 				</c:if>

@@ -19,9 +19,8 @@
 				<td colspan="1" style="width: 15%;">
 					<label for="q_userid">아이디</label>
 				</td>
-				<td colsapn="2">
-					<input id="q_userid" type="text" name="q_userid" placeholder="아이디를 입력하세요" 
-						required="required" style="width: 35%"/>
+				<td colspan="2">
+					<input id="q_userid" type="text" name="q_userid" value = "${sessionScope.session_id }" style="width: 35%" readonly="readonly"/>
 				</td>
 			</tr>	
 			<tr>

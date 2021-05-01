@@ -153,6 +153,14 @@ public class HomeController extends HttpServlet {
 			service.replyInsert(request, response);
 			viewPage += "QAboard/goList";
 			break;
+		case "/replyUpdate.nhn":
+			service.aupdate(request,response);
+			viewPage += "QAboard/goList";
+			break;
+		case "/AnsDelete.nhn":
+			service.ansdelete(request,response);
+			viewPage += "QAboard/goList";
+			break;
 		// ==================== 상품 페이지 ======================
 
 		// 전체 상품 페이지

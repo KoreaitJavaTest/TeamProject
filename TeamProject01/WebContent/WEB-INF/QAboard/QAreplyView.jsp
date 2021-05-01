@@ -43,13 +43,13 @@
 		<tr>
 				<td align="center">제목</td>
 				<td colspan="3">
-					<input type="text" name="q_title" value="${vo.q_title}" style="width: 98%"/>
+					<input type="text" name="q_title" value="${vo.q_title}" readonly="readonly" style="width: 98%"/>
 				</td>
 			</tr>
 			<tr>
 				<td align="center">내용</td>
 				<td colspan="3">
-					<textarea rows="10" cols="60" name="q_content" style="resize: none;">${vo.q_content}</textarea>
+					<textarea rows="10" cols="120" name="q_content" readonly="readonly" style="resize: none;">${vo.q_content}</textarea>
 				</td>
 			</tr>
 	</table>
@@ -57,7 +57,7 @@
 
 	<!-- 답글 -->
 <div class="container" align="center" style="margin-top: 30px;">	
-	<form action="replyInsert.nhn" method="post">
+	<form action="replyUpdate.nhn" method="post">
 
 		<input type="hidden" name="q_idx" value="${vo.q_idx}"/> <!-- 질문글의 글번호 -->
 		<input type="hidden" name="q_ref" value="${vo.q_ref}"/> <!-- 글 그룹 -->
@@ -74,7 +74,7 @@
 			<tr>
 				<td width="100" align="center">이름</td>
 				<td width="500">
-					<input type="text" name="a_userid" value="${avo.a_userid}"/>
+					<input type="text" name="a_userid" value="${avo.a_userid}" readonly="readonly"/>
 				</td>
 			</tr>
 			<tr>
@@ -86,12 +86,15 @@
 			<tr>
 				<td align="center">내용</td>
 				<td colspan="3">
-					<textarea rows="10" cols="60" name="a_content" style="resize: none;">${avo.a_content}</textarea>
+					<textarea rows="10" cols="120" name="a_content" style="resize: none;">${avo.a_content}</textarea>
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center">
-					<input type=submit value="수정하기"/>
+				<td colspan="5" align="center">
+				<c:if test = "${sessionScope.session_id eq avo.a_userid }">
+					<input type = "submit" value="수정하기"/>
+					<input type = "button" value = "삭제하기" onclick = "location.href = 'AnsDelete.nhn?a_idx=${avo.a_idx}&currentPage=${currentPage}'">
+				</c:if>
 					<input type="button" value="돌아가기" onclick="history.back()"/>
 					<input type="button" value="목록보기" onclick="location.href='list.nhn?currentPage=${currentPage}'"/>
 				</td>

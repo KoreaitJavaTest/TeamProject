@@ -58,13 +58,24 @@ public class QAboardDAO {
 
 	public void ansReply(SqlSession mapper, AnswerVO vo) {
 		mapper.insert("ansReply", vo);
-		
 	}
 	
 	public ArrayList<AnswerVO> selectAlist(SqlSession mapper) {
 		return (ArrayList<AnswerVO>) mapper.selectList("selectAlist");
 	}
-
+	public void ansdelete(SqlSession mapper, AnswerVO vo) {
+		mapper.update("Aqflagoff",vo);
+		mapper.delete("ansdelete",vo);
+	}
+	public AnswerVO selectAnswar(SqlSession mapper, int a_idx) {
+		return (AnswerVO) mapper.selectOne("selectAnswer",a_idx);
+	}
+	public AnswerVO selectAnswarbyref(SqlSession mapper, int q_idx) {
+		return (AnswerVO) mapper.selectOne("selectAnswarbyref",q_idx);
+	}
+	public void editqaflag(SqlSession mapper, AnswerVO voref) {
+		mapper.update("Aqflagon",voref);
+	}
 
 	
 

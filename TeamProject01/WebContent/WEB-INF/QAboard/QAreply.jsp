@@ -42,13 +42,13 @@
 		<tr>
 				<td align="center">제목</td>
 				<td colspan="3">
-					<input type="text" name="q_title" value="${vo.q_title}" style="width: 98%"/>
+					<input type="text" name="q_title" value="${vo.q_title}" readonly="readonly" style="width: 98%"/>
 				</td>
 			</tr>
 			<tr>
 				<td align="center">내용</td>
 				<td colspan="3">
-					<textarea rows="10" cols="65" name="q_content" style="resize: none; width: 95%;">${vo.q_content}</textarea>
+					<textarea rows="10" cols="65" name="q_content" readonly="readonly" style="resize: none; width: 95%;">${vo.q_content}</textarea>
 				</td>
 			</tr>
 	</table>
@@ -73,7 +73,7 @@
 			<tr>
 				<td width="100" align="center">이름</td>
 				<td width="500">
-					<input type="text" name="a_userid"/>
+					<input type="text" name="a_userid" value = "${sessionScope.session_id}" readonly="readonly"/>
 				</td>
 			</tr>
 			<tr>

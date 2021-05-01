@@ -10,18 +10,26 @@ public class AnswerVO {
 	private String a_content;
 	private Date a_writedate;
 	private int a_ref;
-	private int q_idx;
+	private int a_flag;
 	
 	public AnswerVO() {}
 	
-	public AnswerVO(String a_userid, String a_title, String a_content, int q_idx) {
+	public AnswerVO(String a_userid, String a_title, String a_content,int q_idx) {
 		super();
 		this.a_userid = a_userid;
 		this.a_title = a_title;
 		this.a_content = a_content;
-		this.q_idx = q_idx;
+		this.a_ref = q_idx;
 	}
-	
+
+	public int getA_flag() {
+		return a_flag;
+	}
+
+	public void setA_flag(int a_flag) {
+		this.a_flag = a_flag;
+	}
+
 	public int getA_idx() {
 		return a_idx;
 	}

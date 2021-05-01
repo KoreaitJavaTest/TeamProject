@@ -12,6 +12,7 @@ public class QAboardVo {
 	private int q_lev;
 	private int q_ref;
 	private Date q_writedate;
+	private String Q_flag;
 
 	public QAboardVo() {}
 	
@@ -78,6 +79,15 @@ public class QAboardVo {
 		this.q_writedate = q_writedate;
 	}
 
+	public String getQ_flag() {
+		return Q_flag;
+	}
+
+	public void setQ_flag(String q_flag) {
+		Q_flag = q_flag;
+	}
+
+	
 	
 	
 	
