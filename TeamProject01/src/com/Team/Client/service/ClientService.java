@@ -325,10 +325,10 @@ public class ClientService {
 		ClientDao dao = ClientDao.getInstance();
 		
 		int totalcount = dao.qnaTotalCount(mapper,id);
-		System.out.println(totalcount);
+		System.out.println("토탈카운트 : "+totalcount);
 		
 		QAboardList qaBoardList = new QAboardList(pagesize, totalcount, currentPage,id);
-		
+		System.out.println("id: "+id);
 //		1페이지 분량의 글 목록을 얻어와서 mvcboardList의 ArrayList에 넣어준다.
 		qaBoardList.setList(dao.QAselectList(mapper, qaBoardList));
 

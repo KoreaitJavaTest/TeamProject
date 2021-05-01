@@ -43,11 +43,11 @@
 				</c:when>
 				<c:otherwise>
 					<c:forEach var="vo" items="${list}">
-						<tr onclick="location.href='ReHitUp.nhn?idx=${vo.RE_idx}&currentPage=${reViewList.currentPage}'" style="cursor: pointer;">
+						<tr style="cursor: pointer;">
 							<td><input type="checkbox" class="checkthis" /></td>
 							<td align="center">${vo.RE_idx}</td>
 							<td align="center">${vo.RE_userId}</td>
-							<td align="center">${vo.RE_title}</td>
+							<td align="center" onclick="location.href='ReHitUp.nhn?idx=${vo.RE_idx}&currentPage=${reViewList.currentPage}'">${vo.RE_title}</td>
 								<td align="center">
 								<c:if test="${date.year == vo.RE_writeDate.year && date.month == vo.RE_writeDate.month && date.date == vo.RE_writeDate.date}">
 									<fmt:formatDate value="${vo.RE_writeDate}" pattern="a h:mm" />
@@ -59,7 +59,7 @@
 							<td align="center">${vo.RE_hit}</td>
 							<td align="center">
 						    	<p data-placement="top" data-toggle="tooltip" title="Edit">
-							    	<button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" >
+							    	<button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" onclick="location.href='ReViewUpdate.nhn?idx=${vo.RE_idx}'">
 							    		<span class="glyphicon glyphicon-pencil"></span>
 							    	</button>
 						    	</p>

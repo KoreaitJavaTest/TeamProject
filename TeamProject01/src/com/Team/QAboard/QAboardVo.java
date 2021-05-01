@@ -22,30 +22,37 @@ public class QAboardVo {
 		this.q_title = q_title;
 		this.q_content = q_content;
 	}
-	
+
 	public int getQ_idx() {
 		return q_idx;
 	}
+
 	public void setQ_idx(int q_idx) {
 		this.q_idx = q_idx;
 	}
+
 	public String getQ_title() {
 		return q_title;
 	}
+
 	public void setQ_title(String q_title) {
 		this.q_title = q_title;
 	}
-	public String getQ_userid() {
-		return q_userid;
-	}
-	public void setQ_userid(String q_userid) {
-		this.q_userid = q_userid;
-	}
+
 	public String getQ_content() {
 		return q_content;
 	}
+
 	public void setQ_content(String q_content) {
 		this.q_content = q_content;
+	}
+
+	public String getQ_userid() {
+		return q_userid;
+	}
+
+	public void setQ_userid(String q_userid) {
+		this.q_userid = q_userid;
 	}
 
 	public int getQ_seq() {
@@ -75,6 +82,7 @@ public class QAboardVo {
 	public Date getQ_writedate() {
 		return q_writedate;
 	}
+
 	public void setQ_writedate(Date q_writedate) {
 		this.q_writedate = q_writedate;
 	}
@@ -87,8 +95,6 @@ public class QAboardVo {
 		Q_flag = q_flag;
 	}
 
-	
-	
 	
 	
 }

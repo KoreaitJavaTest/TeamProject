@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <div class="container_fluid col-xs-12" style="
-    padding-bottom: 30px;
+    padding-bottom: 80px;
 ">
 	<div class="row affix-row">
 	    <div class="col-sm-3 col-md-2 affix-sidebar">

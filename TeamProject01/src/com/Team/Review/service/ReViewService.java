@@ -199,7 +199,12 @@ public class ReViewService {
 	public void selectByIdx(HttpServletRequest request, HttpServletResponse response) {
 		SqlSession mapper = MySession.getSession();
 		int idx = Integer.parseInt(request.getParameter("idx"));
-		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		int currentPage=1;
+		try {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}catch (Exception e) {
+
+		}
 		
 		ReViewVO vo = ReViewDao.getInstance().selectByIdx(mapper,idx);	// 1건의 정보를 vo 객체에 저장	
 		

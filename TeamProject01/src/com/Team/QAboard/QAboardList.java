@@ -48,6 +48,17 @@ public class QAboardList {
 		endPage = endPage > totalPage ? totalPage : endPage;
 	}
 
+	
+	
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	public ArrayList<QAboardVo> getList() {
 		return list;
 	}

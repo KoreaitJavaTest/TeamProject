@@ -333,7 +333,7 @@ footer {
 	
 	}
 /*지노가 만듬 마이페이지 메뉴바+메인글 css ----------------------------------------------------------*/	
-	  .affix-row .affix-sidebar{ background-color: #f8f8f8; height: 100%;overflow: hidden;}
+	  .affix-row .affix-sidebar{ background-color: white; height: 100%;overflow: hidden;}
    .affix-content .container .page-header{ margin-top: 0; }
   .sidebar-nav{position:fixed; width:100%;}
   .affix-sidebar{ padding-right:0; font-size:small;padding-left: 0;}  
