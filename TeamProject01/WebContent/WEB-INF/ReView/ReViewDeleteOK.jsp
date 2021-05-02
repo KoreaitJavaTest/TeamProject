@@ -6,7 +6,14 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%
 	int idx =Integer.parseInt(request.getParameter("idx"));
-	int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+	int currentPage = 1;
+	String flag = request.getParameter("flag");
+	try{
+	currentPage = Integer.parseInt(request.getParameter("currentPage"));
+	}catch(Exception e){
+		
+	}
+		
 %>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script type="text/javascript">
@@ -49,7 +56,11 @@ $("#myModal").modal({                    // wire up the actual modal functionali
             <!-- dialog buttons -->
             <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal" onclick="location.href='ReViewDelete.nhn?idx=<%=idx%>&currentPage=<%=currentPage%>'">예</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="location.href='ReHitUp.nhn?idx=<%=idx%>&currentPage=<%=currentPage%>'">아니오</button>
+            <% if(flag.equals("detail")){ %>
+	        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="location.href='ReHitUp.nhn?idx=<%=idx%>&currentPage=<%=currentPage%>'">아니오</button>
+			<%}else if(flag.equals("mypage")){ %>
+	        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="history.back()">아니오</button>
+			<%} %>
             </div>
         </div>
     </div>

@@ -231,7 +231,7 @@ function commentDelete() {
 							 <li role="presentation">
 								 <c:choose>
 							 	<c:when test="${sessionScope.session_id eq vo.RE_userId }">
-							 	<a href="ReViewDeleteOK.nhn?idx=${vo.RE_idx}&currentPage=${currentPage}" role="menuitem" tabindex="-1">
+							 	<a href="ReViewDeleteOK.nhn?idx=${vo.RE_idx}&currentPage=${currentPage}&flag=detail" role="menuitem" tabindex="-1">
 							 		삭제하기
 							 	</a>
 							 	</c:when>

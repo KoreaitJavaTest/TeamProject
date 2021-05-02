@@ -140,7 +140,8 @@ public class ReViewService {
 		
 		//선택한 게시글 정보를 가져와 담아준다.
 		ReViewVO vo = ReViewDao.getInstance().selectByIdx(mapper,idx);
-		
+		System.out.println("날짜 (월): "+vo.getRE_writeDate().getMonth());
+		System.out.println("날짜 (일): "+vo.getRE_writeDate().getDate());
 		String[] fileNameList = vo.getRE_imgNames().split(",");
 		
 		

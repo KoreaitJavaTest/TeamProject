@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.Team.Client.dao.ClientDao;
+import com.Team.Client.point.PointService;
 import com.Team.Client.service.ClientService;
 import com.Team.QAboard.QAboardService;
 import com.Team.Shop.service.ShopService;
@@ -109,7 +110,16 @@ public class HomeController extends HttpServlet {
 			break;
 
 		// MYPage (진호추가)==============================================
-
+			//출석체크후 포인트 검사 후 증가or경고문
+		case "/depositPoint.nhn":
+			PointService.getInstance().AttentionCheck(request,response);
+//			response.getWriter().write("T");
+			return;
+			
+		case "/MyPointSelect.nhn":
+			PointService.getInstance().SelectMyPointDeposit(request,response);
+			viewPage+="MyPage/MyPagePointLogView";
+			break;
 		// MYPage (진호추가끝)=============================================
 
 			// ================== Q&A 게시판 =====================		
