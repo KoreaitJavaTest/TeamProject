@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team.vo.QuestionVo">
+
+	<!-- 메인글을 저장한다. -->
+	<insert id="insert" parameterType="Qvo">
+		insert into QABOARD2 (Q_IDX, Q_TITLE, Q_CONTENT, Q_USERID, Q_REF, Q_LEV, Q_SEQ) 
+		values(QABOARD2_Q_IDX_SEQ.NEXTVAL, #{q_title}, #{q_content}, #{q_userid},QABOARD2_Q_IDX_SEQ.CURRVAL, 0, 0)
+	</insert>
+
+	<select id="QAselectCount" resultType="int">
+		SELECT COUNT(*) FROM QABOARD2
+	</select>
+	
+	<select id="QAselectList" parameterType="java.util.HashMap" resultType="Qvo">
+		<![CDATA[
+		SELECT * FROM(
+			SELECT ROWNUM RNUM, GG.* FROM (
+				SELECT * FROM QABOARD2 ORDER BY Q_REF DESC, Q_SEQ ASC
+			) GG WHERE ROWNUM <= #{endNo}
+		)WHERE RNUM >= #{startNo}
+		]]>
+	</select>
+	
+	<!-- 글 1건을 얻어온다. -->
+	<select id="QAselectByIdx" parameterType="int" resultType="Qvo">
+		SELECT * FROM QABOARD2 WHERE Q_IDX = #{q_idx}
+	</select>
+	
+	<!-- 글 1건을 삭제한다. -->
+	<delete id="delete" parameterType="int">
+		DELETE FROM QABOARD2 WHERE Q_IDX = #{q_idx}
+	</delete>
+	
+	<!-- 글 1건 수정 -->
+	<update id="update" parameterType="Qvo">
+		UPDATE QABOARD2 SET Q_TITLE = #{q_title}, Q_CONTENT =  #{q_content} WHERE Q_IDX = #{q_idx}
+	</update>
+	
+	<!-- 답글이 삽입될 위치를 확보하기 위해 조건에 만족하는 seq를 1씩 증가시킨다. -->
+	<update id="incrementSeq" parameterType="java.util.HashMap">
+		UPDATE QABOARD2 SET Q_SEQ = Q_SEQ + 1 WHERE Q_REF = #{q_ref} AND Q_SEQ >= #{q_seq} 
+	</update>
+	
+	<!-- 답글을 저장한다. -->
+	<insert id="ansReply" parameterType="Avo">
+		INSERT INTO ANSWER_DB (A_IDX, A_TITLE, A_CONTENT, A_USERID, A_REF) 
+		values (answer_db_a_idx_seq.NEXTVAL, #{a_title}, #{a_content}, #{a_userid}, #{a_ref})
+	</insert>
+	
+	<select id="selectAlist" resultType="Avo">
+		select * from ANSWER_DB
+	</select>
+	
+	<!-- 답글 1건을 얻어온다. -->
+	<select id="AnswerByIdx" parameterType="int" resultType="Avo">
+		select * from ANSWER_DB where a_ref = #{q_idx}
+	</select>
+	
+	<!-- 답글 1건 수정 -->
+	<update id="Aupdate" parameterType="Avo">
+		update ANSWER_DB set a_title = #{a_title}, a_content = #{a_content} where a_ref = #{a_ref}
+	</update>
+	
+	<update id="Aqflagon">
+		update qaboard2 set q_flag = #{a_idx} where q_idx = #{a_ref}
+	</update>
+	
+	<update id="Aqflagoff" parameterType="Avo">
+		update qaboard2 set q_flag = #{a_flag} where q_idx = #{a_ref}
+	</update>
+	
+	<delete id="ansdelete" parameterType="Avo">
+		DELETE FROM ANSWER_DB WHERE A_IDX = #{a_idx}
+	</delete>
+	
+	<select id="selectAnswer" parameterType="int" resultType="Avo">
+		select * from ANSWER_DB where a_idx = #{a_idx}
+	</select>
+	
+	<select id="selectAnswarbyref" parameterType="int" resultType="Avo">
+		select * from ANSWER_DB where a_ref = #{q_idx}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+

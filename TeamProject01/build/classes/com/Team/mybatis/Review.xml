@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Review_vo">
+	<insert id="ReViewInsert" parameterType="Re_vo">
+		INSERT INTO REVIEW (RE_IDX,RE_TITLE,RE_CONTENT,RE_USERID,RE_IMG,RE_CATEGORYDETAIL,RE_IMGNAMES)
+		VALUES (REVIEW_RE_IDX_SEQ.NEXTVAL,#{RE_title},#{RE_content},#{RE_userId},#{RE_img},#{RE_categoryDetail},#{RE_imgNames})
+	</insert>
+	<select id="totalCount" resultType="Integer">
+		select count(*) from REVIEW
+	</select>
+	<select id="selectReViewList" parameterType="java.util.HashMap" resultType="Re_vo">
+		<![CDATA[
+		select * from (
+			select rownum rnum, TT.* from (
+				select * from REVIEW order by RE_IDX DESC
+			) TT where rownum <= #{endNo}
+		) where rnum >= #{startNo}
+		]]>
+	</select>
+	<update id="ReHitUp" parameterType="Integer">
+		update REVIEW set RE_hit = RE_hit + 1 where RE_idx = #{idx}
+	</update>
+	<update id="ReViewReport" parameterType="Integer">
+		update REVIEW set RE_report = RE_report + 1 where RE_idx = #{idx}
+	</update>
+	<select id="selectByIdx" parameterType="Integer" resultType="Re_vo">
+		select * from REVIEW where RE_idx = #{idx}
+	</select>
+	<update id="ReViewUpdate" parameterType="Re_vo">
+		update REVIEW set re_content = #{RE_content},re_title=#{RE_title},
+		re_img = #{RE_img} , RE_categoryDetail=#{RE_categoryDetail} , RE_imgNames = #{RE_imgNames}
+		where RE_idx = #{RE_idx}
+	</update>
+		
+	<update id="ReViewUpdateNoImg" parameterType="Re_vo">
+		update REVIEW set re_content = #{RE_content},re_title=#{RE_title},
+		RE_categoryDetail=#{RE_categoryDetail}
+		where RE_idx = #{RE_idx}
+	</update>
+	<delete id="ReViewDelete" parameterType="Integer">
+		delete from REVIEW where RE_idx = #{idx}
+	</delete>
+	
+	<select id="ReViewTotalCount" parameterType="com.Team.Review.vo.ReViewSearchVO" resultType="Integer">
+		select count(*) from REVIEW where
+		<if test="searchName=='제목'">
+			RE_title LIKE '%'||#{searchText}||'%'
+		</if>		
+		<if test="searchName=='작성자'">
+			RE_USERID LIKE '%'||#{searchText}||'%'
+		</if>		
+		<if test="searchName=='제목작성자'">
+			RE_title LIKE '%'||#{searchText}||'%' or RE_USERID LIKE '%'||#{searchText}||'%'
+		</if>
+	</select>
+	
+	<select id="ReViewSearch" parameterType="com.Team.Review.vo.ReViewSearchVO" resultType="Re_vo">
+		<![CDATA[select * from (select rownum rnum, GG.* from (select*from REVIEW where]]>
+		<if test="searchName=='제목'">
+			<![CDATA[RE_title like '%'||#{searchText}||'%']]>
+		</if>		
+		<if test="searchName=='작성자'">
+			<![CDATA[RE_USERID like '%'||#{searchText}||'%']]>
+		</if>		
+		<if test="searchName=='제목작성자'">
+			<![CDATA[RE_title like '%'||#{searchText}||'%' or RE_USERID like '%'||#{searchText}||'%']]>
+		</if>
+			<![CDATA[order by RE_idx desc) GG where rownum <=#{endNo})where rnum>=#{startNo}]]>	
+	</select>
+	
+	<update id="CommentUp" parameterType="Integer">
+		update REVIEW set RE_COMMENTCOUNT = RE_COMMENTCOUNT + 1 where RE_idx = #{refIdx}
+	</update>
+	<update id="minusCommentCount" parameterType="Integer">
+		update REVIEW set RE_COMMENTCOUNT = RE_COMMENTCOUNT - 1 where RE_idx = #{idx}
+	</update>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+

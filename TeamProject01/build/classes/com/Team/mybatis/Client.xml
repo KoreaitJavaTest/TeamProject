@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Client_vo">
+	<insert id="join" parameterType="vo">
+		INSERT INTO CLIENT_DB
+		(CLIENT_IDX,CLIENT_ID,CLIENT_PASSWORD,CLIENT_GENDER,CLIENT_ADDR_HEAD,CLIENT_ADDR_END,CLIENT_PHONE,CLIENT_EMAIL,CLIENT_EMAILCODE)
+		VALUES 
+		(CLIENT_IDX_SEQ.NEXTVAL,#{client_id},#{client_password},#{client_gender},#{client_addr_head},#{client_addr_end},#{client_phone},#{client_email},#{client_emailcode})
+	</insert>
+	
+	<select id="getClientEmail" parameterType = "String" resultType="String">
+		SELECT CLIENT_EMAIL FROM CLIENT_DB WHERE CLIENT_ID = #{client_id} 
+	</select>
+	
+	<update id="emailCheckAction" parameterType="String">
+		UPDATE CLIENT_DB SET CLIENT_EMAILCHECK = replace(CLIENT_EMAILCHECK, 'false', 'true') WHERE CLIENT_EMAILCODE = #{code}
+	</update>
+	
+	<select id="idoverlapcheck" parameterType="String" resultType="int">
+		SELECT count(*) FROM CLIENT_DB WHERE CLIENT_ID = #{client_id}
+	</select>
+	
+	<select id="login" parameterType="vo" resultType="vo">
+		SELECT * FROM CLIENT_DB WHERE CLIENT_ID = #{client_id} AND CLIENT_PASSWORD = #{client_password}
+	</select>
+	
+	<select id="ClientInfo" parameterType="vo" resultType="vo">
+		SELECT * FROM CLIENT_DB WHERE CLIENT_ID = #{client_id} AND CLIENT_PASSWORD = #{client_password}
+	</select>
+	
+	<update id="ClientUpdate" parameterType="vo">
+		UPDATE CLIENT_DB SET CLIENT_PASSWORD = #{client_password}, CLIENT_ADDR_HEAD = #{client_addr_head}, CLIENT_ADDR_END = #{client_addr_end}
+		WHERE CLIENT_ID = #{client_id}
+	</update>
+	
+	<select id="reviewListCount" parameterType="String" resultType="int">
+		SELECT count(*) FROM REVIEW WHERE RE_USERID = #{id}
+	</select>
+	
+	<select id="selectreviewList" parameterType="Re_vo" resultType="Re_vo">
+		<![CDATA[
+		select * from (
+			select rownum rnum, TT.* from (
+				select * from REVIEW WHERE RE_USERID = #{id} order by RE_IDX asc
+			) TT where rownum <= #{endNo}
+		) where rnum >= #{startNo}
+		]]>
+	</select>
+	
+	<select id="qnaTotalCount" parameterType="String" resultType="int">
+		select count(*) from QABOARD2 where Q_USERID like '%'||#{id}||'%'
+	</select>
+	
+	<select id="selectQAList" parameterType="Qvo" resultType="Qvo">
+		<![CDATA[
+		select * from (
+			select rownum rnum, TT.* from (
+				select * from QABOARD2 WHERE Q_USERID like '%'||#{id}||'%' order by Q_IDX asc
+			) TT where rownum <= #{endNo}
+		) where rnum >= #{startNo}
+		]]>
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
