@@ -1,11 +1,62 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript">
 
 
+function addcart(idx) {
+//	상품의 idx로 session key와 value를 설정한다.
+	if(idx == sessionStorage.getItem("session_cart_" + idx)){
+		alert('이미 같은 상품을 담았습니다.')
+	} else {
+		sessionStorage.setItem("session_cart_" + idx, idx)
+		alert(idx + '번 상품을 장바구니에 담았습니다.')
+	}
+}
+/*
+====================== 수정 ing... =====================
+$(function(){
+	alert('load');
+	// 추천버튼 클릭시(추천 추가 또는 추천 제거)
+	$("#likeUpdate").click(function(){
+		$.ajax({
+			url: "/likeUpdate.nhn",
+			method: "POST",
+            asyn: true,	
+            data: {
+                'like_idx': '${vo.sh_idx}',
+                'like_id': '${userId}'
+            },
+            success: function () {
+		        console.log("아작스 성공")
+		        likeCount();
+            },
+            error: function() {
+		        console.log("아작스 실패")
+            }
+		})
+	});
+
+	// 게시글 추천수
+    function likeCount() {
+		$.ajax({
+			url: "/likeCount.nhn",
+			method: "POST",
+            data: {
+            	'like_idx': '${vo.sh_idx}'
+            },
+            success: function (count) {
+            	$(".likeCount").html(count);
+            },
+		})
+    };
+}
+=======================================================
+*/
 </script>
+
 <!-- 선택한 상품을 보여주는 페이지 -->
 <jsp:include page="/WEB-INF/Shop/mainCategory.jsp"></jsp:include>
 
@@ -22,30 +73,35 @@
 					</div>
 					<div class="panel-heading">
 						<h3 class="panel-title" align="right">
-							<span onclick="location.href=''">${vo.sh_category} </span>
+							<span onclick="location.href='AllProducts.nhn?category=신발'" style="cursor: pointer;">${vo.sh_category} </span>
 							>>
-							<span>${vo.sh_categoryDetail}</span>
+							<span onclick="location.href='AllProducts.nhn?category=신발'">${vo.sh_categoryDetail}</span>
 						</h3>
 					</div>
 				
 					<div class="panel-body">
 						<div class="media">
-							<div class="media-left">
+							<div class="media-left" style="width: 20%">
 								<c:if test="${vo.sh_img1 != null && vo.sh_img2 == null}">
-			                        <img src="${vo.sh_img1}" width="300" height="300">
+			                        <img class="pic" src="${vo.sh_img1}">
 		                    	</c:if>
 		                    	<c:if test="${vo.sh_img1 == null && vo.sh_img2 != null}">
-			                        <img src="${vo.sh_img2}" width="300" height="300">
+			                        <img class="pic" src="${vo.sh_img2}">
 		                    	</c:if>
 		                    	<c:if test="${vo.sh_img1 != null && vo.sh_img2 != null}">
-		                    		<img src="${vo.sh_img1}" width="300" height="300">
-		                    		<img src="${vo.sh_img2}" width="300" height="300">
+		                    		<img class="pic" src="${vo.sh_img1}">
+		                    		<img class="pic" src="${vo.sh_img2}">
 		                    	</c:if>
 							</div>
 							<div class="media-body">
 								<h4 class="media-heading" style="font-size: 20pt;font-weight: bold"><strong>${vo.sh_name}</strong></h4>
 								<br/>
-								
+								<h2>
+									<c:set var="sh_content" value="${fn:replace(fn:trim(vo.sh_content), '<', '&lt;')}"/>
+									<c:set var="sh_content" value="${fn:replace(sh_content, '>', '&gt;')}"/>
+									<c:set var="sh_content" value="${fn:replace(sh_content, enter, '<br/>')}"/>
+									${sh_content}
+								</h2>
 							</div>
 						</div>
 					</div>
@@ -70,24 +126,17 @@
 									<a class="btn btn-default" href="#">바로 구매</a>
 								</td>
 								<td  colspan="2" align="right">
-									<a class="btn btn-default" href="#">장바구니</a>
+									<a class="btn btn-default" onclick="addcart(${vo.sh_idx})">장바구니</a>
 									&nbsp;
-									<a class="btn btn-default" href="#">좋아요 ♡</a>
+									<c:if test="${userId != null }">
+										<a class="btn btn-default" id="likeUpdate">좋아요</a>
+									</c:if>
+										<span class="likeCount"></span>
 								</td>
 								
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td colspan="4" align="right">
-									
-									★<input type="radio" name="check" value="1">&nbsp;
-									★★<input type="radio" name="check" value="2">&nbsp;
-									★★★<input type="radio" name="check" value="3">&nbsp;
-									★★★★<input type="radio" name="check" value="4">&nbsp;
-									★★★★★<input type="radio" name="check" value="5">&nbsp;
-								</td>
-							</tr>
 							<tr>
 								<td align="right" colspan="4">
 									사이즈
@@ -112,7 +161,7 @@
 									<a class="btn btn-default" href="#">상품 리뷰 보러가기</a>
 								</td>
 								<td colspan="2" align="center">
-									<a class="btn btn-default" href="">목록으로</a>
+									<a class="btn btn-default" href="AllProducts.nhn?currentPage=${currentPage}">목록으로</a>
 								</td>
 							</tr>
 							

@@ -169,23 +169,40 @@ public class HomeController extends HttpServlet {
 				shopService.selectProduct(request, response);
 				viewPage += "Shop/deleteProduct";
 				break;
+				
 			// 상품 삭제 완료
 			case "/deleteOK.nhn":
 				shopService.deleteProduct(request, response);
-				viewPage += "index";
+				viewPage += "Shop/goMain";
 				break;
 				
-				// 상품 수정 페이지
+			// 상품 수정 페이지
 			case "/updateProduct.nhn":
 				shopService.selectProduct(request, response);
 				viewPage += "Shop/updateProduct";
 				break;
-				// 상품 수정 완료
-			case "/updateOK.nhn":
-				shopService.deleteProduct(request, response);
-				viewPage += "index";
+				
+			// 상품 수정 완료
+			case "/updateProductOK.nhn":
+				shopService.updateProduct(request, response);
+				viewPage += "Shop/goMain";
 				break;
-
+/*
+===================== 수정 ing =========================
+			//	좋아요 업데이트
+			case "/likeUpdate.nhn":
+				shopService.likeUpdate(request, response);
+				viewPage += "Shop/selectProduct";
+				break;
+			
+			// 좋아요 개수 카운트
+			case "/likeCount.nhn":
+				shopService.likeCount(request, response);
+				viewPage += "Shop/selectProduct";
+				break;
+========================================================
+*/
+			
 		// ==========================================================
 				// 리뷰게시판 페이지
 			case "/ReViewBoard.nhn":

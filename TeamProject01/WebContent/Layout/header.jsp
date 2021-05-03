@@ -9,9 +9,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>부트스트랩 웹 페이지</title>
+
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+
 <style type="text/css">
 *{
 	font-family: "Nanum Gothic";
@@ -22,21 +25,10 @@ table tbody>tr>td>a:hover,
 table tbody>tr>td>a:focus{
 	text-decoration: none;
 	color:red;
-	
+</style>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-<link rel="shortcut icon" href="../images/favicon.ico">
-
-
-
-
-<style>
-/* ============================ 재훈 추가 (왼쪽 메뉴바) ===================================== */
+<!-- 왼쪽 메뉴바 start -->
+<style> 
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}table{border-collapse:collapse;border-spacing:0}
 
 body {
@@ -266,8 +258,9 @@ footer {
 		color:skyblue;
 	}
 }
-
 </style>
+<!-- 왼쪽 메뉴바 end -->
+
 <link rel="icon" href="./images/me.png">
 <style type="text/css">
 	.jumbotron {
@@ -289,7 +282,13 @@ footer {
 	.product-grid{font-family:Raleway,sans-serif;text-align:center;padding:0 0 72px;border:1px solid rgba(0,0,0,.1);overflow:hidden;position:relative;z-index:1}
 	.product-grid .product-image{position:relative;transition:all .3s ease 0s}
 	.product-grid .product-image a{display:block}
-	.product-grid .product-image img{width:100%;height:auto}
+	
+/* 	=================== 재훈 변경 04-30 ======================== 	 */
+/* 						이미지 크기 고정 */
+	.product-grid .product-image img{width:100%;height:300px;} 
+	.pic{width: 300px; height: 300px; object-fit: cover;}
+/* 	=================== 재훈 변경 04-30 끝 ========================	 */
+	 
 	.product-grid .pic-1{opacity:1;transition:all .3s ease-out 0s}
 	.product-grid:hover .pic-1{opacity:1}
 	.product-grid .pic-2{opacity:0;position:absolute;top:0;left:0;transition:all .3s ease-out 0s}
@@ -351,7 +350,7 @@ footer {
 					<span class="icon-bar"></span>
 				</button>
 			</div>
-			<div class="jumbotron" onclick = "location.href = '/TeamProject01/'">
+			<div class="jumbotron" onclick = "location.href = '/TeamProject/'">
 				<h1 class="text-center">LUXMEA</h1>
 				<p class="text-center">LUXMEA MAKES YOU SHINE</p>
 			</div>
@@ -359,6 +358,9 @@ footer {
 				<ul class="nav navbar-nav" >
 					<li class="nav-item">
 						<a  class="nav-link" href="AllProducts.nhn?currentPage=1">전체상품</a>
+					</li>
+					<li class="nav-item">
+						<a  class="nav-link" href="insertProduct.nhn">상품 등록</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="ReViewBoard.nhn">리뷰게시판</a>
