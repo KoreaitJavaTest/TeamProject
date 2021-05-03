@@ -7,7 +7,7 @@ var btnCount = 1 ;
 function imgPlus() {
 	btnCount++;
 	if(btnCount<4){//id를 주고  onsubmit할시 함수한번실행(file을 체크하는) $('#1,2,3') value가 null이면 return false하게 만들어주면된다.
-		$('#file').append('<input type="file" name="'+btnCount+'"/>');	
+		$('#file').append('<input type="file" id="'+btnCount+'" name="'+btnCount+'" onchange="setThumbnail(event,'+btnCount+')"/>');	
 	}else{
 		alert('최대3개');
 		btnCount=3;
@@ -19,8 +19,11 @@ function imgMinus() {
 	if(btnCount==1){
 		alert('더이상 삭제할 수 없습니다.')
 	}else{
-	$('input[type=file]:last-child').remove();
+// 	$('input[type=file]:last-child').remove();
+	$('input[name='+btnCount+']').remove();
 	btnCount--;
+	$('.clthumbnail > img').eq(btnCount).parent().css('display','none');
+	$('.clthumbnail > img').eq(btnCount).attr('src',"");
 	}
 }
 function test(){	//Test
@@ -33,6 +36,7 @@ function test(){	//Test
 	      return true;
 	   }
 	}
+
 </script>
 <jsp:include page="/Layout/header.jsp"></jsp:include>
 <div class="container" align="center" style="margin-top: 30px;">
@@ -68,8 +72,43 @@ function test(){	//Test
 					<span onclick="imgMinus()">&nbsp;-&nbsp;</span>
 				</td>
 				<td id="file">
-					<input type="file" name="1">
+					<div id="divfile">
+						<input type="file" name="1"  id="1" onchange="setThumbnail(event,1)">
+					</div>
 				</td>
+				<script>
+					$('#1').change(function() {
+						$('input[name=fileName1]').remove()
+						var getList = this.files;
+						var reader = new FileReader();
+						reader.readAsDataURL(getList[0]);
+						reader.onload = function() {
+							$('#img1').attr('src',reader.result);
+							$('#img1').parent().css('display','block');
+						}
+					})
+					$(document).on('change',"#2",function(){
+						$('input[name=fileName2]').remove()
+// 						console.log($('input[name=fileName2]').val())
+						var getList = this.files;
+						var reader = new FileReader();
+						reader.readAsDataURL(getList[0]);
+						reader.onload = function() {
+							$('#img2').attr('src',reader.result);
+							$('#img2').parent().css('display','block');
+						}
+					})
+					$(document).on('change',"#3",function(){
+						$('input[name=fileName3]').remove()						
+						var getList = this.files;
+						var reader = new FileReader();
+						reader.readAsDataURL(getList[0]);
+						reader.onload = function() {
+							$('#img3').attr('src',reader.result);
+							$('#img3').parent().css('display','block');
+						}
+					})
+				</script>
 				<td>
 				카테고리
 					<select name="categoryDetail">
@@ -82,6 +121,29 @@ function test(){	//Test
 						<option value="고세">고세</option>
 						<option value="조던">조던</option>
 					</select>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3" >
+					<div class='col-md-12 container'>
+				      <div class="carousel media-carousel" id="media">
+				        <div class="carousel-inner">
+				          <div class="item  active">
+				            <div class="row">
+				            <div class="col-md-12">
+				                <a class="thumbnail clthumbnail" style="display: none;" href="" data-toggle="modal" data-target="#myModal1">
+				                <img alt=""  class="userimg" id="img1"  src=""></a>
+				                <a class="thumbnail clthumbnail" style="display: none;" href="" data-toggle="modal" data-target="#myModal2">
+				                <img alt=""  class="userimg" id="img2"  src=''></a>
+				                <a class="thumbnail clthumbnail" style="display: none;" href="" data-toggle="modal" data-target="#myModal3">
+				                <img alt=""  class="userimg" id="img3"  src=""></a>
+								<!-- Modal -->
+				              </div>
+				            </div>
+				          </div>
+        				</div>
+			      	  </div>                          
+			    	</div>
 				</td>
 			</tr>
 			<tr>

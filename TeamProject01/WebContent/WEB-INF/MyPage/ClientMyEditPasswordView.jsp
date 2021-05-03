@@ -2,18 +2,18 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri ="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/Layout/header.jsp"></jsp:include>
+<jsp:include page="./MyPageLayOut/menuBar.jsp"></jsp:include>
+<jsp:include page="./MyPageLayOut/StartMain.jsp"></jsp:include>
+
 <style>
-    body {
-        background: #f8f8f8;
-        padding: 60px 0;
-    }
+
     
     #login-form > div {
         margin: 15px 0;
     }
 
 </style>
-<div class="container" align = "center">
+<div class="container" align = "center" style="margin-bottom: 60px; margin-top: 35px;">
     <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
         <div class="panel panel-success">
             <div class="panel-heading">
@@ -32,6 +32,6 @@
         </div>
     </div>
 </div>
-
+<jsp:include page="./MyPageLayOut/EndMain.jsp"></jsp:include>
 <jsp:include page="/Layout/footer.jsp"></jsp:include>
 	

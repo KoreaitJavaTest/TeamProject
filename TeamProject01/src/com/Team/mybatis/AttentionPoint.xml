@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AttentionPoint_vo">
+	<insert id="insertPointLog" parameterType="com.Team.Client.point.attentionPointVO">
+		INSERT INTO ATTENTIONPOINT (idx,userid,point,content) VALUES (ATTENTIONPOINT_seq_idx.nextval,#{userId},#{point},#{content})
+	</insert>
+	<select id="SelectMyPointDeposit" parameterType="String" resultType="com.Team.Client.point.attentionPointVO">
+		select * from ATTENTIONPOINT WHERE USERID = #{userId}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+

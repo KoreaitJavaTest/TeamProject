@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.Team.Client.dao.ClientDao;
+import com.Team.Client.point.PointService;
 import com.Team.Client.service.ClientService;
 import com.Team.QAboard.QAboardService;
 import com.Team.Shop.service.ShopService;
@@ -20,133 +21,94 @@ import com.Team.Review.service.ReViewService;
 @WebServlet("*.nhn")
 public class HomeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
+
 	private ShopService shopService = ShopService.getInstance();
-	
+
 //	컨트롤러에서 사용할 service 클래스 객체를 선언한다.
 	private QAboardService service = QAboardService.getInstance();
-	
-    public HomeController() {
-        super();
-    }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public HomeController() {
+		super();
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		actionDo(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		actionDo(request, response);
 	}
-	
-	protected void actionDo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void actionDo(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-	
+
 		String url = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		String context = url.substring(contextPath.length());
-	
+
 		String viewPage = "/WEB-INF/";
 		switch (context) {
 		// 회원가입 페이지
-			case "/JoinView.nhn":
-				viewPage += "ClitenJoin/JoinView";
-				break;
+		case "/JoinView.nhn":
+			viewPage += "ClitenJoin/JoinView";
+			break;
 		// 회원가입 결과 페이지
-			case "/JoinResultView.nhn":
-				// db , dao , sevice , db.mxl 만들기
-				ClientService.getInstance().join(request,response);
-				viewPage += "ClitenJoin/JoinResultView";
-				break;
+		case "/JoinResultView.nhn":
+			// db , dao , sevice , db.mxl 만들기
+			ClientService.getInstance().join(request, response);
+			viewPage += "ClitenJoin/JoinResultView";
+			break;
 		// 회원가입 이메일 페이지
-			case "/JoinEmailResultView.nhn":
-				ClientService.getInstance().emailCheckAction(request,response);
-				viewPage += "ClitenJoin/JoinEmailResultView";
-				break;
+		case "/JoinEmailResultView.nhn":
+			ClientService.getInstance().emailCheckAction(request, response);
+			viewPage += "ClitenJoin/JoinEmailResultView";
+			break;
 		// 로그인 페이지
-			case "/LoginView.nhn":
-				viewPage += "Login/LoginView";
-				break;
+		case "/LoginView.nhn":
+			viewPage += "Login/LoginView";
+			break;
 		// 로그인 결과 페이지
-			case "/LoginResultView.nhn":
-				ClientService.getInstance().login(request,response);
-				viewPage += "Login/LoginResultView";
-				break;
+		case "/LoginResultView.nhn":
+			ClientService.getInstance().login(request, response);
+			viewPage += "Login/LoginResultView";
+			break;
 		// 로그아웃 페이지
-			case "/LogoutView.nhn":
-				ClientService.getInstance().logout(request,response);
-				viewPage += "Login/LogoutView";
-				break;
-		// 마이페이지 메인 뷰페이지 
-			case "/MyPageView.nhn":
-				viewPage += "MyPage/MyPageMainView";
-				break;
+		case "/LogoutView.nhn":
+			ClientService.getInstance().logout(request, response);
+			viewPage += "Login/LogoutView";
+			break;
+		// 마이페이지 메인 뷰페이지
+		case "/MyPageView.nhn":
+			viewPage += "MyPage/MyPageMainView";
+			break;
 		// 회원정보 수정페이지 가기 전 비밀번호 체크
-			case "/MyEditViewPasswordCheck.nhn":
-				viewPage += "MyPage/ClientMyEditPasswordView";
-				break;
+		case "/MyEditViewPasswordCheck.nhn":
+			viewPage += "MyPage/ClientMyEditPasswordView";
+			break;
 		// 내정보 수정 페이지
-			case "/ClientEditView.nhn":
-				ClientService.getInstance().edit(request,response);
-				viewPage += "MyPage/ClientEditView";
-				break;
+		case "/ClientEditView.nhn":
+			ClientService.getInstance().edit(request, response);
+			viewPage += "MyPage/ClientEditView";
+			break;
 		// 내정보 수정 완료
-			case "/EditResultView.nhn":
-				ClientService.getInstance().editOK(request,response);
-				viewPage += "MyPage/EditResultView";
-				break;
+		case "/EditResultView.nhn":
+			ClientService.getInstance().editOK(request, response);
+			viewPage += "MyPage/EditResultView";
+			break;
 		// 나의 게시물 관리
-			case "/MyListViewPage.nhn":
-				ClientService.getInstance().reviewSelect(request,response);
-				viewPage += "MyPage/MyListViewPage";
-				break;
+		case "/MyListViewPage.nhn":
+			ClientService.getInstance().reviewSelect(request, response);
+			viewPage += "MyPage/MyListViewPage";
+			break;
 		// 나의 Q&A 게시물 관리
-			case "/MyQnAviewPage.nhn":
-				ClientService.getInstance().myQnASelect(request,response);
-				viewPage += "MyPage/MyQnAviewPage";
-				break;
+		case "/MyQnAviewPage.nhn":
+			ClientService.getInstance().myQnASelect(request, response);
+			viewPage += "MyPage/MyQnAviewPage";
+			break;
 
-		// ================== Q&A 게시판 =====================		
-			case "/QAboard.nhn":
-				service.selectList(request, response);
-				viewPage += "QAboard/QAlist";
-				break;
-			case "/QAinsert.nhn":
-				viewPage += "QAboard/QAinsert";
-				break;
-			case "/insertOK.nhn":
-				System.out.println(request);
-				service.insert(request, response);
-				viewPage += "QAboard/index";
-				System.out.println(viewPage);
-				break;
-			case "/list.nhn":
-				service.selectList(request, response);
-				viewPage += "QAboard/QAlist";
-				break;
-		// ==================== 상품 페이지 ======================
-				
-			// 전체 상품 페이지
-			case "/AllProducts.nhn":
-				shopService.selectAllProduct(request,response);
-				viewPage += "Shop/AllProducts";
-				break;
-				
-			// 상품 등록 페이지
-			case "/insertProduct.nhn":
-				viewPage += "Shop/insertProduct";
-				break;
-			case "/insertProductOK.nhn":
-				shopService.insertProduct(request,response);
-//				System.out.println("상품 등록 끝");
-				viewPage += "Shop/goMain";
-				break;
-			
-			// 브랜드별로 나눔
-			case "/categoryDetail.nhn":
-				shopService.selectCategoryDetail(request, response);
-				viewPage += "Shop/categoryDetail";
-				break;
-			
 			// 상품 상세보기 페이지
 			case "/selectProduct.nhn":
 				shopService.selectProduct(request, response);
@@ -281,27 +243,98 @@ public class HomeController extends HttpServlet {
 				viewPage += "ReView/ReViewPostDetail";
 				break;
 				
+			// MYPage (진호추가)==============================================
+			//출석체크후 포인트 검사 후 증가or경고문
+
+			case "/depositPoint.nhn":
+				PointService.getInstance().AttentionCheck(request,response);
+//				response.getWriter().write("T");
+				return;
+			case "/MyPointSelect.nhn":
+				PointService.getInstance().SelectMyPointDeposit(request,response);
+				viewPage+="MyPage/MyPagePointLogView";
+				break;
+		// MYPage (진호추가끝)=============================================
+
+			// ================== Q&A 게시판 =====================		
+		case "/QAboard.nhn":
+			service.QAselectList(request, response);
+			viewPage += "QAboard/QAlist";
+			break;
+		case "/QAinsert.nhn":
+			viewPage += "QAboard/QAinsert";
+			break;
+		case "/insertOK.nhn":
+			service.insert(request, response);
+			viewPage += "QAboard/index";
+//			System.out.println(viewPage);
+			break;
+		case "/list.nhn":
+			service.QAselectList(request, response);
+			viewPage += "QAboard/QAlist";
+			break;
+		case "/contentView.nhn":
+			service.QAselectByIdx(request, response);
+			viewPage += "QAboard/QAcontentView";
+			break;
+		case "/delete.nhn":
+			service.delete(request, response);
+			viewPage += "QAboard/goList";
+			break;
+		case "/update.nhn":
+			service.update(request, response);
+			viewPage += "QAboard/goList";
+			break;
+		case "/reply.nhn":
+			service.QAselectByIdx(request, response);
+			viewPage += "QAboard/QAreply";
+			break;
+		case "/replyView.nhn":
+			service.QAselectByIdx(request, response);
+			viewPage += "QAboard/QAreplyView";
+			break;
+		case "/replyInsert.nhn":
+			service.replyInsert(request, response);
+			viewPage += "QAboard/goList";
+			break;
+		case "/replyUpdate.nhn":
+			service.aupdate(request,response);
+			viewPage += "QAboard/goList";
+			break;
+		case "/AnsDelete.nhn":
+			service.ansdelete(request,response);
+			viewPage += "QAboard/goList";
+			break;
+		// ==================== 상품 페이지 ======================
+
+		// 전체 상품 페이지
+		case "/AllProducts.nhn":
+			shopService.selectAllProduct(request, response);
+			viewPage += "Shop/AllProducts";
+			break;
+
+		// 상품 등록 페이지
+		case "/insertProduct.nhn":
+			viewPage += "Shop/insertProduct";
+			break;
+		case "/insertProductOK.nhn":
+			shopService.insertProduct(request, response);
+//				System.out.println("상품 등록 끝");
+			viewPage += "Shop/goMain";
+			break;
+
+		// 브랜드별로 나눔
+		case "/categoryDetail.nhn":
+			shopService.selectCategoryDetail(request, response);
+			viewPage += "Shop/categoryDetail";
+			break;
+
 		}
-		
 		viewPage += ".jsp";
-	
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);
-		
+
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

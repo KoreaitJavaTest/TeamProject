@@ -140,7 +140,8 @@ public class ReViewService {
 		
 		//선택한 게시글 정보를 가져와 담아준다.
 		ReViewVO vo = ReViewDao.getInstance().selectByIdx(mapper,idx);
-		
+		System.out.println("날짜 (월): "+vo.getRE_writeDate().getMonth());
+		System.out.println("날짜 (일): "+vo.getRE_writeDate().getDate());
 		String[] fileNameList = vo.getRE_imgNames().split(",");
 		
 		
@@ -199,7 +200,12 @@ public class ReViewService {
 	public void selectByIdx(HttpServletRequest request, HttpServletResponse response) {
 		SqlSession mapper = MySession.getSession();
 		int idx = Integer.parseInt(request.getParameter("idx"));
-		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		int currentPage=1;
+		try {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}catch (Exception e) {
+
+		}
 		
 		ReViewVO vo = ReViewDao.getInstance().selectByIdx(mapper,idx);	// 1건의 정보를 vo 객체에 저장	
 		

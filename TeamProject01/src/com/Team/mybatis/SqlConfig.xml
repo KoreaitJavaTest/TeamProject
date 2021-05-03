@@ -7,11 +7,12 @@
 	
 	<typeAliases>
  		<typeAlias type="com.Team.Client.vo.ClientVo" alias="vo" />	
- 		<typeAlias type="com.Team.QAboard.QAboardVo" alias="QAvo"/>
  		<typeAlias type="com.Team.Shop.vo.ShopVO" alias="shopVO"/>	
  		<typeAlias type="com.Team.Shop.vo.ShopList" alias="shopList" />	
  		<typeAlias type="com.Team.Review.vo.ReViewVO" alias="Re_vo" />	
  		<typeAlias type="com.Team.Review.vo.ReViewCommentVO" alias="Re_Co_vo" />	
+ 		<typeAlias type="com.Team.QAboard.QAboardVo" alias="Qvo"/>
+ 		<typeAlias type="com.Team.QAboard.AnswerVO" alias="Avo"/>
 	</typeAliases>
 	
 	<environments default="development">
@@ -32,6 +33,7 @@
 		<mapper resource="com/Team/mybatis/Review.xml"/>
 		<mapper resource="com/Team/mybatis/ReviewComment.xml"/>
 		<mapper resource="com/Team/mybatis/Shop.xml"/>
+		<mapper resource="com/Team/mybatis/AttentionPoint.xml"/>
 	</mappers>
 
 

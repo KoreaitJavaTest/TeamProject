@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.Team.Client.point.attentionPointVO;
 import com.Team.Client.vo.ClientVo;
 import com.Team.QAboard.QAboardList;
 import com.Team.QAboard.QAboardVo;
@@ -49,6 +50,16 @@ public class ClientDao {
 	}
 	public ArrayList<QAboardVo> QAselectList(SqlSession mapper, QAboardList qaBoardList) {
 		return (ArrayList<QAboardVo>) mapper.selectList("selectQAList",qaBoardList);
+	}
+	public ArrayList<attentionPointVO> selectPoint(SqlSession mapper, String userId) {
+		return (ArrayList<attentionPointVO>) mapper.selectList("selectPoint",userId);
+	}
+	public void depositAttentionPoint(SqlSession mapper, attentionPointVO vo) {
+		mapper.update("depositAttentionPoint",vo);
+		
+	}
+	public int userPointSelect(SqlSession mapper, String userId) {
+		return (int) mapper.selectOne("userPointSelect",userId);
 	}
 	
 

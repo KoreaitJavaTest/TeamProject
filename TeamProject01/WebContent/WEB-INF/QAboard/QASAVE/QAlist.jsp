@@ -10,9 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-<div class="container" style="margin-top: 50px;">
-	<table class="table table-hover table-border">
+	<table width="1000" align="center" border="1" cellpadding="5" cellspacing="0">
 		<tr>
 			<th colspan="5">Q&A 게시판</th>
 		</tr>
@@ -35,25 +33,31 @@
 		<c:if test="${list.size() == 0}"></c:if>
 		
 		<c:if test="${list.size() != 0}">
-		
 		<c:forEach var="vo" items="${list}">
 		<tr>
 			<td align="center">${vo.q_idx}</td>
 			<td>
+				<c:if test="${vo.q_lev > 0}">
+				<c:forEach var="i" begin="1" end="${vo.q_lev}" step="1">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</c:forEach>
+				</c:if>
+				
 				<c:set var="q_title" value="${fn:replace(fn:trim(vo.q_title), '<', '&lt;')}"/>
 				<c:set var="q_title" value="${fn:replace(q_title, '>', '&gt;')}"/>
-				<a href="contentView.nhn?idx=${vo.q_idx}&currentPage=${qaboardList.currentPage}" style = "color : black;">  <!-- get 방식 -->
+				<a href="increment.nhn?idx=${vo.q_idx}&currentPage=${qaboardList.currentPage}">  <!-- get 방식 -->
 					${q_title}
 				</a>
 			</td> 
 
+
+				
 			<td align="center">
 				<c:set var="q_userid" value="${fn:replace(fn:trim(vo.q_userid), '<', '&lt;')}"/>
 				<c:set var="q_userid" value="${fn:replace(q_userid, '>', '&gt;')}"/>
 				${q_userid}
 			</td>
 			<td align="center">
-			
 				<c:if test="${date.year == vo.q_writedate.year && date.month == vo.q_writedate.month && date.date == vo.q_writedate.date}">
 					<fmt:formatDate value="${vo.q_writedate}" pattern="a h:mm"/>
 				</c:if>
@@ -62,38 +66,6 @@
 				</c:if>
 			</td>
 		</tr>
-		
-			<c:forEach var="avo" items="${Alist}">
-				<c:if test="${vo.q_idx == avo.a_ref}">
-					<tr>
-						<td align="center">
-							<input hidden="${avo.a_idx}"/> 
-						</td>
-						<td>
-							<c:set var="avo.a_title" value="${fn:replace(fn:trim(avo.a_title), '<', '&lt;')}"/>
-							<c:set var="avo.a_title" value="${fn:replace(a_title, '>', '&gt;')}"/>
-							<a href="replyView.nhn?idx=${vo.q_idx}&currentPage=${qaboardList.currentPage}"> 
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							${avo.a_title}
-							</a>						
-						</td>
-						<td align="center">
-							<c:set var="avo.a_userid" value="${fn:replace(fn:trim(avo.a_userid), '<', '&lt;')}"/>
-							<c:set var="avo.a_userid" value="${fn:replace(a_userid, '>', '&gt;')}"/>
-							${avo.a_userid}
-						</td>
-						<td align="center">
-							<c:if test="${date.year == avo.a_writedate.year && date.month == avo.a_writedate.month && date.date == avo.a_writedate.date}">
-								<fmt:formatDate value="${avo.a_writedate}" pattern="a h:mm"/>
-							</c:if>
-							<c:if test="${date.year != avo.a_writedate.year || date.month != avo.a_writedate.month || date.date != avo.a_writedate.date}">
-								<fmt:formatDate value="${avo.a_writedate}" pattern="yyyy.MM.dd(E)"/>
-							</c:if>
-						</td>
-					</tr>
-				</c:if>
-			</c:forEach>
-		
 		</c:forEach>
 		</c:if>
 		
@@ -146,18 +118,11 @@
 		
 		<tr>
 			<td colspan="5" align="right">
-				<c:choose>
-					<c:when test="${sessionScope.session_id != null }">
-						<input type="button" value="글쓰기" onclick="location.href='QAinsert.nhn'"/>
-					</c:when>
-					<c:otherwise>
-						<input type="button" value="글쓰기" onclick="alert('로그인 후 작성하실 수 있습니다')"/>
-					</c:otherwise>
-				</c:choose>
+				<input type="button" value="글쓰기" onclick="location.href='QAinsert.nhn'"/>
 			</td>
 		</tr>
+		
 	</table>	
-</div>
 </body>
 </html>
 <jsp:include page="/Layout/footer.jsp"></jsp:include>

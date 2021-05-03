@@ -51,7 +51,7 @@
 		select count(*) from QABOARD2 where Q_USERID like '%'||#{id}||'%'
 	</select>
 	
-	<select id="selectQAList" parameterType="QAvo" resultType="QAvo">
+	<select id="selectQAList" parameterType="Qvo" resultType="Qvo">
 		<![CDATA[
 		select * from (
 			select rownum rnum, TT.* from (
@@ -60,6 +60,22 @@
 		) where rnum >= #{startNo}
 		]]>
 	</select>
+	
+	
+	<!-- 임시로 쓸 포인트 테이블 조회 -->
+	<select id="selectPoint" parameterType="String" resultType="com.Team.Client.point.attentionPointVO">
+		select * from ATTENTIONPOINT where userid=#{userId}
+	</select>
+	
+	<update id="depositAttentionPoint" parameterType="com.Team.Client.point.attentionPointVO">
+		update CLIENT_DB set CLIENT_POINT = CLIENT_POINT+#{point} WHERE CLIENT_ID = #{userId}
+	</update>
+	
+	<select id="userPointSelect" parameterType="String" resultType="Integer">
+		select CLIENT_POINT from CLIENT_DB WHERE CLIENT_ID=#{userId}
+	</select>
+	
+	
 </mapper>
 
 

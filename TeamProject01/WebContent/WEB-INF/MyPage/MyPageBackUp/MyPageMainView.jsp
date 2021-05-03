@@ -150,32 +150,69 @@ span.tags
 
 
 </style>
-<script type="text/javascript">
-function AttentionCheck() {
-	$.ajax({
-		type:"POST",
-		url:"./depositPoint.nhn",
-		data:{
-			userId:"${sessionScope.session_id}"
-		},
-		success: function(meg){
-			alert(meg);
-			
-		},error: function(){
-			alert("failed!");
-		}
-	});
-	location.reload();
-}
-
-
-</script>
-<jsp:include page="./MyPageLayOut/menuBar.jsp"></jsp:include>
-<!--  메뉴바는 include로 , 메뉴바,메인글테두리 css는 header에 저장되어있음 -->
-<!--  메인글 시작 입니다 여기서부터 -->
-
-<jsp:include page="./MyPageLayOut/StartMain.jsp"></jsp:include>
-                <!-- 메인표시글 시작 -->
+<div class="container_fluid col-xs-12" style="
+    padding-bottom: 30px;
+">
+	<div class="row affix-row">
+	    <div class="col-sm-3 col-md-2 affix-sidebar">
+			<div class="sidebar-nav">
+	  <div class="navbar navbar-default" role="navigation" style="width: 225px;">
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
+	      <span class="sr-only">Toggle navigation</span>
+	      <span class="icon-bar"></span>
+	      <span class="icon-bar"></span>
+	      <span class="icon-bar"></span>
+	      </button>
+	      <span class="visible-xs navbar-brand">Sidebar menu</span>
+	    </div>
+	    <div class="navbar-collapse collapse sidebar-navbar-collapse" style="text-align: left; width: 242px;">
+	      <ul class="nav navbar-nav" id="sidenav01">
+	        <li class="active">
+	          <a href="#" data-toggle="collapse" data-target="#toggleDemo0" data-parent="#sidenav01" class="collapsed">
+	          <h4 style="color: white">
+	          <span class="glyphicon glyphicon-user"></span>&nbsp;내 정보
+	          <br>
+	          <small>${sessionScope.session_id} 님<span class="caret"></span></small>
+	          </h4>
+	          </a>
+	          <div class="collapse" id="toggleDemo0" style="height: 0px;">
+	            <ul class="nav nav-list">
+	              <li><a href="MyEditViewPasswordCheck.nhn">개인정보 변경</a></li>
+	              <li><a href="#">비밀번호 변경</a></li>
+	              <li><a href="#">결제수단 변경</a></li>
+	              <li><a href="#">배송지 관리</a></li>
+	            </ul>
+	          </div>
+	        </li>
+	        <li>
+	          <a href="#" data-toggle="collapse" data-target="#toggleDemo" data-parent="#sidenav01" class="collapsed">
+	          <span class="glyphicon glyphicon-cloud"></span> 게시글 관리 <span class="caret pull-right"></span>
+	          </a>
+	          <div class="collapse" id="toggleDemo" style="height: 0px;">
+	            <ul class="nav nav-list">
+	              <li><a href="#">판매 상품</a></li>
+	              <li><a href="#">내가 올린 리뷰</a></li>
+	              <li><a href="#">1:1 상담</a></li>
+	            </ul>
+	          </div>
+	        </li>
+	        <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;장바구니</a></li>
+	        <li><a href="#"><span class="glyphicon glyphicon-copyright-mark"></span> 포인트 관리 <span class="badge pull-right">${sessionScope.session_point}</span></a></li>
+	        <li><a href=""><span class="glyphicon glyphicon-cog"></span> 회원 탈퇴</a></li>
+	      </ul>
+	      </div><!--/.nav-collapse -->
+	    </div>
+	  </div>
+		</div>
+		<div class="col-sm-9 col-md-10 col-xs-12 affix-content" style="padding-left: 30px;"><!-- 메인글테두리시작 -->
+				
+		<div class="container" style="margin-left: 0px; padding-left: 0px;"><!-- 메인글시작 -->
+			<div class="page-header">
+				<h3><span class="glyphicon glyphicon-th-list"></span> 내 프로필</h3>
+			</div>
+			 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12" >
+                <div class="row">
 			            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="border-radius: 16px;">
 			                <div class="well profile col-lg-12 col-md-12 col-sm-12 col-xs-12" style="position: relative; left: 400px;">
 			                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
@@ -186,7 +223,7 @@ function AttentionCheck() {
 			                        <p style="text-align:center;font-size: smaller;" id="user-frid">${sessionScope.session_gender}</p>
 			                        <p style="text-align:center;font-size: smaller;overflow-wrap: break-word;" id="user-email">${sessionScope.session_email}</p>
 			                        <p style="text-align:center;font-size: smaller;"><strong>
-			                 	       	<c:if test="${sessionScope.session_level==0}">관리자</c:if>		                      
+			                        	<c:if test="${sessionScope.session_level==0}">관리자</c:if>		                      
 			                        	<c:if test="${sessionScope.session_level==1}">판매자</c:if>		                      
 			                        	<c:if test="${sessionScope.session_level==2}">손님</c:if>		                      
 			                        	</strong><span class="tags" id="user-status">
@@ -199,13 +236,17 @@ function AttentionCheck() {
 			                        <p style="text-align:center;font-size: smaller;" id="user-role">${sessionScope.session_point}점</p>
 			                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 divider text-center"></div>
 			                            <div class="col-lg-12 left" style="text-align:center;overflow-wrap: break-word;">
-			                               <input type="button" class="btn btn-info" value="출석체크" onclick="AttentionCheck()">
+			                               <input type="button" class="btn btn-info" value="출석체크">
 			                            </div>
 			                      </div>
 			                    </div>
 			            </div>
-			            <!-- 메인표시글 끝 -->
-<jsp:include page="./MyPageLayOut/EndMain.jsp"></jsp:include>
+                    </div>
+                </div>
+            </div><!-- 메인글끝 -->    
+        </div><!-- 메인글테두리끝 -->
+	</div><!-- 내정보nav바 + 메인글끝 -->
+		</div><!-- 내정보nav바 + 메인글끝 테두리 끝-->
 
 
 

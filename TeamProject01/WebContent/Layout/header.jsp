@@ -13,9 +13,13 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 
 <style type="text/css">
+<link href="./css/bootstrap.css" rel="stylesheet">
+<link rel="stylesheet" href="./css/codinglearning.css">
+<link rel="shortcut icon" href="../images/favicon.ico">
+<style>
+
 *{
 	font-family: "Nanum Gothic";
 }
@@ -25,10 +29,10 @@ table tbody>tr>td>a:hover,
 table tbody>tr>td>a:focus{
 	text-decoration: none;
 	color:red;
-</style>
+	
 
 <!-- 왼쪽 메뉴바 start -->
-<style> 
+}	
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}table{border-collapse:collapse;border-spacing:0}
 
 body {
@@ -66,7 +70,7 @@ header {
   display: block;
   padding: .85rem;
   color: #fff;
-  background-color: #151515;
+  background-color: black;
   box-shadow: inset 0 -1px #1d1d1d;
   -webkit-transition: all .25s ease-in;
           transition: all .25s ease-in;
@@ -75,7 +79,7 @@ header {
 .nav label:focus,
 .nav label:hover {
   color: rgba(255, 255, 255, 0.5);
-  background: #030303;
+  background: white;
 }
 
 .nav label {
@@ -258,6 +262,10 @@ footer {
 		color:skyblue;
 	}
 }
+.jinho{
+	background: black;
+}
+
 </style>
 <!-- 왼쪽 메뉴바 end -->
 
@@ -289,6 +297,7 @@ footer {
 	.pic{width: 300px; height: 300px; object-fit: cover;}
 /* 	=================== 재훈 변경 04-30 끝 ========================	 */
 	 
+	.product-grid .product-image img{width:100%;height:300px; object-fit: cover;}
 	.product-grid .pic-1{opacity:1;transition:all .3s ease-out 0s}
 	.product-grid:hover .pic-1{opacity:1}
 	.product-grid .pic-2{opacity:0;position:absolute;top:0;left:0;transition:all .3s ease-out 0s}
@@ -333,11 +342,56 @@ footer {
 }		
 	#headerNav{
   	  height: 208px;		
-	}		
+	}	
+	.navlink{
+	
+	}
+/*지노가 만듬 마이페이지 메뉴바+메인글 css ----------------------------------------------------------*/	
+	  .affix-row .affix-sidebar{ background-color: white; height: 100%;overflow: hidden;}
+   .affix-content .container .page-header{ margin-top: 0; }
+  .sidebar-nav{position:fixed; width:100%;}
+  .affix-sidebar{ padding-right:0; font-size:small;padding-left: 0;}  
+  .affix-row, .affix-container, .affix-content{height: 100%;margin-left: 0; margin-right: 0;} 
+  .affix-content{background-color:white; } 
+  .sidebar-nav .navbar .navbar-collapse { padding: 0; max-height: none; }
+  .sidebar-nav .navbar{border-radius:0; margin-bottom:0; border:0;}
+  .sidebar-nav .navbar ul {float: none;display: block;}
+  .sidebar-nav .navbar li {float: none;display: block;}
+  .sidebar-nav .navbar li a {padding-top: 12px;padding-bottom: 12px;}  }
+@media (min-width: 769px){.affix-content .container {width: 600px;}
+    .affix-content .container .page-header{margin-top: 0;}  }
+
+@media (min-width: 992px){.affix-content .container {width: 900px;}
+    .affix-content .container .page-header{ margin-top: 0;}}
+
+@media (min-width: 1220px){.affix-row{overflow: hidden;}
+.affix-content{overflow: auto;}
+.affix-content .container {width: 1000px; }
+.affix-content .container .page-header{ margin-top: 0;}
+.affix-content{padding-right: 30px;padding-left: 30px;}  
+.affix-title{border-bottom: 1px solid #ecf0f1; padding-bottom:10px;}
+.navbar-nav {margin: 0;}
+.navbar-collapse{padding: 0;}
+.sidebar-nav .navbar li a:hover {background-color: #428bca;color: white;}
+.sidebar-nav .navbar li a > .caret { margin-top: 8px;}  }
+@import url(http://fonts.googleapis.com/css?family=Lato:400,700);
+.profile{font-family: 'Lato', 'sans-serif';}
+.profile {
+/*    height: 321px;
+    width: 265px;*/
+margin-top: 2px;
+padding:1px;
+    display: inline-block;
+    }
+.divider {border-top:1px solid rgba(0,0,0,0.1);}
+.emphasis {border-top: 1px solid transparent;}
+.emphasis h2{margin-bottom:0;}
+span.tags {background: #1abc9c;border-radius: 2px;color: #f5f5f5;font-weight: bold;padding: 2px 4px;}
+.profile strong,span,div{text-transform: initial;}
 </style>
 
 </head>
-<body>
+<body style="margin-top: 0px;">
 	<div style = "background-color: black;">
 	</div>
 	<nav class="navbar navbar-default">
@@ -355,28 +409,28 @@ footer {
 				<p class="text-center">LUXMEA MAKES YOU SHINE</p>
 			</div>
 			<div class="collapse navbar-collapse navheigt" id="bs-example-navbar-collapse-1" style="padding-left: 80px;">
-				<ul class="nav navbar-nav" >
+				<ul class="nav navbar-nav" style="background: black;" >
 					<li class="nav-item">
-						<a  class="nav-link" href="AllProducts.nhn?currentPage=1">전체상품</a>
+						<a  class="nav-link jinho" href="AllProducts.nhn?currentPage=1">전체상품</a>
 					</li>
 					<li class="nav-item">
-						<a  class="nav-link" href="insertProduct.nhn">상품 등록</a>
+						<a  class="nav-link jinho" href="insertProduct.nhn">상품판매등록(임시)</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="ReViewBoard.nhn">리뷰게시판</a>
+						<a class="nav-link jinho" href="ReViewBoard.nhn">리뷰게시판</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="index5.html">묻고답하기</a>
+						<a class="nav-link jinho" href="QAboard.nhn">묻고답하기</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="index5.html">공지사항</a>
+						<a class="nav-link jinho" href="index5.html">공지사항</a>
 					</li>
 					<li class="nav-item">
 						<c:if test = "${sessionScope.session_id eq null }">
 							<a class="nav-link" onclick="alert('로그인후 사용가능 합니다.');location.href='LoginView.nhn'">마이페이지</a>
 						</c:if>
 						<c:if test = "${sessionScope.session_id != null }">
-							<a class="nav-link" href="d.html">마이페이지</a>
+							<a class="nav-link" href="MyPageView.nhn">마이페이지</a>
 						</c:if>
 					</li>
 			<li>
@@ -392,7 +446,7 @@ footer {
 							</c:if>
 							<c:if test = "${sessionScope.session_id != null }">
 								<li><div align="center">${sessionScope.session_id}님<br/>point: ${sessionScope.session_point}점</div></li>
-								<li><a href="LogoutView.nhn">로그아웃</a></li>
+								<li><div style="cursor: pointer;" align="center" onclick="location.href='LogoutView.nhn'">로그아웃</div></li>
 							</c:if>
 						</ul>
 					</li>
