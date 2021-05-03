@@ -27,7 +27,7 @@ function addcart(idx) {
 <jsp:useBean id="date" class="java.util.Date"/>
 
 
-<input type="button" onclick="location.href='cart.nhn'" value="장바구니 보기"/>
+<!-- <input type="button" onclick="location.href='cart.nhn'" value="장바구니 보기"/> -->
 <c:set var="list" value="${shopList.list}"/>
 <div class="container">
     <h3 class="h3">
@@ -49,14 +49,14 @@ function addcart(idx) {
                 <div class="product-image">
                     <a href="increment.nhn?sh_idx=${vo.sh_idx}">
                     	<c:if test="${vo.sh_img1 != null && vo.sh_img2 == null}">
-	                        <img class="pic-1" src="${vo.sh_img1}" width="100" height="100">
+	                        <img class="pic-1 pic" src="${vo.sh_img1}">
                     	</c:if>
                     	<c:if test="${vo.sh_img1 == null && vo.sh_img2 != null}">
-	                        <img class="pic-1" src="${vo.sh_img2}" width="100" height="100">
+	                        <img class="pic-1 pic" src="${vo.sh_img2}">
                     	</c:if>
                     	<c:if test="${vo.sh_img1 != null && vo.sh_img2 != null}">
-                    		<img class="pic-1" src="${vo.sh_img1}" width="100" height="100">
-                    		<img class="pic-2" src="${vo.sh_img2}" width="100" height="100">
+                    		<img class="pic-1 pic" src="${vo.sh_img1}">
+                    		<img class="pic-2 pic" src="${vo.sh_img2}">
                     	</c:if>
                     </a>
                     <ul class="social">

@@ -26,7 +26,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 public class ReViewService {
 	
-	String fileAddr = "http://localhost:8009/korea/upload/";	// 여기서 포트만 수정하세요 or (server.xml 경로도 자기에맞게)
+	String fileAddr = "http://localhost:9090/korea/upload/";	// 여기서 포트만 수정하세요 or (server.xml 경로도 자기에맞게)
 	
 	private static ReViewService instance = new ReViewService();
 	private ReViewService() {}
@@ -51,8 +51,8 @@ public class ReViewService {
 //		파일업로드 시작 ===============================
 		try {
 			MultipartRequest mr = new MultipartRequest(request,
-//					application.getRealPath("./upload/"),
-					"D:/upload",
+					application.getRealPath("./upload/"),
+//					"D:/upload",
 
 					5*1024*1024,
 					"UTF-8",
@@ -140,7 +140,8 @@ public class ReViewService {
 		
 		//선택한 게시글 정보를 가져와 담아준다.
 		ReViewVO vo = ReViewDao.getInstance().selectByIdx(mapper,idx);
-		
+		System.out.println("날짜 (월): "+vo.getRE_writeDate().getMonth());
+		System.out.println("날짜 (일): "+vo.getRE_writeDate().getDate());
 		String[] fileNameList = vo.getRE_imgNames().split(",");
 		
 		

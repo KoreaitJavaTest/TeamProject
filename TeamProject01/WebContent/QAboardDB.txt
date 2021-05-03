@@ -23,6 +23,8 @@ answer DB
   create sequence answer_db_a_idx_seq;
 commit;
   
+
+
   QABOARD2 DB
   
   CREATE TABLE "TEAM"."QABOARD2" 

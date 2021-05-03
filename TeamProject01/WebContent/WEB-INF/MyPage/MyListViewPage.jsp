@@ -66,7 +66,7 @@
 					    	</td>
 					    	<td align="center">
 						    	<p data-placement="top" data-toggle="tooltip" title="Delete">
-							    	<button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" >
+							    	<button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" onclick="location.href='ReViewDeleteOK.nhn?idx=${vo.RE_idx}&flag=mypage'" >
 							    		<span class="glyphicon glyphicon-trash"></span>
 							    	</button>
 					    		</p>
@@ -112,9 +112,10 @@
 			</td>
 		</tr>
     </tbody>
-        
+    <jsp:include page="/WEB-INF/ReView/ReViewModal.jsp"></jsp:include>
 </table>
 </div>
+        
 
 			            <!-- 메인표시글 끝 -->
 <jsp:include page="./MyPageLayOut/EndMain.jsp"></jsp:include>

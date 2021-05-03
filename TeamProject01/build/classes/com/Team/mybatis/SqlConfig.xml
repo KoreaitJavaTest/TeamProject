@@ -33,6 +33,7 @@
 		<mapper resource="com/Team/mybatis/Review.xml"/>
 		<mapper resource="com/Team/mybatis/ReviewComment.xml"/>
 		<mapper resource="com/Team/mybatis/Shop.xml"/>
+		<mapper resource="com/Team/mybatis/AttentionPoint.xml"/>
 	</mappers>
 
 

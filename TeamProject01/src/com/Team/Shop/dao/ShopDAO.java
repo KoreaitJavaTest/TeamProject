@@ -2,6 +2,7 @@ package com.Team.Shop.dao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -62,8 +63,42 @@ public class ShopDAO {
 		mapper.update("increment", sh_idx);
 	}
 	
+//	상품 삭제
 	public void deleteProduct(SqlSession mapper, int sh_idx) {
 		mapper.delete("deleteProduct", sh_idx);
 	}
 	
+//	상품 수정
+	public void updateProduct(SqlSession mapper, ShopVO vo) {
+		if(vo.getSh_img1() != null && vo.getSh_img2() != null) {
+			System.out.println("updateProduct");
+			mapper.update("updateProduct", vo);
+		} else if(vo.getSh_img1() != null && vo.getSh_img2() == null) {
+			System.out.println("updateProduct1");
+			mapper.update("updateProduct1", vo);
+		} else if(vo.getSh_img1() == null && vo.getSh_img2() != null) {
+			System.out.println("updateProduct2");
+			mapper.update("updateProduct2", vo);
+		}
+	}
+	
+/*
+	====================== 수정 ing.... ========================================
+	public int likeCheck(SqlSession mapper, Map<String, Object> map) {
+		return (int) mapper.selectOne("likeCheck", map);
+	}
+	
+	public void likeUpdate(SqlSession mapper, Map<String, Object> map) {
+		mapper.insert("likeUpdate", map);
+	}
+	
+	public void likeDelete(SqlSession mapper, Map<String, Object> map) {
+		mapper.delete("likeDelete", map);
+	}
+	
+	public void likeCount(SqlSession mapper, int like_idx) {
+		mapper.selectOne("likeCount", like_idx);
+	}
+	==========================================================================	
+*/
 }

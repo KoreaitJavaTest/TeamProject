@@ -150,6 +150,26 @@ span.tags
 
 
 </style>
+<script type="text/javascript">
+function AttentionCheck() {
+	$.ajax({
+		type:"POST",
+		url:"./depositPoint.nhn",
+		data:{
+			userId:"${sessionScope.session_id}"
+		},
+		success: function(meg){
+			alert(meg);
+			
+		},error: function(){
+			alert("failed!");
+		}
+	});
+	location.reload();
+}
+
+
+</script>
 <jsp:include page="./MyPageLayOut/menuBar.jsp"></jsp:include>
 <!--  메뉴바는 include로 , 메뉴바,메인글테두리 css는 header에 저장되어있음 -->
 <!--  메인글 시작 입니다 여기서부터 -->
@@ -179,7 +199,7 @@ span.tags
 			                        <p style="text-align:center;font-size: smaller;" id="user-role">${sessionScope.session_point}점</p>
 			                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 divider text-center"></div>
 			                            <div class="col-lg-12 left" style="text-align:center;overflow-wrap: break-word;">
-			                               <input type="button" class="btn btn-info" value="출석체크">
+			                               <input type="button" class="btn btn-info" value="출석체크" onclick="AttentionCheck()">
 			                            </div>
 			                      </div>
 			                    </div>
