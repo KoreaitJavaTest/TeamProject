@@ -442,6 +442,7 @@ span.tags {background: #1abc9c;border-radius: 2px;color: #f5f5f5;font-weight: bo
 						<ul class="dropdown-menu">
 							<c:if test = "${sessionScope.session_id eq null }">
 								<li><a href="LoginView.nhn">로그인</a></li>
+								<li><a href="SearchMyIdPw.nhn">아이디,비밀번호 찾기</a></li>
 								<li><a href="JoinView.nhn">회원가입</a></li>
 							</c:if>
 							<c:if test = "${sessionScope.session_id != null }">

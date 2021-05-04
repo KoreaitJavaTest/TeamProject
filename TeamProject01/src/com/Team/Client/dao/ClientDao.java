@@ -61,6 +61,18 @@ public class ClientDao {
 	public int userPointSelect(SqlSession mapper, String userId) {
 		return (int) mapper.selectOne("userPointSelect",userId);
 	}
+	public void deleteId(SqlSession mapper, String id) {
+		mapper.delete("deleteId",id);
+	}
+	public String SearchMyIdByEmailDo(SqlSession mapper, String email) {
+		return (String) mapper.selectOne("SearchMyIdByEmailDo", email);
+	}
+	public ClientVo checkidandemail(SqlSession mapper, String id) {
+		return (ClientVo)mapper.selectOne("checkidandemail",id);
+	}
+	public void ChangePassword(SqlSession mapper, ClientVo vo) {
+		mapper.update("ChangePassword",vo);
+	}
 	
 
 	

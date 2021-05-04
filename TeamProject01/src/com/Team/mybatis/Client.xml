@@ -75,7 +75,21 @@
 		select CLIENT_POINT from CLIENT_DB WHERE CLIENT_ID=#{userId}
 	</select>
 	
+	<delete id="deleteId" parameterType="String">
+		delete from CLIENT_DB where Client_ID = #{id}
+	</delete>
 	
+	<select id="SearchMyIdByEmailDo" parameterType="String" resultType="String">
+		select CLIENT_ID from CLIENT_DB WHERE CLIENT_EMAIL = #{email}
+	</select>
+	
+	<select id="checkidandemail" parameterType="String" resultType="vo">
+		select * from CLIENT_DB where CLIENT_ID = #{id}
+	</select>
+	
+	<update id="ChangePassword" parameterType="vo">
+		update CLIENT_DB set CLIENT_PASSWORD = #{client_password} WHERE CLIENT_ID = #{client_id}
+	</update>
 </mapper>
 
 

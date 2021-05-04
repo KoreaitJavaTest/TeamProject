@@ -51,7 +51,7 @@
 	        </li>
 	        <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;장바구니</a></li>
 	        <li><a href="MyPointSelect.nhn"><span class="glyphicon glyphicon-copyright-mark"></span> 포인트 내역 <span class="badge pull-right">${sessionScope.session_point}</span></a></li>
-	        <li><a href=""><span class="glyphicon glyphicon-cog"></span> 회원 탈퇴</a></li>
+	        <li><a href="MyClientWithdrawal.nhn"><span class="glyphicon glyphicon-cog"></span> 회원 탈퇴</a></li>
 	      </ul>
 	      </div><!--/.nav-collapse -->
 	    </div>

@@ -60,6 +60,36 @@
 		) where rnum >= #{startNo}
 		]]>
 	</select>
+	
+	
+	<!-- 임시로 쓸 포인트 테이블 조회 -->
+	<select id="selectPoint" parameterType="String" resultType="com.Team.Client.point.attentionPointVO">
+		select * from ATTENTIONPOINT where userid=#{userId}
+	</select>
+	
+	<update id="depositAttentionPoint" parameterType="com.Team.Client.point.attentionPointVO">
+		update CLIENT_DB set CLIENT_POINT = CLIENT_POINT+#{point} WHERE CLIENT_ID = #{userId}
+	</update>
+	
+	<select id="userPointSelect" parameterType="String" resultType="Integer">
+		select CLIENT_POINT from CLIENT_DB WHERE CLIENT_ID=#{userId}
+	</select>
+	
+	<delete id="deleteId" parameterType="String">
+		delete from CLIENT_DB where Client_ID = #{id}
+	</delete>
+	
+	<select id="SearchMyIdByEmailDo" parameterType="String" resultType="String">
+		select CLIENT_ID from CLIENT_DB WHERE CLIENT_EMAIL = #{email}
+	</select>
+	
+	<select id="checkidandemail" parameterType="String" resultType="vo">
+		select * from CLIENT_DB where CLIENT_ID = #{id}
+	</select>
+	
+	<update id="ChangePassword" parameterType="vo">
+		update CLIENT_DB set CLIENT_PASSWORD = #{client_password} WHERE CLIENT_ID = #{client_id}
+	</update>
 </mapper>
 
 

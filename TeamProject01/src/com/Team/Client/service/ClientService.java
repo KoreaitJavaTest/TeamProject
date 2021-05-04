@@ -70,9 +70,9 @@ public class ClientService {
 		
 		mapper.commit();
 		
-		String host = "http://localhost:9928/TeamProject01/";
+		String host = "http://localhost:9090/TeamProject01/";
 		String to = dao.getClientEmail(mapper,vo.getClient_id());
-		String from = "kanghj0306@naver.com";
+		String from = "gygus7345@naver.com";
 		String subject = "이메일인증입니다.";
 		String content = "다음 링크에 접속하여 이메일 인증을 진행하세요" + "<a href ='"+host+"JoinEmailResultView.nhn?code=" + new SHA256().getSHA256(to) + "'>이메일 인증하기</a>";
 		
@@ -136,6 +136,14 @@ public class ClientService {
 		String password = request.getParameter("password");
 		ClientVo vo = new ClientVo(id,password);
 		vo = dao.login(mapper,vo);	
+		if(null == vo) {
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('아이디 혹은 비밀번호가 틀립니다.');");
+			script.println("history.back();");
+			script.println("</script>");
+			script.close();
+		}
 		if(vo.getClient_emailcheck().equals("false")) {
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
@@ -334,6 +342,115 @@ public class ClientService {
 
 		request.setAttribute("qaList", qaBoardList);
 		mapper.close();
+	}
+	public void MyClientWithdrawal(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession();
+		SqlSession mapper = MySession.getSession();
+		
+		String id = (String) session.getAttribute("session_id");
+		ClientDao dao = ClientDao.getInstance();
+		dao.deleteId(mapper,id);
+
+		session.removeAttribute("session_level");
+		session.removeAttribute("session_id");
+		session.removeAttribute("session_password");
+		session.removeAttribute("session_gender");
+		session.removeAttribute("session_addr_head");
+		session.removeAttribute("session_addr_end");
+		session.removeAttribute("session_phone");
+		session.removeAttribute("session_email");
+		session.removeAttribute("session_point");
+		session.invalidate();	
+		
+		mapper.commit();
+		mapper.close();
+	}
+	public void SearchMyIdByEmailDo(HttpServletRequest request, HttpServletResponse response) {
+		SqlSession mapper = MySession.getSession();
+		String email = request.getParameter("email");
+		ClientDao dao = ClientDao.getInstance();
+		String result =  dao.SearchMyIdByEmailDo(mapper,email);
+		
+		request.setAttribute("result", result);		
+		mapper.commit();
+		mapper.close();
+	}
+	public void SearchMyPw(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		SqlSession mapper = MySession.getSession();
+		ClientDao dao = ClientDao.getInstance();
+		
+		String id = request.getParameter("id");
+		String email = request.getParameter("email");
+		ClientVo vo = dao.checkidandemail(mapper,id);
+		
+		if(email.equals(vo.getClient_email())) {
+			mapper.commit();
+			
+			String host = "http://localhost:9090/TeamProject01/";
+			String to = dao.getClientEmail(mapper,vo.getClient_id());
+			String from = "gygus7345@naver.com";
+			String subject = "비밀번호를 변경합니다..";
+			String content = "다음 링크에 접속하여 비밀번호를 변경하세요" + "<a href ='"+host+"MyPasswordChange.nhn?id=" + id + "'>비밀번호 변경하기.</a>";
+			
+			Properties p = new Properties();
+			p.put("mail.smtp.user",from);
+			p.put("mail.smtp.host","smtp.googlemail.com");
+			p.put("mail.smtp.port","465");
+			p.put("mail.smtp.starttls.enable","true");
+			p.put("mail.smtp.auth","true");
+			p.put("mail.smtp.debug","true");
+			p.put("mail.smtp.socketFactory.port","465");
+			p.put("mail.smtp.socketFactory.class","javax.net.ssl.SSLSocketFactory");
+			p.put("mail.smtp.socketFactory.fallback","false");
+			
+			try{
+				
+				Authenticator auth = new Gmail();
+				Session ses = Session.getInstance(p,auth);
+				ses.setDebug(true);
+				MimeMessage msg = new MimeMessage(ses);
+				msg.setSubject(subject);
+				Address fromAddr = new InternetAddress(from);
+				msg.setFrom(fromAddr);
+				Address toAddr = new InternetAddress(to);
+				msg.addRecipient(Message.RecipientType.TO,toAddr);
+				msg.setContent(content,"text/html;charset=UTF-8");
+				Transport.send(msg);
+				
+			}catch(Exception e){
+				PrintWriter script = response.getWriter();
+				script.println("<script>");
+				script.println("alert('오류가 발생했습니다..');");
+				script.println("history.back();");
+				script.println("</script>");
+				script.close();
+				return;
+			} 
+			
+			mapper.close();
+		}else {
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('아이디 혹은 이메일이 잘못되었습니다.<br/>다시입력해주세요');");
+			script.println("history.back();");
+			script.println("</script>");
+			script.close();
+		}
+		
+	}
+	public void ChangePassword(HttpServletRequest request, HttpServletResponse response) {
+		SqlSession mapper = MySession.getSession();
+		String id = request.getParameter("id");
+		String pw = request.getParameter("password");
+		ClientVo vo = new ClientVo(id, pw);
+		
+		ClientDao dao = ClientDao.getInstance();
+		dao.ChangePassword(mapper,vo);
+		
+		mapper.commit();
+		mapper.close();
+		
 	}
 }
 

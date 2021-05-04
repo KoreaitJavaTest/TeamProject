@@ -80,6 +80,39 @@ public class HomeController extends HttpServlet {
 			ClientService.getInstance().logout(request, response);
 			viewPage += "Login/LogoutView";
 			break;
+		// 아이디 비밀번호 찾기
+		case "/SearchMyIdPw.nhn":
+			viewPage += "MyPage/SearchMyIdPw";
+			break;
+		// 아이디를 찾아보장
+		case "/SearchIdByEmail.nhn":
+			viewPage += "MyPage/SearchIdByEmail";
+			break;
+		// 이메일 입력했으니 아이디찾아
+		case "/SearchMyIdByEmailDo.nhn":
+			ClientService.getInstance().SearchMyIdByEmailDo(request, response);
+			viewPage += "MyPage/SearchMyIdByEmailResult";
+			break;
+		// 비밀번호 찾아보장
+		case "/SearchPwView.nhn":
+			viewPage += "MyPage/SearchPwView";
+			break;
+		// 입력했으니 비번찾아
+		case "/SearchMyPwDo.nhn":
+			ClientService.getInstance().SearchMyPw(request, response);
+			viewPage += "MyPage/SearchMyPwResult";
+			break;
+		// 비번 변경 페이지
+		case "/MyPasswordChange.nhn":
+			String id = request.getParameter("id");
+			request.setAttribute("id", id);
+			viewPage += "MyPage/MyPasswordChangeView";
+			break;
+		// 비번 변경 고고
+		case "/PasswordChange.nhn":
+			ClientService.getInstance().ChangePassword(request, response);
+			viewPage += "MyPage/PasswordChangeResult";
+			break;
 		// 마이페이지 메인 뷰페이지
 		case "/MyPageView.nhn":
 			viewPage += "MyPage/MyPageMainView";
@@ -108,7 +141,11 @@ public class HomeController extends HttpServlet {
 			ClientService.getInstance().myQnASelect(request, response);
 			viewPage += "MyPage/MyQnAviewPage";
 			break;
-
+		// 나의 회원탈퇴 
+		case "/MyClientWithdrawal.nhn":
+			ClientService.getInstance().MyClientWithdrawal(request, response);
+			viewPage += "MyPage/MyClientWithdrawal";
+			break;
 			// 상품 상세보기 페이지
 			case "/selectProduct.nhn":
 				shopService.selectProduct(request, response);

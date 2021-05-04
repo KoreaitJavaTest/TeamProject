@@ -51,7 +51,7 @@ $(function() {
 			  <div class="col-xs-2 col-sm-6 col-md-4" style="height: 560px; width: 360px;" align="center">
 			    <div class="thumbnail" style="width: 320px; height: 548px;">
 			    	<a href="ReHitUp.nhn?idx=${vo.RE_idx}&currentPage=${ReViewList.currentPage}">
-				        <img src="http://localhost:8009/korea/upload/${imgN[0]}" alt="..." style="width: 300px;height: 300px;">
+				        <img src="http://localhost:9090/korea/upload/${imgN[0]}" alt="..." style="width: 300px;height: 300px;">
 			    	</a>
 			      <div class="caption">
 			      	<a class="RETitle" href="ReHitUp.nhn?idx=${vo.RE_idx}&currentPage=${ReViewList.currentPage}">
