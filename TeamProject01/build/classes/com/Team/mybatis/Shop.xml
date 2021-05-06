@@ -116,7 +116,6 @@
 		where sh_idx=#{sh_idx}
 	</update>
 	
-	<!--================ 수정 ing.... ================-->
 	<!-- 좋아요 체크 -->
 	<select id="likeCheck" parameterType="map" resultType="int">
 		select count(*) from product_like where ref_sh_idx = #{like_idx} and ref_client_id = #{like_id}
@@ -128,15 +127,19 @@
 	</insert>
 	
 	<!-- 좋아요 삭제 -->
-	<delete id="rec_delete" parameterType="map">
+	<delete id="likeDelete" parameterType="map">
 		delete from product_like where ref_sh_idx = #{like_idx} and ref_client_id = #{like_id}
 	</delete>
 
 	<!-- 좋아요 수 카운트 -->
-	<select id="likeCount" parameterType="int">
+	<select id="likeCount" parameterType="int" resultType="int">
 		select count(*) from product_like where ref_sh_idx = #{like_idx}
 	</select>
-	<!-- ============================================ -->
+	
+	<!-- 상품에 좋아요 수 업데이트 -->
+	<update id="productLikeCount" parameterType="int">
+		update shop set sh_like = ${count} where sh_idx = ${sh_idx}
+	</update>
 </mapper>
 
 

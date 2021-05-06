@@ -82,8 +82,7 @@ public class ShopDAO {
 		}
 	}
 	
-/*
-	====================== 수정 ing.... ========================================
+//	====================== 수정 ing.... ========================================
 	public int likeCheck(SqlSession mapper, Map<String, Object> map) {
 		return (int) mapper.selectOne("likeCheck", map);
 	}
@@ -93,12 +92,16 @@ public class ShopDAO {
 	}
 	
 	public void likeDelete(SqlSession mapper, Map<String, Object> map) {
+		System.out.println("삭제 들어옴");
 		mapper.delete("likeDelete", map);
 	}
 	
-	public void likeCount(SqlSession mapper, int like_idx) {
-		mapper.selectOne("likeCount", like_idx);
+	public int likeCount(SqlSession mapper, int like_idx) {
+		return (int) mapper.selectOne("likeCount", like_idx);
 	}
-	==========================================================================	
-*/
+//	==========================================================================	
+	public void productLikeCount(SqlSession mapper, Map<String, Object> map) {
+		mapper.update("productLikeCount", map);
+		
+	}
 }

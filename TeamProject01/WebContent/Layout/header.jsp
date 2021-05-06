@@ -137,7 +137,7 @@ header {
 .group-list,
 .sub-group-list,
 .sub-sub-group-list {
-  height: 100%;
+/*   height: 100%; */
   max-height: 0;
   overflow: hidden;
   -webkit-transition: max-height .5s ease-in-out;
@@ -291,11 +291,9 @@ footer {
 	.product-grid .product-image{position:relative;transition:all .3s ease 0s}
 	.product-grid .product-image a{display:block}
 	
-/* 	=================== 재훈 변경 04-30 ======================== 	 */
-/* 						이미지 크기 고정 */
+/* 	이미지 크기 고정 */
 	.product-grid .product-image img{width:100%;height:300px;} 
 	.pic{width: 300px; height: 300px; object-fit: cover;}
-/* 	=================== 재훈 변경 04-30 끝 ========================	 */
 	 
 	.product-grid .product-image img{width:100%;height:300px; object-fit: cover;}
 	.product-grid .pic-1{opacity:1;transition:all .3s ease-out 0s}
@@ -312,7 +310,7 @@ footer {
 	.product-grid .social li a:hover:after,.product-grid .social li a:hover:before{opacity:1}
 	.product-grid .product-discount-label,.product-grid .product-new-label{color:#fff;background-color:#ef5777;font-size:12px;text-transform:uppercase;padding:2px 7px;display:block;position:absolute;top:10px;left:0}
 	.product-grid .product-discount-label{background-color:#333;left:auto;right:0}
-	.product-grid .rating{color:#FFD200;font-size:12px;padding:12px 0 0;margin:0;list-style:none;position:relative;z-index:-1}
+	.product-grid .rating{color:red;font-size:12px;padding:12px 0 0;margin:0;list-style:none;position:relative;z-index:-1}
 	.product-grid .rating li.disable{color:rgba(0,0,0,.2)}
 	.product-grid .product-content{background-color:#fff;text-align:center;padding:12px 0;margin:0 auto;position:absolute;left:0;right:0;bottom:-27px;z-index:1;transition:all .3s}
 	.product-grid:hover .product-content{bottom:0}

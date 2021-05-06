@@ -73,11 +73,9 @@ function addcart(idx) {
                 </div>
                 
                 <ul class="rating">
-                    <li class="fa fa-star"></li>
-                    <li class="fa fa-star"></li>
-                    <li class="fa fa-star"></li>
-                    <li class="fa fa-star disable"></li>
-                    <li class="fa fa-star disable"></li>
+                	<li>
+                		<span class="glyphicon glyphicon-heart">&nbsp;${vo.sh_like}</span>
+                	</li>
                 </ul>
                 
                 

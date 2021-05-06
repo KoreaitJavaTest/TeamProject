@@ -190,22 +190,21 @@ public class HomeController extends HttpServlet {
 			case "/updateProductOK.nhn":
 				shopService.updateProduct(request, response);
 				viewPage += "Shop/goMain";
-				break;
-/*
-===================== 수정 ing =========================
-			//	좋아요 업데이트
+				//	좋아요 업데이트
+				
 			case "/likeUpdate.nhn":
 				shopService.likeUpdate(request, response);
-				viewPage += "Shop/selectProduct";
-				break;
+//				viewPage += "Shop/selectProduct";
+//				break;
+				return;
 			
 			// 좋아요 개수 카운트
 			case "/likeCount.nhn":
 				shopService.likeCount(request, response);
-				viewPage += "Shop/selectProduct";
-				break;
-========================================================
-*/
+//				viewPage += "Shop/selectProduct";
+//				break;
+				return;
+
 			
 		// ==========================================================
 				// 리뷰게시판 페이지

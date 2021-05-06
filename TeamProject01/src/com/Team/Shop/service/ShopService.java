@@ -177,21 +177,36 @@ public class ShopService {
 	
 //	상품의 idx로 상품 정보를 얻어오는 메소드
 	public void selectProduct(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("service => selectProduct");
 		HttpSession session = request.getSession();
 		SqlSession mapper = MySession.getSession();
 		ShopDAO dao = ShopDAO.getInstance();
 		
-		String userId = (String) session.getAttribute("session_id");
+		String userId = null;
+		try {userId = (String) session.getAttribute("session_id");} catch (Exception e1) {System.out.println("아이디를 찾을 수 없음");}
 		int sh_idx = Integer.parseInt(request.getParameter("sh_idx"));
 		
 		int currentPage = 1;
 		try { currentPage = Integer.parseInt(request.getParameter("currentPage")); } catch (NumberFormatException e) { }
 		
 		ShopVO vo = dao.selectProduct(mapper, sh_idx);
+		int likeCount = dao.likeCount(mapper, sh_idx);
+		int likeCheck = 0;
+		if(userId != null) {
+			Map<String , Object> map = new HashMap<String, Object>();
+			map.put("like_idx",  sh_idx);
+			map.put("like_id",  userId);
+			
+			likeCheck = dao.likeCheck(mapper, map);
+		}
+		System.out.println("likeCheck : " + likeCheck);
+		System.out.println("likeCount : " + likeCount);
 		
 		vo.setSh_priceFM(priceFm.format(vo.getSh_price()));
 		vo.setSh_salePriceFM(priceFm.format(vo.getSh_salePrice()));
 		
+		request.setAttribute("likeCheck", likeCheck);		// 좋아요를 누른 유저인지 판별
+		request.setAttribute("likeCount", likeCount);		// 좋아요 개수
 		request.setAttribute("userId", userId);
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("vo", vo);
@@ -331,41 +346,53 @@ public class ShopService {
 		mapper.close();
 	}
 	
-/*
-=============================== 수정 ing..... =============================
-	public void likeUpdate(HttpServletRequest request, HttpServletResponse response) {
+
+//=============================== 수정 ing..... =============================
+	public void likeUpdate(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		SqlSession mapper = MySession.getSession();
 		ShopDAO dao = ShopDAO.getInstance();
-		
+		PrintWriter out = response.getWriter();
 		Map<String, Object> map = new HashMap<>();
 		map.put("like_idx", request.getParameter("like_idx"));
 		map.put("like_id", request.getParameter("like_id"));
 
 		int likeCheck = dao.likeCheck(mapper, map);
-		
+		System.out.println(likeCheck);
 		if(likeCheck == 0) {
 			dao.likeUpdate(mapper, map);
 		} else {
 			dao.likeDelete(mapper, map);
 		}
-		
+		out.println(likeCheck);
 		
 		mapper.commit();
 		mapper.close();
 	}
 
-	public void likeCount(HttpServletRequest request, HttpServletResponse response) {
+	public void likeCount(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset:UTF-8");
 		SqlSession mapper = MySession.getSession();
 		ShopDAO dao = ShopDAO.getInstance();
+		PrintWriter out = response.getWriter();
+		Map<String, Object> map = new HashMap<String, Object>();
+		
 		
 		int like_idx = Integer.parseInt(request.getParameter("like_idx"));
+		int count = dao.likeCount(mapper, like_idx);
 		
-		dao.likeCount(mapper, like_idx);
+		map.put("sh_idx", like_idx);
+		map.put("count", count);
 		
+		dao.productLikeCount(mapper,map);	// 상품 db에 좋아요 수 넣는 작업
+		out.println(count);		// ajax 리턴값
+		
+		mapper.commit();	// 좋아요수 업데이트
 		mapper.close();
 	}
-================================================================================
-*/
+//================================================================================
+
 	
 }
 

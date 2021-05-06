@@ -3,7 +3,7 @@
 
 <jsp:include page="/Layout/header.jsp"></jsp:include>
 
-<div style="position:fixed; width: 200px; margin-right: 50%;">
+<div style="float: left;">
 	<header role="banner">
 		<nav class="nav" role="navigation">
 			<ul class="nav__list">

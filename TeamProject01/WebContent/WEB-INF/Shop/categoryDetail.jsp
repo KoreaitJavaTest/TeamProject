@@ -22,7 +22,7 @@
 	        <div class="col-md-3 col-sm-6">
 	            <div class="product-grid">
 	                <div class="product-image">
-	                    <a href="selectProduct.nhn">
+	                    <a href="increment.nhn?sh_idx=${vo.sh_idx}">
 		                    <c:if test="${vo.sh_img1 != null && vo.sh_img2 == null}">
 		                        <img class="pic-1" src="${vo.sh_img1}">
 	                    	</c:if>
@@ -36,7 +36,6 @@
 	                    </a>
 	                    <ul class="social">
 	                        <li><a href="selectProduct.nhn" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
-	                        <li><a href="" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
 	                        <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
 	                    </ul>
 	                    
@@ -49,11 +48,9 @@
 	                </div>
 	                
 	                <ul class="rating">
-	                    <li class="fa fa-star"></li>
-	                    <li class="fa fa-star"></li>
-	                    <li class="fa fa-star"></li>
-	                    <li class="fa fa-star disable"></li>
-	                    <li class="fa fa-star disable"></li>
+	                    <li>
+                			<span class="glyphicon glyphicon-heart">&nbsp;${vo.sh_like}</span>
+                		</li>
 	                </ul>
 	                
                     <div class="product-content">

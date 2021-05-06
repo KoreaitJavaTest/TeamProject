@@ -15,46 +15,53 @@ function addcart(idx) {
 		alert(idx + '번 상품을 장바구니에 담았습니다.')
 	}
 }
-/*
-====================== 수정 ing... =====================
-$(function(){
-	alert('load');
+function NoLogin() {
+	alert('좋아요는 로그인 후 가능합니다.');
+	location.href='LoginView.nhn';
+}
+// ====================== 수정 ing... =====================
 	// 추천버튼 클릭시(추천 추가 또는 추천 제거)
-	$("#likeUpdate").click(function(){
+	function likeUpdate() {
 		$.ajax({
-			url: "/likeUpdate.nhn",
-			method: "POST",
-            asyn: true,	
+			url: "./likeUpdate.nhn",
+			type: "POST",
             data: {
-                'like_idx': '${vo.sh_idx}',
-                'like_id': '${userId}'
+                like_idx: "${vo.sh_idx}",
+                like_id: "${userId}"
             },
-            success: function () {
-		        console.log("아작스 성공")
+            success: function (data) {
+            	if(data == 0){
+	            	$('.likeCount').attr('class', 'likeCount glyphicon glyphicon-heart');
+            	}else{
+	            	$('.likeCount').attr('class', 'likeCount glyphicon glyphicon-heart-empty');
+            		
+            	}
 		        likeCount();
+		        
             },
             error: function() {
-		        console.log("아작스 실패")
             }
 		})
-	});
-
+	}
 	// 게시글 추천수
     function likeCount() {
 		$.ajax({
-			url: "/likeCount.nhn",
+			url: "./likeCount.nhn",
 			method: "POST",
             data: {
-            	'like_idx': '${vo.sh_idx}'
+            	like_idx: "${vo.sh_idx}"
             },
             success: function (count) {
-            	$(".likeCount").html(count);
+            	console.log(count);
+            	$(".likeCount").html("&nbsp;"+count);
+            	
             },
+            error: function() {
+            }
 		})
     };
-}
-=======================================================
-*/
+// =======================================================
+
 </script>
 
 <!-- 선택한 상품을 보여주는 페이지 -->
@@ -75,7 +82,7 @@ $(function(){
 						<h3 class="panel-title" align="right">
 							<span onclick="location.href='AllProducts.nhn?category=신발'" style="cursor: pointer;">${vo.sh_category} </span>
 							>>
-							<span onclick="location.href='AllProducts.nhn?category=신발'">${vo.sh_categoryDetail}</span>
+							<span onclick="location.href='categoryDetail.nhn?categoryDetail=${vo.sh_categoryDetail}&category=신발'" style="cursor: pointer;">${vo.sh_categoryDetail}</span>
 						</h3>
 					</div>
 				
@@ -125,13 +132,20 @@ $(function(){
 								<td colspan="2" align="center">
 									<a class="btn btn-default" href="#">바로 구매</a>
 								</td>
-								<td  colspan="2" align="right">
+								<td colspan="2" align="right">
 									<a class="btn btn-default" onclick="addcart(${vo.sh_idx})">장바구니</a>
 									&nbsp;
 									<c:if test="${userId != null }">
-										<a class="btn btn-default" id="likeUpdate">좋아요</a>
+										<c:if test="${likeCheck == 0}">
+											<span class="likeCount glyphicon glyphicon-heart-empty" onclick="likeUpdate()" style="cursor: pointer;">&nbsp;${likeCount}</span>
+										</c:if>
+										<c:if test="${likeCheck == 1}">
+											<span class="likeCount glyphicon glyphicon-heart" onclick="likeUpdate()" style="cursor: pointer;">&nbsp;${likeCount}</span>
+										</c:if>
 									</c:if>
-										<span class="likeCount"></span>
+									<c:if test="${userId == null }">
+											<span class="likeCount glyphicon glyphicon-heart-empty" onclick="NoLogin()" style="cursor: pointer;">&nbsp;${likeCount}</span>
+									</c:if>
 								</td>
 								
 							</tr>
