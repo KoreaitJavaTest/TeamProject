@@ -9,17 +9,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>부트스트랩 웹 페이지</title>
-
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.css">
-
-<style type="text/css">
 <link href="./css/bootstrap.css" rel="stylesheet">
 <link rel="stylesheet" href="./css/codinglearning.css">
 <link rel="shortcut icon" href="../images/favicon.ico">
 <style>
-
 *{
 	font-family: "Nanum Gothic";
 }
@@ -29,9 +25,6 @@ table tbody>tr>td>a:hover,
 table tbody>tr>td>a:focus{
 	text-decoration: none;
 	color:red;
-	
-
-<!-- 왼쪽 메뉴바 start -->
 }	
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}table{border-collapse:collapse;border-spacing:0}
 
@@ -267,8 +260,6 @@ footer {
 }
 
 </style>
-<!-- 왼쪽 메뉴바 end -->
-
 <link rel="icon" href="./images/me.png">
 <style type="text/css">
 	.jumbotron {
@@ -290,13 +281,6 @@ footer {
 	.product-grid{font-family:Raleway,sans-serif;text-align:center;padding:0 0 72px;border:1px solid rgba(0,0,0,.1);overflow:hidden;position:relative;z-index:1}
 	.product-grid .product-image{position:relative;transition:all .3s ease 0s}
 	.product-grid .product-image a{display:block}
-	
-/* 	=================== 재훈 변경 04-30 ======================== 	 */
-/* 						이미지 크기 고정 */
-	.product-grid .product-image img{width:100%;height:300px;} 
-	.pic{width: 300px; height: 300px; object-fit: cover;}
-/* 	=================== 재훈 변경 04-30 끝 ========================	 */
-	 
 	.product-grid .product-image img{width:100%;height:300px; object-fit: cover;}
 	.product-grid .pic-1{opacity:1;transition:all .3s ease-out 0s}
 	.product-grid:hover .pic-1{opacity:1}
@@ -404,7 +388,7 @@ span.tags {background: #1abc9c;border-radius: 2px;color: #f5f5f5;font-weight: bo
 					<span class="icon-bar"></span>
 				</button>
 			</div>
-			<div class="jumbotron" onclick = "location.href = '/TeamProject/'">
+			<div class="jumbotron" onclick = "location.href = '/TeamProject01/'">
 				<h1 class="text-center">LUXMEA</h1>
 				<p class="text-center">LUXMEA MAKES YOU SHINE</p>
 			</div>
@@ -442,12 +426,14 @@ span.tags {background: #1abc9c;border-radius: 2px;color: #f5f5f5;font-weight: bo
 						<ul class="dropdown-menu">
 							<c:if test = "${sessionScope.session_id eq null }">
 								<li><a href="LoginView.nhn">로그인</a></li>
-								<li><a href="SearchMyIdPw.nhn">아이디,비밀번호 찾기</a></li>
 								<li><a href="JoinView.nhn">회원가입</a></li>
 							</c:if>
 							<c:if test = "${sessionScope.session_id != null }">
 								<li><div align="center">${sessionScope.session_id}님<br/>point: ${sessionScope.session_point}점</div></li>
 								<li><div style="cursor: pointer;" align="center" onclick="location.href='LogoutView.nhn'">로그아웃</div></li>
+								<c:if test="${sessionScope.session_level==1}">
+									<li><div style="cursor: pointer;" align="center" onclick="location.href='adminPage.nhn'">관리자페이지</div></li>
+								</c:if>
 							</c:if>
 						</ul>
 					</li>
