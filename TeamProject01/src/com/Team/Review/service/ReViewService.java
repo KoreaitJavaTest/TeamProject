@@ -439,6 +439,40 @@ public class ReViewService {
 		mapper.close();
 		
 	}
+	public void likeCheck(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("likeCheck()");
+		SqlSession mapper = MySession.getSession();
+		
+		String userId = request.getParameter("userId");
+		int idx = Integer.parseInt(request.getParameter("idx"));
+		String flag = ""+request.getParameter("checkFlag");
+		System.out.println("userId:"+userId);
+		System.out.println("idx:"+idx);
+		System.out.println("flag:"+flag);
+		// flag: check (좋아요 개수 추가 + 좋아요한사람 이름추가)
+		// flag: cancle (좋아요 개수 1감소 + 좋아요한사람 이름뺴기)
+		userId+=",";
+		System.out.println(userId);
+		ReViewVO vo = ReViewDao.getInstance().selectByIdx(mapper, idx); // vo객체에 해당 게시글 정보 받아온다.
+		String goodCheckUser = vo.getRE_goodCheckUser();
+		System.out.println("goodeCheckUser : "+goodCheckUser);
+		if(flag.equals("check")) {
+			ReViewDao.getInstance().likeUp(mapper,idx);	//좋아요 1증가
+			goodCheckUser+= userId;	
+			vo.setRE_goodCheckUser(goodCheckUser);
+			ReViewDao.getInstance().checkUserUpdate(mapper,vo);	//좋아요누른사람 게시글수정
+			mapper.commit();
+		}else if(flag.equals("cancle")) {
+			ReViewDao.getInstance().likeDown(mapper,idx); //좋아요 개수다운
+			goodCheckUser= goodCheckUser.replace(userId, "");	//admin,ses7361,
+			vo.setRE_goodCheckUser(goodCheckUser);
+			ReViewDao.getInstance().checkUserUpdate(mapper,vo);
+			mapper.commit();
+		}
+		
+		mapper.close();
+		
+	}
 
 		
 		

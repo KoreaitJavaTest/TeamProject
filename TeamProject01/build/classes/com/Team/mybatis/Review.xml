@@ -74,6 +74,16 @@
 	<update id="minusCommentCount" parameterType="Integer">
 		update REVIEW set RE_COMMENTCOUNT = RE_COMMENTCOUNT - 1 where RE_idx = #{idx}
 	</update>
+		<update id="likeUp" parameterType="Integer">
+		update REVIEW set RE_GOOD = RE_GOOD + 1 where RE_idx = #{idx}
+	</update>
+	<update id="likeDown" parameterType="Integer">
+		update REVIEW set RE_GOOD = RE_GOOD - 1 where RE_idx = #{idx}
+	</update>
+	
+	<update id="checkUserUpdate" parameterType="Re_vo">
+		update REVIEW set RE_GOODCHECKUSER=#{RE_goodCheckUser} where RE_idx = #{RE_idx}
+	</update>
 
 </mapper>
 

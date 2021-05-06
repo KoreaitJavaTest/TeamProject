@@ -17,7 +17,7 @@ public class ReViewVO {
 	private String RE_categoryDetail;
 	private String RE_imgNames;
 	private int RE_commentCount;
-	
+	private String RE_goodCheckUser;
 
 
 
@@ -37,6 +37,16 @@ public class ReViewVO {
 
 	public void setRE_categoryDetail(String rE_categoryDetail) {
 		RE_categoryDetail = rE_categoryDetail;
+	}
+
+
+	public String getRE_goodCheckUser() {
+		return RE_goodCheckUser;
+	}
+
+
+	public void setRE_goodCheckUser(String rE_goodCheckUser) {
+		RE_goodCheckUser = rE_goodCheckUser;
 	}
 
 

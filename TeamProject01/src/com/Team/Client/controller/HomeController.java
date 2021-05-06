@@ -382,6 +382,10 @@ public class HomeController extends HttpServlet {
 			AdminUserMangementService.getInstance().selectUserList(request,response);
 			viewPage += "Admin/AdminUserMangement";
 			break;
+			
+		case "/likeCheck.nhn":	// 05.03추가 (좋아요 체크) AJAX
+			ReViewService.getInstance().likeCheck(request,response);
+			return;
 		//-----------------------end---------------
 		}
 		viewPage += ".jsp";

@@ -63,6 +63,9 @@
   width: 250px;
   height: 150px
 }
+.like{
+	width: 25px;height: 22px;
+}
 </style>
 <script type="text/javascript">
 
@@ -128,9 +131,29 @@ function commentDelete() {
 	location.href = 'commentDelete.nhn?idx='+voIdx+'&commentIdx='+CoIdx;
 }//AJAX로 하자!
 
+function like(flag){
+	var flag=flag;
+// 	console.log(flag);
+	$.ajax({
+		type:"POST",
+		url:"./likeCheck.nhn",
+		data:{
+			userId:"${sessionScope.session_id}",
+			idx:"${vo.RE_idx}",
+			checkFlag:flag
+		},
+		success: function(meg){
+			alert('t')
+			location.reload();
+		},error: function(){
+			alert("failed!");
+		}
+	});
+}
 
 </script>
 <jsp:include page="/WEB-INF/ReView/ReViewModal.jsp"></jsp:include>
+<c:set var="goodCheckUsers" value="${fn:split(vo.RE_goodCheckUser,',')}"/>
 <div class="container" style="margin-top: 50px;">
 	<table align="center" class="table table-hover">
 		<thead>
@@ -141,7 +164,7 @@ function commentDelete() {
 		<tbody>
 			<tr>
 				<td width="10%">제목</td>
-				<td>${vo.RE_title}</td>
+				<td>${vo.RE_title} Test:${goodCheckUsers[0]}</td>
 			</tr>
 			<tr>
 				<td>작성자</td>
@@ -247,8 +270,29 @@ function commentDelete() {
 				</td>				
 			</tr>
 			<tr>
-				<td colspan="2" align="right">
-					<div style="cursor: pointer;" onclick="location.href='ReViewReport.nhn?idx=${vo.RE_idx}&currentPage=${currentPage}'"><span class="glyphicon glyphicon-bullhorn"></span>신고하기</div>
+				
+				<td colspan="2">
+<!-- 				http://localhost:8009/korea/upload/img05.jpg -->
+					<div style="display: inline-block; float: left;">
+						<!-- 비 로그인일시 -->
+						<c:if test="${sessionScope.session_id eq null }">
+							<a onclick="alert('로그인후 이용해주세요.');location.href='LoginView.nhn'">
+								<img class="like" src="http://localhost:8009/korea/upload/nolike.png" alt="좋아요안눌럿을때"/>
+							</a>
+						</c:if>
+<!-- 						로그인됫을시 -->
+						<c:if test="${sessionScope.session_id != null }">
+								<c:choose>
+									<c:when test="${fn:contains(vo.RE_goodCheckUser,sessionScope.session_id)}">
+										<img class="like" src="http://localhost:8009/korea/upload/like.png" alt="좋아요눌럿을때" onclick="like('cancle')">
+									</c:when>					
+									<c:otherwise>
+										<img class="like" src="http://localhost:8009/korea/upload/nolike.png" alt="좋아요안눌럿을때" onclick="like('check')">						
+									</c:otherwise>
+								</c:choose>
+						</c:if>
+					</div>
+					<div  align="right" style="cursor: pointer; display: inline-block; float: right" onclick="location.href='ReViewReport.nhn?idx=${vo.RE_idx}&currentPage=${currentPage}'"><span class="glyphicon glyphicon-bullhorn"></span>신고하기</div>
 				</td>
 			</tr>				
 		</tbody>
