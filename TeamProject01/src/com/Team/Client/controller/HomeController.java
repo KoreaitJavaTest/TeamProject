@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.Team.Admin.service.AdminUserMangementService;
 import com.Team.Client.dao.ClientDao;
 import com.Team.Client.point.PointService;
 import com.Team.Client.service.ClientService;
@@ -369,7 +370,22 @@ public class HomeController extends HttpServlet {
 			shopService.selectCategoryDetail(request, response);
 			viewPage += "Shop/categoryDetail";
 			break;
-
+			
+		// 진호추가  05-14------------------------
+		// 관리자페이지 메인
+		case "/adminPage.nhn":
+			viewPage += "Admin/AdminMainPage";
+			break;
+		// Admin 유저 관리 페이지
+		case "/AdminUserMangement.nhn":
+			AdminUserMangementService.getInstance().selectUserList(request,response);
+			viewPage += "Admin/AdminUserMangement";
+			break;
+			
+		case "/likeCheck.nhn":	// 05.03추가 (좋아요 체크) AJAX
+			ReViewService.getInstance().likeCheck(request,response);
+			return;
+		//-----------------------end---------------
 		}
 		viewPage += ".jsp";
 

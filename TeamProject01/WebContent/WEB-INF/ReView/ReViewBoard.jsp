@@ -51,19 +51,21 @@ $(function() {
 			  <div class="col-xs-2 col-sm-6 col-md-4" style="height: 560px; width: 360px;" align="center">
 			    <div class="thumbnail" style="width: 320px; height: 548px;">
 			    	<a href="ReHitUp.nhn?idx=${vo.RE_idx}&currentPage=${ReViewList.currentPage}">
-				        <img src="http://localhost:9090/korea/upload/${imgN[0]}" alt="..." style="width: 300px;height: 300px;">
+				        <img src="http://localhost:8009/korea/upload/${imgN[0]}" alt="..." style="width: 300px;height: 300px;">
 			    	</a>
-			      <div class="caption">
+			      <div class="caption" style="height: 243px;">
+			      <div>
 			      	<a class="RETitle" href="ReHitUp.nhn?idx=${vo.RE_idx}&currentPage=${ReViewList.currentPage}">
-				        <h4 style="margin-bottom: 5px; display: inline-block;">${vo.RE_title}
+				        <h4 style="margin-bottom: 5px; display: inline-block; word-break:break-all">${vo.RE_title}
 				        	<c:if test="${date.year == vo.RE_writeDate.year && date.month == vo.RE_writeDate.month && date.date == vo.RE_writeDate.date}">
 								<span class="label label-default">New</span>
 							</c:if>
 				        </h4>
 			      	</a>
+			      </div>
 			        <hr size="1" style="margin-top: 5px;margin-bottom: 5px;"/>
-			        <p style="width:100%; height: 120px;">${vo.RE_content}</p>
-			        <p><a href="#" class="btn btn-primary" role="button" onclick="location.href='ReHitUp.nhn?idx=${vo.RE_idx}&currentPage=${ReViewList.currentPage}'">리뷰보기</a> 
+			        <p style="width:100%; word-break:break-all">${vo.RE_content}</p>
+			        <p style=" position: relative; top: 30%;"><a href="#" class="btn btn-primary" role="button" onclick="location.href='ReHitUp.nhn?idx=${vo.RE_idx}&currentPage=${ReViewList.currentPage}'">리뷰보기</a> 
 			       	<!-- 재훈이꺼랑 연동하기 -->
 			        <a href="#" class="btn btn-default" role="button">상품보기</a></p>
 			      </div>

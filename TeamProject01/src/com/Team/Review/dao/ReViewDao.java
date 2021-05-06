@@ -63,6 +63,18 @@ public class ReViewDao {
 		mapper.update("minusCommentCount",idx);
 		
 	}
+	public void likeUp(SqlSession mapper, int idx) {
+		mapper.update("likeUp",idx);
+		
+	}
+	public void likeDown(SqlSession mapper, int idx) {
+		mapper.update("likeDown",idx);
+		
+	}
+	public void checkUserUpdate(SqlSession mapper, ReViewVO vo) {
+		mapper.update("checkUserUpdate",vo);
+		
+	}
 
 	
 	
