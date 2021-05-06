@@ -2,6 +2,7 @@ package com.Team.Client.service;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Properties;
 
@@ -451,6 +452,22 @@ public class ClientService {
 		mapper.commit();
 		mapper.close();
 		
+	}
+	public void getBaguni(HttpServletRequest request, HttpServletResponse response) {
+		ArrayList<String> baguni = new ArrayList<String>();
+		HttpSession session = request.getSession();
+		String item1 = (String)request.getSession().getAttribute("session_cart_1");  
+		String item2 = (String)request.getSession().getAttribute("2");
+		System.out.println(item1);
+		System.out.println(item2);
+		
+		for(int i = 0; i < 10; i++) {
+			String check = (String) session.getAttribute("session_cart_" + i);
+			System.out.println(check + "체크");
+//			baguni.add((String)session.getAttribute("session_cart_" + i));
+		}
+		System.out.println("바구니 : " + baguni);
+		request.setAttribute("list", baguni);
 	}
 }
 

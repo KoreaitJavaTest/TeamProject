@@ -146,6 +146,11 @@ public class HomeController extends HttpServlet {
 			ClientService.getInstance().MyClientWithdrawal(request, response);
 			viewPage += "MyPage/MyClientWithdrawal";
 			break;
+		// 나의 장바구니
+		case "/MyBaguniView.nhn":
+			ClientService.getInstance().getBaguni(request, response);
+			viewPage += "MyPage/MyBaguniMainView";
+			break;
 			// 상품 상세보기 페이지
 			case "/selectProduct.nhn":
 				shopService.selectProduct(request, response);
